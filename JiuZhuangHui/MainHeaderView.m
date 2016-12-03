@@ -17,26 +17,18 @@
 #import "BottomButtonModel.h"
 
 
-@interface MainHeaderView()
+@interface MainHeaderView()<SDCycleScrollViewDelegate>
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *topItems;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *bottomButtonImage;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *bottomLabel;
 @property (weak, nonatomic) IBOutlet UIView *playPictureView;
+@property (strong, nonatomic) SDCycleScrollView *scrollView;
 
 @end
 @implementation MainHeaderView
 
 + (CGFloat)heightHeaderView{
     return 230;
-}
-
-- (IBAction)bottomButtonPressed:(UIButton *)sender {
-#warning 点击事件需要相应
-}
-
-
-+ (instancetype)shareHeaderView{
-    return [[[NSBundle mainBundle]loadNibNamed:@"MainHeaderView" owner:self options:nil] lastObject];
 }
 
 - (void)setHeaderViewData:(MainHeaderViewModel *)model;{
@@ -76,8 +68,11 @@
     for(PlayerPictureModel *playerPictureModel in array){
         [picArray addObject:playerPictureModel.picPhoto];
     }
-    SDCycleScrollView *scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreen_Width, 135) imageURLStringsGroup:picArray];
-    [self.playPictureView addSubview:scrollView];
+    
+    
+    self.scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreen_Width, 135) imageURLStringsGroup:picArray];
+    self.scrollView.delegate = self;
+    [self.playPictureView addSubview:self.scrollView];
     
     //底部button数据
     for(UIImageView *imageView in self.bottomButtonImage){
@@ -85,7 +80,6 @@
         switch (imageView.tag) {
             case 1:{
                 bottomButtonModel = model.bottomButtonsArray[0];
-                NSLog(@"底部image的图片是%@，",bottomButtonModel.bottomImage);
                 [imageView sd_setImageWithURL:[NSURL URLWithString:bottomButtonModel.bottomImage]];
             }
                 break;
@@ -114,9 +108,8 @@
         switch (label.tag) {
             case 1:{
                 bottomButtonModel = model.bottomButtonsArray[0];
-               
+                
                 label.text = bottomButtonModel.bottomName;
-                NSLog(@"底部babel的数据%@",label.text);
             }
                 break;
             case 2:{
@@ -141,4 +134,30 @@
     
     
 }
+
+- (IBAction)bottomButtonPressed:(UIButton *)sender {
+#warning 点击事件需要相应
+    [self.delegate mainHeaderView:self didSelectedBottomButton:sender];
+    
+}
+
+
++ (instancetype)shareHeaderView{
+    return [[[NSBundle mainBundle]loadNibNamed:@"MainHeaderView" owner:self options:nil] lastObject];
+}
+
+
+
+- (IBAction)topItemClick:(UIButton *)sender {
+    
+    [self.delegate mainHeaderView:self didSelectedTopItem:sender];
+    
+}
+
+-(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    
+    [self.delegate mainHeaderView:self didSelectedScrollView:index];
+    
+}
+
 @end

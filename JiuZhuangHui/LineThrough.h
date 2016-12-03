@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//在Label中间加一道横线
 @interface LineThrough : UILabel
 
 @end

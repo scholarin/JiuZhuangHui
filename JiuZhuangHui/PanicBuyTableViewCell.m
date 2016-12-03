@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *oldPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *purchaseCountLabel;
+@property (weak, nonatomic) IBOutlet UIButton *panicBuyingButton;
 
 @end
 
@@ -24,6 +25,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.panicBuyingButton.layer.borderColor = [UIColor redColor].CGColor;
+    self.panicBuyingButton.layer.borderWidth = 0.5;
     // Initialization code
 }
 
@@ -48,6 +51,8 @@
     self.oldPriceLabel.text         = model.goodsMarketPrice;
     self.currentPriceLabel.text     = model.goodsShopPrice;
     self.purchaseCountLabel.text    = [NSString stringWithFormat:@"剩余：%@",model.goodsCount];
+ 
+    
 }
 
 @end

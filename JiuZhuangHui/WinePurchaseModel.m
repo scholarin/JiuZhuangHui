@@ -10,24 +10,85 @@
 
 @implementation WinePurchaseModel
 
+- (instancetype)copyWithZone:(NSZone *)zone{
+    WinePurchaseModel *winePurchase = [[[self class]allocWithZone:zone]init];
+    winePurchase.goodsID            =       [_goodsID copy];
+    winePurchase.goodsName          =       [_goodsName copy];
+    winePurchase.goodsCount         =       [_goodsCount copy];
+    winePurchase.goodsImage         =       [_goodsImage copy];
+    winePurchase.goodsShopPrice     =       [_goodsShopPrice copy];
+    winePurchase.goodsMarketPrice   =       [_goodsMarketPrice copy];
+    winePurchase.goodsSmallImage    =       [_goodsSmallImage copy];
+    winePurchase.likeNumber         =       [_likeNumber copy];
+    winePurchase.replyNumber        =       [_replyNumber copy];
+    
+    return winePurchase;
+}
 
 - (instancetype)initWithPanicBuyData:(id)data{
-    WinePurchaseModel *winePurchaseModel = [[WinePurchaseModel alloc]init];
+    WinePurchaseModel *winePurchaseModel = nil;
     if([data isKindOfClass:[NSDictionary class]]){
-        //NSLog(@"%@",data);
         NSDictionary *dataDic = data[@"data"];
         NSDictionary *goodsListDic = [dataDic[@"gift"] firstObject];
-        //NSLog(@"%@",goodsListDic);
-        winePurchaseModel.goodsID           = goodsListDic[@"goods_id"];
-        winePurchaseModel.goodsName         = goodsListDic[@"goods_name"];
-        winePurchaseModel.goodsMarketPrice  = goodsListDic[@"market_price"];
-        winePurchaseModel.goodsShopPrice    = goodsListDic[@"shop_price"];
-        winePurchaseModel.goodsImage        = goodsListDic[@"goods_img"];
-       //winePurchaseModel.goodsSmallImage = goodsListDic[@"img"][@"small"];
-        winePurchaseModel.goodsCount        = goodsListDic[@"goods_number"];
-        //NSLog(@"goodsID = %@,goodsName =%@",winePurchaseModel.goodsID,winePurchaseModel.goodsName);
+        winePurchaseModel = [[WinePurchaseModel alloc]initWineModelForDic:goodsListDic];
     }
     return winePurchaseModel;
+}
+
++ (NSArray *)getHotWineWithData:(id)data{
+    
+    NSMutableArray *hotWines = [NSMutableArray new];
+    if([data isKindOfClass:[NSDictionary class]]){
+        NSDictionary *dataDic = data[@"data"];
+        for(NSDictionary *goodsHotDic in dataDic[@"hot"]){
+            WinePurchaseModel *winePurchaseModel = [[WinePurchaseModel alloc]initWineModelForDic:goodsHotDic];
+            [hotWines addObject:winePurchaseModel];
+            NSLog(@"goodsID = %@,goodsName =%@",winePurchaseModel.goodsID,winePurchaseModel.goodsName);
+        }
+    }
+    return [hotWines copy];
+}
+
++ (NSArray *)getRecommendWineWithData:(id)data{
+    
+    
+    NSMutableArray *recommendWines = [NSMutableArray new];
+    if([data isKindOfClass:[NSDictionary class]]){
+        NSDictionary *dataDic = data[@"data"];
+        for(NSDictionary *goodsRecommendDic in dataDic[@"recommend"]){
+            WinePurchaseModel *winePurchaseModel = [[WinePurchaseModel alloc]initWineModelForDic:goodsRecommendDic];
+            [recommendWines addObject:winePurchaseModel];
+            NSLog(@"goodsID = %@,goodsName =%@",winePurchaseModel.goodsID,winePurchaseModel.goodsName);
+        }
+    }
+    return [recommendWines copy];
+}
+
+- (instancetype)initWineModelForDic: (NSDictionary *)wineDic{
+    if(self = [super init]){
+        self.goodsID           = wineDic[@"goods_id"];
+        self.goodsName         = wineDic[@"goods_name"];
+        self.goodsMarketPrice  = wineDic[@"market_price"];
+        self.goodsShopPrice    = wineDic[@"shop_price"];
+        self.goodsImage        = wineDic[@"goods_img"];
+        self.goodsCount        = wineDic[@"goods_number"];
+    }
+    return self;
+}
+
+
+- (instancetype)initWineryGoodListForDic:(NSDictionary *)wineDic{
+    if(self = [super init]){
+        self.goodsID           = wineDic[@"goods_id"];
+        self.goodsName         = wineDic[@"goods_name"];
+        self.goodsMarketPrice  = wineDic[@"market_price"];
+        self.goodsShopPrice    = wineDic[@"shop_price"];
+        self.goodsImage        = wineDic[@"goods_thumb"];
+        self.goodsCount        = wineDic[@"goods_number"];
+        self.likeNumber        = wineDic[@"like_num"];
+        self.replyNumber       = wineDic[@"reply_num"];
+    }
+    return self;
 }
 @end
 

@@ -15,6 +15,7 @@
     playerPictureModel.picURL = [_picURL copy];
     playerPictureModel.picPhoto = [_picPhoto copy];
     playerPictureModel.picDescription = [_picDescription copy];
+    playerPictureModel.picWineID = [_picWineID copy];
     return playerPictureModel;
 }
 @end

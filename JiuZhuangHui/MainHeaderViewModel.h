@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MainHeaderViewModel : NSObject
+@interface MainHeaderViewModel : NSObject<NSCopying>
 
 @property (nonatomic, copy)NSArray *topItemsArray;
 @property (nonatomic, copy)NSArray *playerPictiuresArray;

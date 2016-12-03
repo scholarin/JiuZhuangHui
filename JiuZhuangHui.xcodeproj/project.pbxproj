@@ -16,6 +16,8 @@
 		514928A41DEE75B9000322C4 /* FirstLuanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514928A31DEE75B9000322C4 /* FirstLuanchViewController.m */; };
 		514928A71DEE9427000322C4 /* RootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514928A61DEE9427000322C4 /* RootTabBarViewController.m */; };
 		514928AB1DEE9652000322C4 /* PanicBuyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 514928AA1DEE9652000322C4 /* PanicBuyTableViewCell.m */; };
+		514B71791DF0739E00EFBC3A /* HotWineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 514B71771DF0739E00EFBC3A /* HotWineTableViewCell.m */; };
+		514B717A1DF0739E00EFBC3A /* HotWineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 514B71781DF0739E00EFBC3A /* HotWineTableViewCell.xib */; };
 		51B345AC1DEFC4850027078C /* PanicBuyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51B345AB1DEFC4850027078C /* PanicBuyTableViewCell.xib */; };
 		51B345AF1DEFD53D0027078C /* WinePurchaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B345AE1DEFD53D0027078C /* WinePurchaseModel.m */; };
 		51B345B51DEFDF2B0027078C /* NetRequestManeger.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B345B41DEFDF2B0027078C /* NetRequestManeger.m */; };
@@ -27,6 +29,26 @@
 		51B345C81DF023F60027078C /* MainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B345C71DF023F60027078C /* MainHeaderView.m */; };
 		51B345CA1DF02AAD0027078C /* MainHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51B345C91DF02AAD0027078C /* MainHeaderView.xib */; };
 		51B345CD1DF05DA10027078C /* LineThrough.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B345CC1DF05DA10027078C /* LineThrough.m */; };
+		51B345D01DF0635E0027078C /* TopItemPushVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B345CF1DF0635E0027078C /* TopItemPushVC.m */; };
+		51B345D31DF066D10027078C /* TopItemPushViewBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B345D21DF066D10027078C /* TopItemPushViewBottomView.m */; };
+		51BDF58C1DF11EC900CDBBB2 /* TopicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF58B1DF11EC900CDBBB2 /* TopicTableViewCell.m */; };
+		51BDF58F1DF1209C00CDBBB2 /* TopicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF58E1DF1209C00CDBBB2 /* TopicViewModel.m */; };
+		51BDF5921DF12FEB00CDBBB2 /* WineryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5911DF12FEB00CDBBB2 /* WineryModel.m */; };
+		51BDF5991DF1522600CDBBB2 /* WineryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5971DF1522600CDBBB2 /* WineryTableViewCell.m */; };
+		51BDF59A1DF1522600CDBBB2 /* WineryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51BDF5981DF1522600CDBBB2 /* WineryTableViewCell.xib */; };
+		51BDF59D1DF17E2800CDBBB2 /* OriginatorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF59C1DF17E2800CDBBB2 /* OriginatorTableViewCell.m */; };
+		51BDF5A11DF17E9900CDBBB2 /* OriginatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5A01DF17E9900CDBBB2 /* OriginatorModel.m */; };
+		51BDF5AC1DF1C52A00CDBBB2 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51BDF5AB1DF1C52A00CDBBB2 /* AVKit.framework */; };
+		51BDF5B41DF1CA5300CDBBB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51BDF5B31DF1CA5300CDBBB2 /* AVFoundation.framework */; };
+		51BDF5C11DF1D47200CDBBB2 /* WineryVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5C01DF1D47200CDBBB2 /* WineryVideoViewController.m */; };
+		51BDF5C41DF2785D00CDBBB2 /* WineDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5C31DF2785D00CDBBB2 /* WineDetailModel.m */; };
+		51BDF5C71DF279CC00CDBBB2 /* WineryArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5C61DF279CC00CDBBB2 /* WineryArticle.m */; };
+		51BDF5CA1DF27CD200CDBBB2 /* BoxfulWinesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5C91DF27CD200CDBBB2 /* BoxfulWinesModel.m */; };
+		51BDF5CD1DF287A800CDBBB2 /* WineBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5CC1DF287A800CDBBB2 /* WineBuyViewController.m */; };
+		51BDF5D21DF2895500CDBBB2 /* WineTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5D01DF2895500CDBBB2 /* WineTitleTableViewCell.m */; };
+		51BDF5D31DF2895500CDBBB2 /* WineTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51BDF5D11DF2895500CDBBB2 /* WineTitleTableViewCell.xib */; };
+		51BDF5D61DF29A6F00CDBBB2 /* BasicTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5D51DF29A6F00CDBBB2 /* BasicTableHeaderView.m */; };
+		51BDF5D91DF2CA5700CDBBB2 /* WineryDetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5D81DF2CA5700CDBBB2 /* WineryDetailWebView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +69,9 @@
 		514928A61DEE9427000322C4 /* RootTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarViewController.m; sourceTree = "<group>"; };
 		514928A91DEE9652000322C4 /* PanicBuyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanicBuyTableViewCell.h; sourceTree = "<group>"; };
 		514928AA1DEE9652000322C4 /* PanicBuyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanicBuyTableViewCell.m; sourceTree = "<group>"; };
+		514B71761DF0739E00EFBC3A /* HotWineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotWineTableViewCell.h; sourceTree = "<group>"; };
+		514B71771DF0739E00EFBC3A /* HotWineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotWineTableViewCell.m; sourceTree = "<group>"; };
+		514B71781DF0739E00EFBC3A /* HotWineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotWineTableViewCell.xib; sourceTree = "<group>"; };
 		51B345AB1DEFC4850027078C /* PanicBuyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanicBuyTableViewCell.xib; sourceTree = "<group>"; };
 		51B345AD1DEFD53D0027078C /* WinePurchaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinePurchaseModel.h; sourceTree = "<group>"; };
 		51B345AE1DEFD53D0027078C /* WinePurchaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinePurchaseModel.m; sourceTree = "<group>"; };
@@ -67,6 +92,42 @@
 		51B345C91DF02AAD0027078C /* MainHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainHeaderView.xib; sourceTree = "<group>"; };
 		51B345CB1DF05DA10027078C /* LineThrough.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineThrough.h; sourceTree = "<group>"; };
 		51B345CC1DF05DA10027078C /* LineThrough.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineThrough.m; sourceTree = "<group>"; };
+		51B345CE1DF0635E0027078C /* TopItemPushVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopItemPushVC.h; sourceTree = "<group>"; };
+		51B345CF1DF0635E0027078C /* TopItemPushVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopItemPushVC.m; sourceTree = "<group>"; };
+		51B345D11DF066D10027078C /* TopItemPushViewBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopItemPushViewBottomView.h; sourceTree = "<group>"; };
+		51B345D21DF066D10027078C /* TopItemPushViewBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopItemPushViewBottomView.m; sourceTree = "<group>"; };
+		51BDF58A1DF11EC900CDBBB2 /* TopicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicTableViewCell.h; sourceTree = "<group>"; };
+		51BDF58B1DF11EC900CDBBB2 /* TopicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicTableViewCell.m; sourceTree = "<group>"; };
+		51BDF58D1DF1209C00CDBBB2 /* TopicViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicViewModel.h; sourceTree = "<group>"; };
+		51BDF58E1DF1209C00CDBBB2 /* TopicViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicViewModel.m; sourceTree = "<group>"; };
+		51BDF5901DF12FEB00CDBBB2 /* WineryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineryModel.h; sourceTree = "<group>"; };
+		51BDF5911DF12FEB00CDBBB2 /* WineryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineryModel.m; sourceTree = "<group>"; };
+		51BDF5961DF1522600CDBBB2 /* WineryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineryTableViewCell.h; sourceTree = "<group>"; };
+		51BDF5971DF1522600CDBBB2 /* WineryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineryTableViewCell.m; sourceTree = "<group>"; };
+		51BDF5981DF1522600CDBBB2 /* WineryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WineryTableViewCell.xib; sourceTree = "<group>"; };
+		51BDF59B1DF17E2800CDBBB2 /* OriginatorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginatorTableViewCell.h; sourceTree = "<group>"; };
+		51BDF59C1DF17E2800CDBBB2 /* OriginatorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OriginatorTableViewCell.m; sourceTree = "<group>"; };
+		51BDF59F1DF17E9900CDBBB2 /* OriginatorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginatorModel.h; sourceTree = "<group>"; };
+		51BDF5A01DF17E9900CDBBB2 /* OriginatorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OriginatorModel.m; sourceTree = "<group>"; };
+		51BDF5AB1DF1C52A00CDBBB2 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		51BDF5B31DF1CA5300CDBBB2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		51BDF5BF1DF1D47200CDBBB2 /* WineryVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineryVideoViewController.h; sourceTree = "<group>"; };
+		51BDF5C01DF1D47200CDBBB2 /* WineryVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineryVideoViewController.m; sourceTree = "<group>"; };
+		51BDF5C21DF2785D00CDBBB2 /* WineDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineDetailModel.h; sourceTree = "<group>"; };
+		51BDF5C31DF2785D00CDBBB2 /* WineDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineDetailModel.m; sourceTree = "<group>"; };
+		51BDF5C51DF279CC00CDBBB2 /* WineryArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineryArticle.h; sourceTree = "<group>"; };
+		51BDF5C61DF279CC00CDBBB2 /* WineryArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineryArticle.m; sourceTree = "<group>"; };
+		51BDF5C81DF27CD200CDBBB2 /* BoxfulWinesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxfulWinesModel.h; sourceTree = "<group>"; };
+		51BDF5C91DF27CD200CDBBB2 /* BoxfulWinesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxfulWinesModel.m; sourceTree = "<group>"; };
+		51BDF5CB1DF287A800CDBBB2 /* WineBuyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineBuyViewController.h; sourceTree = "<group>"; };
+		51BDF5CC1DF287A800CDBBB2 /* WineBuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineBuyViewController.m; sourceTree = "<group>"; };
+		51BDF5CF1DF2895500CDBBB2 /* WineTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineTitleTableViewCell.h; sourceTree = "<group>"; };
+		51BDF5D01DF2895500CDBBB2 /* WineTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineTitleTableViewCell.m; sourceTree = "<group>"; };
+		51BDF5D11DF2895500CDBBB2 /* WineTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WineTitleTableViewCell.xib; sourceTree = "<group>"; };
+		51BDF5D41DF29A6F00CDBBB2 /* BasicTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTableHeaderView.h; sourceTree = "<group>"; };
+		51BDF5D51DF29A6F00CDBBB2 /* BasicTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicTableHeaderView.m; sourceTree = "<group>"; };
+		51BDF5D71DF2CA5700CDBBB2 /* WineryDetailWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineryDetailWebView.h; sourceTree = "<group>"; };
+		51BDF5D81DF2CA5700CDBBB2 /* WineryDetailWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WineryDetailWebView.m; sourceTree = "<group>"; };
 		8695FFC0F4696FEE8AEB8AC4 /* Pods-JiuZhuangHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JiuZhuangHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JiuZhuangHui/Pods-JiuZhuangHui.debug.xcconfig"; sourceTree = "<group>"; };
 		9152EAABF94D037CEA4D0E9A /* libPods-JiuZhuangHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JiuZhuangHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -76,6 +137,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51BDF5B41DF1CA5300CDBBB2 /* AVFoundation.framework in Frameworks */,
+				51BDF5AC1DF1C52A00CDBBB2 /* AVKit.framework in Frameworks */,
 				25698807FE73E015B38993DB /* libPods-JiuZhuangHui.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,9 +210,12 @@
 		514928881DEDC84D000322C4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				51BDF5CE1DF2888600CDBBB2 /* wineBuyView */,
 				514928A81DEE95AB000322C4 /* mainVCView */,
 				5149288C1DEDCB71000322C4 /* MNAutoScrollView.h */,
 				5149288D1DEDCB71000322C4 /* MNAutoScrollView.m */,
+				51BDF5D41DF29A6F00CDBBB2 /* BasicTableHeaderView.h */,
+				51BDF5D51DF29A6F00CDBBB2 /* BasicTableHeaderView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -159,6 +225,18 @@
 			children = (
 				51B345AD1DEFD53D0027078C /* WinePurchaseModel.h */,
 				51B345AE1DEFD53D0027078C /* WinePurchaseModel.m */,
+				51BDF5C21DF2785D00CDBBB2 /* WineDetailModel.h */,
+				51BDF5C31DF2785D00CDBBB2 /* WineDetailModel.m */,
+				51BDF5C51DF279CC00CDBBB2 /* WineryArticle.h */,
+				51BDF5C61DF279CC00CDBBB2 /* WineryArticle.m */,
+				51BDF5C81DF27CD200CDBBB2 /* BoxfulWinesModel.h */,
+				51BDF5C91DF27CD200CDBBB2 /* BoxfulWinesModel.m */,
+				51BDF58D1DF1209C00CDBBB2 /* TopicViewModel.h */,
+				51BDF58E1DF1209C00CDBBB2 /* TopicViewModel.m */,
+				51BDF5901DF12FEB00CDBBB2 /* WineryModel.h */,
+				51BDF5911DF12FEB00CDBBB2 /* WineryModel.m */,
+				51BDF59F1DF17E9900CDBBB2 /* OriginatorModel.h */,
+				51BDF5A01DF17E9900CDBBB2 /* OriginatorModel.m */,
 				51B345C51DF023BF0027078C /* MainHeaderView */,
 			);
 			name = Medol;
@@ -173,6 +251,14 @@
 				514928A61DEE9427000322C4 /* RootTabBarViewController.m */,
 				51B345B61DF006440027078C /* MainTableViewController.h */,
 				51B345B71DF006440027078C /* MainTableViewController.m */,
+				51BDF5BF1DF1D47200CDBBB2 /* WineryVideoViewController.h */,
+				51BDF5C01DF1D47200CDBBB2 /* WineryVideoViewController.m */,
+				51BDF5CB1DF287A800CDBBB2 /* WineBuyViewController.h */,
+				51BDF5CC1DF287A800CDBBB2 /* WineBuyViewController.m */,
+				51BDF5D71DF2CA5700CDBBB2 /* WineryDetailWebView.h */,
+				51BDF5D81DF2CA5700CDBBB2 /* WineryDetailWebView.m */,
+				51B345CE1DF0635E0027078C /* TopItemPushVC.h */,
+				51B345CF1DF0635E0027078C /* TopItemPushVC.m */,
 			);
 			name = Vc;
 			sourceTree = "<group>";
@@ -180,14 +266,26 @@
 		514928A81DEE95AB000322C4 /* mainVCView */ = {
 			isa = PBXGroup;
 			children = (
-				514928A91DEE9652000322C4 /* PanicBuyTableViewCell.h */,
-				514928AA1DEE9652000322C4 /* PanicBuyTableViewCell.m */,
-				51B345AB1DEFC4850027078C /* PanicBuyTableViewCell.xib */,
-				51B345CB1DF05DA10027078C /* LineThrough.h */,
-				51B345CC1DF05DA10027078C /* LineThrough.m */,
 				51B345C61DF023F60027078C /* MainHeaderView.h */,
 				51B345C71DF023F60027078C /* MainHeaderView.m */,
 				51B345C91DF02AAD0027078C /* MainHeaderView.xib */,
+				514928A91DEE9652000322C4 /* PanicBuyTableViewCell.h */,
+				514928AA1DEE9652000322C4 /* PanicBuyTableViewCell.m */,
+				51B345AB1DEFC4850027078C /* PanicBuyTableViewCell.xib */,
+				514B71761DF0739E00EFBC3A /* HotWineTableViewCell.h */,
+				514B71771DF0739E00EFBC3A /* HotWineTableViewCell.m */,
+				514B71781DF0739E00EFBC3A /* HotWineTableViewCell.xib */,
+				51B345D11DF066D10027078C /* TopItemPushViewBottomView.h */,
+				51B345D21DF066D10027078C /* TopItemPushViewBottomView.m */,
+				51BDF58A1DF11EC900CDBBB2 /* TopicTableViewCell.h */,
+				51BDF58B1DF11EC900CDBBB2 /* TopicTableViewCell.m */,
+				51BDF5961DF1522600CDBBB2 /* WineryTableViewCell.h */,
+				51BDF5971DF1522600CDBBB2 /* WineryTableViewCell.m */,
+				51BDF5981DF1522600CDBBB2 /* WineryTableViewCell.xib */,
+				51BDF59B1DF17E2800CDBBB2 /* OriginatorTableViewCell.h */,
+				51BDF59C1DF17E2800CDBBB2 /* OriginatorTableViewCell.m */,
+				51B345CB1DF05DA10027078C /* LineThrough.h */,
+				51B345CC1DF05DA10027078C /* LineThrough.m */,
 			);
 			name = mainVCView;
 			sourceTree = "<group>";
@@ -216,9 +314,21 @@
 			name = MainHeaderView;
 			sourceTree = "<group>";
 		};
+		51BDF5CE1DF2888600CDBBB2 /* wineBuyView */ = {
+			isa = PBXGroup;
+			children = (
+				51BDF5CF1DF2895500CDBBB2 /* WineTitleTableViewCell.h */,
+				51BDF5D01DF2895500CDBBB2 /* WineTitleTableViewCell.m */,
+				51BDF5D11DF2895500CDBBB2 /* WineTitleTableViewCell.xib */,
+			);
+			name = wineBuyView;
+			sourceTree = "<group>";
+		};
 		6E079A14958DDBB8184E6B44 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				51BDF5B31DF1CA5300CDBBB2 /* AVFoundation.framework */,
+				51BDF5AB1DF1C52A00CDBBB2 /* AVKit.framework */,
 				9152EAABF94D037CEA4D0E9A /* libPods-JiuZhuangHui.a */,
 			);
 			name = Frameworks;
@@ -289,7 +399,10 @@
 				51B345CA1DF02AAD0027078C /* MainHeaderView.xib in Resources */,
 				5149287C1DEDC820000322C4 /* LaunchScreen.storyboard in Resources */,
 				51B345AC1DEFC4850027078C /* PanicBuyTableViewCell.xib in Resources */,
+				51BDF59A1DF1522600CDBBB2 /* WineryTableViewCell.xib in Resources */,
+				514B717A1DF0739E00EFBC3A /* HotWineTableViewCell.xib in Resources */,
 				514928791DEDC820000322C4 /* Assets.xcassets in Resources */,
+				51BDF5D31DF2895500CDBBB2 /* WineTitleTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,19 +463,36 @@
 			files = (
 				51B345BE1DF016A20027078C /* TopItemModel.m in Sources */,
 				51B345CD1DF05DA10027078C /* LineThrough.m in Sources */,
+				51BDF59D1DF17E2800CDBBB2 /* OriginatorTableViewCell.m in Sources */,
+				51BDF5A11DF17E9900CDBBB2 /* OriginatorModel.m in Sources */,
 				514928711DEDC81F000322C4 /* AppDelegate.m in Sources */,
 				514928A71DEE9427000322C4 /* RootTabBarViewController.m in Sources */,
 				51B345C11DF016B90027078C /* PlayerPictureModel.m in Sources */,
+				51BDF5991DF1522600CDBBB2 /* WineryTableViewCell.m in Sources */,
+				51BDF5CA1DF27CD200CDBBB2 /* BoxfulWinesModel.m in Sources */,
+				51BDF5CD1DF287A800CDBBB2 /* WineBuyViewController.m in Sources */,
+				51BDF5D61DF29A6F00CDBBB2 /* BasicTableHeaderView.m in Sources */,
+				51B345D31DF066D10027078C /* TopItemPushViewBottomView.m in Sources */,
+				51BDF5C71DF279CC00CDBBB2 /* WineryArticle.m in Sources */,
+				51B345D01DF0635E0027078C /* TopItemPushVC.m in Sources */,
 				51B345BB1DF015670027078C /* MainHeaderViewModel.m in Sources */,
 				51B345C81DF023F60027078C /* MainHeaderView.m in Sources */,
 				51B345B51DEFDF2B0027078C /* NetRequestManeger.m in Sources */,
+				51BDF58C1DF11EC900CDBBB2 /* TopicTableViewCell.m in Sources */,
+				51BDF5921DF12FEB00CDBBB2 /* WineryModel.m in Sources */,
+				514B71791DF0739E00EFBC3A /* HotWineTableViewCell.m in Sources */,
 				514928AB1DEE9652000322C4 /* PanicBuyTableViewCell.m in Sources */,
 				5149286E1DEDC81F000322C4 /* main.m in Sources */,
+				51BDF5D21DF2895500CDBBB2 /* WineTitleTableViewCell.m in Sources */,
 				51B345AF1DEFD53D0027078C /* WinePurchaseModel.m in Sources */,
 				51B345C41DF016D10027078C /* BottomButtonModel.m in Sources */,
+				51BDF5C11DF1D47200CDBBB2 /* WineryVideoViewController.m in Sources */,
+				51BDF5D91DF2CA5700CDBBB2 /* WineryDetailWebView.m in Sources */,
 				514928A41DEE75B9000322C4 /* FirstLuanchViewController.m in Sources */,
 				51B345B81DF006440027078C /* MainTableViewController.m in Sources */,
+				51BDF58F1DF1209C00CDBBB2 /* TopicViewModel.m in Sources */,
 				5149288E1DEDCB71000322C4 /* MNAutoScrollView.m in Sources */,
+				51BDF5C41DF2785D00CDBBB2 /* WineDetailModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +528,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -445,6 +576,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

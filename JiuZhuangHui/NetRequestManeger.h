@@ -15,4 +15,7 @@
 - (void)getMainViewInfoReponse:(void (^)(id reponseObjext, NSError *error))reponse;
 - (void)postPanicBuyingGoodsReponse:(void (^)(id reponseObject, NSError *error))reponse;
 
+
+- (void)getWineDatailInfoWithID:(NSString *)wineID reponse: (void(^)(id reponseObject, NSError *error))reponse;
+
 @end

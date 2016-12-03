@@ -13,5 +13,6 @@
 @property (nonatomic, copy) NSString *picURL;
 @property (nonatomic, copy) NSString *picDescription;
 @property (nonatomic, copy) NSString *picPhoto;
+@property (nonatomic, copy) NSString *picWineID;
 
 @end

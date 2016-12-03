@@ -16,6 +16,7 @@
 #define kContentTextFont        [UIFont systemFontOfSize:13]
 #define kTitleTextFont          [UIFont systemFontOfSize:15]
 #define kDetailContentTextFont  [UIFont systemFontOfSize:12]
+
 #define kPaddingWith   20
 #define kScreen_Bounds [UIScreen mainScreen].bounds
 #define kScreen_Height [UIScreen mainScreen].bounds.size.height
@@ -24,7 +25,7 @@
 #define kPanicBuyingAPI @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/cart/list"
 #define kMainViewAPI @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/index"
 
-
+#define kHeaderViewColor [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]
 
 
 #endif /* JiuZhuangHui_h */

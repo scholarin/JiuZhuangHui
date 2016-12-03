@@ -30,20 +30,40 @@
 }
 
 
-- (void)postPanicBuyingGoodsReponse:(void (^)(id reponseObject, NSError *error))reponse{
-    
-    NSDictionary *postParameters = @{@"json" : @"{\"session\":{\"sid\":\"376800e9b0ec23cff5a99eb8778e358569c6c3c4\",\"uid\":5423}}"};
-    
-    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-    [sessionManager POST:kPanicBuyingAPI parameters:postParameters progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        reponse(responseObject, nil);
-        //NSLog(@"%@",responseObject);
+//- (void)postPanicBuyingGoodsReponse:(void (^)(id reponseObject, NSError *error))reponse{
+//    
+//    NSDictionary *postParameters = @{@"json" : @"{\"session\":{\"sid\":\"376800e9b0ec23cff5a99eb8778e358569c6c3c4\",\"uid\":5423}}"};
+//    
+//    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+//    [sessionManager POST:kPanicBuyingAPI parameters:postParameters progress:^(NSProgress * _Nonnull uploadProgress) {
+//        
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        reponse(responseObject, nil);
+//        //NSLog(@"%@",responseObject);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        reponse(nil, error);
+//        //NSLog(@"%@",error);
+//    }];
+//    
+//}
+
+
+- (void)getWineDatailInfoWithID:(NSString *)wineID reponse:(void (^)(id reponseObject, NSError * error))reponse{
+    NSString *wineURLString = [NSString stringWithFormat:@"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/goods&goods_id=%@&open_url=/goods.php?",wineID];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:wineURLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject,nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        reponse(nil, error);
-        //NSLog(@"%@",error);
+        reponse(nil,error);
     }];
-    
 }
+
+
+
+
+
+
+
+
+
 @end

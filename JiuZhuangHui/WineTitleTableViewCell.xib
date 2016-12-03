@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="KGk-i7-Jjw" customClass="WineTitleTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="379" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="379" height="149.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卓越的品质-铖庄主的逸圃干红2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukx-eV-9zh">
+                        <rect key="frame" x="8" y="28" width="363" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yi Pu Cabernet Sauvignon2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTH-JE-B1y">
+                        <rect key="frame" x="8" y="54" width="363" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM9-my-Ua2">
+                        <rect key="frame" x="140" y="111.5" width="100" height="20"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcY-Sl-Vh8" userLabel="点赞">
+                                <rect key="frame" x="0.0" y="2" width="48" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="CI4-hM-TID"/>
+                                    <constraint firstAttribute="height" constant="16" id="XqR-Ki-385"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="3" image="like">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="likeIt:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="enE-jz-q24"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gE-hK-cIW" userLabel="评论">
+                                <rect key="frame" x="52" y="2" width="48" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="VkI-eS-gmM"/>
+                                    <constraint firstAttribute="height" constant="16" id="oye-63-74b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="121" image="reply">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="replyIt:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="e5q-rU-27z"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="5Dj-ry-lIw"/>
+                            <constraint firstAttribute="height" constant="20" id="AJR-E0-vee"/>
+                            <constraint firstItem="fcY-Sl-Vh8" firstAttribute="leading" secondItem="fM9-my-Ua2" secondAttribute="leading" id="Ez3-SV-RPU"/>
+                            <constraint firstItem="4gE-hK-cIW" firstAttribute="top" secondItem="fM9-my-Ua2" secondAttribute="top" constant="2" id="I4P-A1-h0a"/>
+                            <constraint firstItem="fcY-Sl-Vh8" firstAttribute="top" secondItem="fM9-my-Ua2" secondAttribute="top" constant="2" id="NoR-9O-LUB"/>
+                            <constraint firstAttribute="trailing" secondItem="4gE-hK-cIW" secondAttribute="trailing" id="iQN-Rc-NML"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥269.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKO-GB-PF4">
+                        <rect key="frame" x="8" y="80" width="363" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="sTH-JE-B1y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="3aV-SY-PAm"/>
+                    <constraint firstItem="sTH-JE-B1y" firstAttribute="top" secondItem="Ukx-eV-9zh" secondAttribute="bottom" constant="5" id="FjI-Xo-p9H"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="sTH-JE-B1y" secondAttribute="trailing" id="GJG-wV-X4J"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LKO-GB-PF4" secondAttribute="trailing" id="I5x-ck-cwb"/>
+                    <constraint firstItem="fM9-my-Ua2" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="KPN-ms-LFf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Ukx-eV-9zh" secondAttribute="trailing" id="PiH-Q1-eXz"/>
+                    <constraint firstItem="LKO-GB-PF4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="UtB-il-Yk7"/>
+                    <constraint firstItem="Ukx-eV-9zh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="VpA-qo-OBN"/>
+                    <constraint firstItem="Ukx-eV-9zh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Ww8-Fi-K6b"/>
+                    <constraint firstItem="LKO-GB-PF4" firstAttribute="top" secondItem="sTH-JE-B1y" secondAttribute="bottom" constant="10" id="g0H-Bd-rUu"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="fM9-my-Ua2" secondAttribute="bottom" constant="10" id="sYK-ZV-2W6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="likeButton" destination="fcY-Sl-Vh8" id="LDK-Rn-Kkm"/>
+                <outlet property="replyButton" destination="4gE-hK-cIW" id="YdH-JH-ep3"/>
+                <outlet property="shopPriceLabel" destination="LKO-GB-PF4" id="dAz-Ex-1Kd"/>
+                <outlet property="wineEnglishLabel" destination="sTH-JE-B1y" id="rcu-xG-Lmq"/>
+                <outlet property="wineNameLabel" destination="Ukx-eV-9zh" id="ZcH-io-lY1"/>
+            </connections>
+            <point key="canvasLocation" x="-178.5" y="-14"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="like" width="16" height="16"/>
+        <image name="reply" width="16" height="16"/>
+    </resources>
+</document>

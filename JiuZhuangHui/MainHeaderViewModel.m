@@ -37,6 +37,9 @@
             playerPictureModel.picURL = playDic[@"url"];
             playerPictureModel.picDescription = playDic[@"description"];
             playerPictureModel.picPhoto = playDic[@"photo"][@"small"];
+            
+            NSString *picID = [playerPictureModel.picURL substringFromIndex:[playerPictureModel.picURL length] - 3];
+            playerPictureModel.picWineID = picID;
             [playerPictures addObject:playerPictureModel];
         }
         mainHeaderViewModel.playerPictiuresArray = [playerPictures copy];
@@ -58,4 +61,5 @@
     }
     return mainHeaderViewModel;
 }
+
 @end
