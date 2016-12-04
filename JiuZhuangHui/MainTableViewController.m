@@ -45,7 +45,7 @@ static  NSString  *kTopicTableViewCell = @"TopicTableViewCell";
 static  NSString  *kWineryTableViewCell = @"WineryTableViewCell";
 static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 
-@interface MainTableViewController ()<MainHeaderViewDelegate,WineryTableViewCellDelegate>
+@interface MainTableViewController ()<MainHeaderViewDelegate,WineryTableViewCellDelegate,HotWineTableViewCellDelegate,PanicBuyTableViewCellDelegate>
 
 @property (strong, nonatomic)WinePurchaseModel   *panicBuyingPurchase;
 @property (strong, nonatomic)MainHeaderViewModel *mainHeaderViewModel;
@@ -54,6 +54,7 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 @property (strong, nonatomic)TopicViewModel *topicModel;
 @property (strong, nonatomic)NSArray   *wineries;
 @property (strong, nonatomic)OriginatorModel *originator;
+@property (strong, nonatomic)UIRefreshControl *refresh;
 
 @end
 
@@ -61,7 +62,6 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"酒庄惠";
     
     [self.tableView registerNib:[UINib nibWithNibName:kPanicBuyingPurchase bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kPanicBuyingPurchase];
     [self.tableView registerNib:[UINib nibWithNibName:kHotWineTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kHotWineTableViewCell ];
@@ -69,6 +69,7 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     [self.tableView registerNib:[UINib nibWithNibName:kWineryTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kWineryTableViewCell];
     [self.tableView registerClass:[OriginatorTableViewCell class] forCellReuseIdentifier:kOriginatorTableViewCell];
     
+    [self.tableView addSubview:self.refresh];
     
     [self requestPanicBuyingPurchase];
 
@@ -79,6 +80,24 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     // Dispose of any resources that can be recreated.
 }
 
+
+
+- (UIRefreshControl *)refresh{
+    if(!_refresh){
+        _refresh = [[UIRefreshControl alloc]init];
+        _refresh.tintColor = [UIColor lightGrayColor];
+        NSAttributedString *string = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
+        _refresh.attributedTitle = string;
+        [_refresh addTarget:self action:@selector(updateUI) forControlEvents:UIControlEventValueChanged];
+    }
+    return _refresh;
+}
+
+
+- (void)updateUI{
+    [self requestPanicBuyingPurchase];
+    [_refresh endRefreshing];
+}
 
 
 - (void)requestPanicBuyingPurchase{
@@ -112,10 +131,12 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0){
         PanicBuyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPanicBuyingPurchase];
+        cell.delegate = self;
         [cell setUIWithWinePurchaseModel:self.panicBuyingPurchase];
         return cell;
     }else if(indexPath.section == 1 || indexPath.section == 2){
         HotWineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kHotWineTableViewCell];
+        cell.delegate = self;
         if(indexPath.section == 1){
             [cell setUIWithWinePurchaseModel:self.hotWines title:@"本周人气庄园酒"];
         }else if(indexPath.section == 2){
@@ -197,12 +218,11 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 3){
-        UIViewController *vc = [[UIViewController alloc]init];
-        UIWebView *webView = [[UIWebView alloc]initWithFrame:vc.view.bounds];
-        [vc.view addSubview: webView];
-        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.topicModel.topicWebURL]]];
-        [self.navigationController pushViewController:vc animated:YES];
-#warning  点击跳转回本App
+        
+        WineryDetailWebView *wineryDetailWeb = [[WineryDetailWebView alloc]init];
+        wineryDetailWeb.topicURL = self.topicModel.topicWebURL;
+        [self.navigationController pushViewController:wineryDetailWeb animated:YES];
+
     }else if(indexPath.section == self.wineries.count + 4){
         [self goWebViewWithURLString:self.originator.originatorWebURL];
     }
@@ -239,6 +259,31 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     [self.navigationController pushViewController:pushVC animated:YES];
 }
 
+
+#pragma mark - pancibuy delegate 
+
+
+- (void)panicBuyTableViewCell:(PanicBuyTableViewCell *)cell didselectedWithWineID:(NSString *)wineID{
+    
+    [self showWineBuyTableViewWithWineID:wineID];
+    
+}
+
+
+#pragma mark - hotwine recommend delegate
+
+- (void)hotWineTableViewCellTitle:(NSString *)cellTitle didselectedWineButton:(UIButton *)wineButton{
+    
+    WinePurchaseModel *wine = nil;
+    if([cellTitle isEqualToString:@"本周人气庄园酒"]){
+        wine = self.hotWines[wineButton.tag];
+    }else if([cellTitle isEqualToString:@"本周精选推荐"]){
+        wine = self.recommendWines[wineButton.tag];
+    }
+    [self showWineBuyTableViewWithWineID:wine.goodsID];
+}
+
+
 #pragma mark - WineryTableViewCellDelegate
 
 - (void)WineryTableViewCell:(WineryTableViewCell *)cell didPressedLikeButton:(UIButton *)button fromID:(NSString *)wineryID{
@@ -251,8 +296,13 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 
 - (void)WineryTableViewCell:(WineryTableViewCell *)cell didPressedWineShowButton:(UIButton *)button fromID:(NSString *)wineryID{
     
-    [self showWineBuyTableViewWithWineID:wineryID];
-    
+    for(WineryModel *winery in self.wineries){
+        if([winery.wineryID isEqualToString:wineryID]){
+            WinePurchaseModel *wine = winery.wineryGoodLists[button.tag];
+            NSString *wineID = wine.goodsID;
+            [self showWineBuyTableViewWithWineID:wineID];
+        }
+    }
 }
 
 - (void)WineryTableViewCell:(WineryTableViewCell *)cell didPressedVideoPlayButton:(UIButton *)button fromURL:(NSString *)videoURL{

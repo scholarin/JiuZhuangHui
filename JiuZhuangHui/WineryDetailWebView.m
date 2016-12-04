@@ -33,9 +33,14 @@ static NSString *wineBasicURL = @"http://www.jiuzhuanghui.com/mobile/index.php?m
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
     
-    NSString *wineryDetailURL = [webBasicURL stringByAppendingString:self.wineryID];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:wineryDetailURL]]];
     
+    if(self.wineryID.length > 0){
+        NSString *wineryDetailURL = [webBasicURL stringByAppendingString:self.wineryID];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:wineryDetailURL]]];
+
+    }else{
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.topicURL]]];
+    }
     
     // Do any additional setup after loading the view.
 }
@@ -65,9 +70,11 @@ static NSString *wineBasicURL = @"http://www.jiuzhuanghui.com/mobile/index.php?m
         WineBuyViewController *wineBuyVC = [[WineBuyViewController alloc]init];
         wineBuyVC.wineID =wineID;
         UINavigationController *natVC = [[UINavigationController alloc]initWithRootViewController:wineBuyVC];
-        [self presentViewController:natVC animated:YES completion:nil];
+        [self.navigationController pushViewController:natVC animated:YES ];
     }
     return isShould;
 }
+
+
 
 @end

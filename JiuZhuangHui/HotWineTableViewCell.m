@@ -55,15 +55,10 @@
     return 230;
 }
 
-- (IBAction)leftButtonClick:(id)sender {
-    
-    [self.delegate didSelectedLeftButtonForHotWineTableVeiwCell:self];
-    
-}
 
-- (IBAction)rightButtonClick:(id)sender {
+- (IBAction)selectedWineButton:(UIButton *)sender {
     
-    [self.delegate didSelectedRightButtonForHotWineTableVeiwCell:self];
+    [self.delegate hotWineTableViewCellTitle:self.titleLabel.text didselectedWineButton:sender];
     
 }
 

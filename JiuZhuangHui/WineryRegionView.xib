@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="rFB-FR-W0x" customClass="WineryRegionVeiw">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="238"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hd9-hO-Jf6">
+                    <rect key="frame" x="0.0" y="0.0" width="380" height="238"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmf-ey-sEj">
+                    <rect key="frame" x="0.0" y="198" width="190" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="wkd-fX-F5Y"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="产区介绍" image="grape">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="wineryRegionPressed:" destination="rFB-FR-W0x" eventType="touchUpInside" id="5Lt-RF-Woc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yf3-ra-ocg">
+                    <rect key="frame" x="190" y="198" width="190" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="pbi-RP-BcZ"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="产区天气" image="sun">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="wineryRegionWeatherPressed:" destination="rFB-FR-W0x" eventType="touchUpInside" id="aqM-v4-JIT"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宁夏贺兰山东麓产区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Jg-NY-ciz">
+                    <rect key="frame" x="20" y="177" width="360" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grapearrow" translatesAutoresizingMaskIntoConstraints="NO" id="Pbi-aP-x7e">
+                    <rect key="frame" x="150" y="198" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="BAE-Kf-em5"/>
+                        <constraint firstAttribute="height" constant="40" id="Hbd-nE-8eX"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grapearrow" translatesAutoresizingMaskIntoConstraints="NO" id="Uqp-Ea-xsv">
+                    <rect key="frame" x="340" y="198" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="3bb-9h-hzD"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="L47-Jb-hex"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="RPr-o6-r4b"/>
+                        <constraint firstAttribute="height" constant="40" id="ejN-B3-Mb4"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlr-hu-dSj">
+                    <rect key="frame" x="0.0" y="0.0" width="380" height="198"/>
+                    <connections>
+                        <action selector="wineryRegionPressed:" destination="rFB-FR-W0x" eventType="touchUpInside" id="Bb0-ox-dhs"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <accessibility key="accessibilityConfiguration" identifier="WineryRegionView"/>
+            <constraints>
+                <constraint firstItem="8Jg-NY-ciz" firstAttribute="leading" secondItem="rFB-FR-W0x" secondAttribute="leading" constant="20" id="0Gi-Zp-8KU"/>
+                <constraint firstItem="lmf-ey-sEj" firstAttribute="top" secondItem="8Jg-NY-ciz" secondAttribute="bottom" id="1P8-1r-1sN"/>
+                <constraint firstItem="yf3-ra-ocg" firstAttribute="height" secondItem="lmf-ey-sEj" secondAttribute="height" id="3Gl-ED-5A3"/>
+                <constraint firstAttribute="bottom" secondItem="Uqp-Ea-xsv" secondAttribute="bottom" id="BiT-23-GHc"/>
+                <constraint firstItem="yf3-ra-ocg" firstAttribute="leading" secondItem="Pbi-aP-x7e" secondAttribute="trailing" id="Ebs-FC-jXl"/>
+                <constraint firstItem="lmf-ey-sEj" firstAttribute="leading" secondItem="rFB-FR-W0x" secondAttribute="leading" id="Gie-1i-dAr"/>
+                <constraint firstAttribute="bottom" secondItem="lmf-ey-sEj" secondAttribute="bottom" id="ODS-6C-nLd"/>
+                <constraint firstItem="yf3-ra-ocg" firstAttribute="width" secondItem="lmf-ey-sEj" secondAttribute="width" id="QhK-gM-W5q"/>
+                <constraint firstItem="yf3-ra-ocg" firstAttribute="leading" secondItem="lmf-ey-sEj" secondAttribute="trailing" id="Scb-iB-t72"/>
+                <constraint firstAttribute="trailing" secondItem="Hd9-hO-Jf6" secondAttribute="trailing" id="TQO-SE-DvA"/>
+                <constraint firstItem="Hd9-hO-Jf6" firstAttribute="leading" secondItem="rFB-FR-W0x" secondAttribute="leading" id="XEQ-LZ-Jvf"/>
+                <constraint firstItem="Hd9-hO-Jf6" firstAttribute="top" secondItem="rFB-FR-W0x" secondAttribute="top" id="bHc-eB-aZ1"/>
+                <constraint firstAttribute="trailing" secondItem="Uqp-Ea-xsv" secondAttribute="trailing" id="c6l-66-F8T"/>
+                <constraint firstAttribute="trailing" secondItem="yf3-ra-ocg" secondAttribute="trailing" id="cAj-x6-jFd"/>
+                <constraint firstAttribute="trailing" secondItem="8Jg-NY-ciz" secondAttribute="trailing" id="g1E-He-fqm"/>
+                <constraint firstItem="lmf-ey-sEj" firstAttribute="top" secondItem="vlr-hu-dSj" secondAttribute="bottom" id="hRd-C4-dlD"/>
+                <constraint firstAttribute="bottom" secondItem="yf3-ra-ocg" secondAttribute="bottom" id="l9M-ao-FgI"/>
+                <constraint firstItem="vlr-hu-dSj" firstAttribute="leading" secondItem="rFB-FR-W0x" secondAttribute="leading" id="ojy-SN-nU5"/>
+                <constraint firstAttribute="bottom" secondItem="Pbi-aP-x7e" secondAttribute="bottom" id="sgZ-NV-GkQ"/>
+                <constraint firstAttribute="bottom" secondItem="Hd9-hO-Jf6" secondAttribute="bottom" id="tj8-dv-ger"/>
+                <constraint firstItem="vlr-hu-dSj" firstAttribute="top" secondItem="rFB-FR-W0x" secondAttribute="top" id="umc-Lr-aQV"/>
+                <constraint firstAttribute="trailing" secondItem="vlr-hu-dSj" secondAttribute="trailing" id="wXO-3l-v38"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="wineryRegion" destination="8Jg-NY-ciz" id="7wv-Rv-g3b"/>
+                <outlet property="wineryRegionIntroductionButton" destination="lmf-ey-sEj" id="bdX-ZP-R2l"/>
+                <outlet property="wineryRegionWeatherButton" destination="yf3-ra-ocg" id="OrG-Wn-IRH"/>
+                <outlet property="wineryReionImageView" destination="Hd9-hO-Jf6" id="nvj-c6-0bt"/>
+            </connections>
+            <point key="canvasLocation" x="-146" y="-443"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="grape" width="25" height="25"/>
+        <image name="grapearrow" width="25" height="25"/>
+        <image name="sun" width="25" height="25"/>
+    </resources>
+</document>

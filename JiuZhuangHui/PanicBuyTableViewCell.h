@@ -12,12 +12,13 @@
 
 @protocol PanicBuyTableViewCellDelegate <NSObject>
 
-- (void)selectShopingInPanicBuyCell:(PanicBuyTableViewCell *)cell;
+- (void)panicBuyTableViewCell:(PanicBuyTableViewCell *)cell didselectedWithWineID:(NSString *)wineID;
 
 @end
 
 @interface PanicBuyTableViewCell : UITableViewCell
 
+@property (nonatomic, copy,readonly) NSString *wineID;
 @property (weak, nonatomic) id<PanicBuyTableViewCellDelegate>delegate;
 
 + (CGFloat)heightForCell;

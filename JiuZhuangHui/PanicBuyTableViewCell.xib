@@ -50,7 +50,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余：11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0a-7W-Nnp">
-                        <rect key="frame" x="168" y="115.5" width="48" height="20"/>
+                        <rect key="frame" x="168" y="115" width="48" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="fck-gd-UEr"/>
                         </constraints>
@@ -59,7 +59,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥149.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rm-i7-fL8" customClass="LineThrough">
-                        <rect key="frame" x="168" y="90.5" width="44" height="20"/>
+                        <rect key="frame" x="168" y="90" width="44" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="iLW-y1-0Pc"/>
                         </constraints>
@@ -68,7 +68,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="迦南美地馥司令半甜白葡萄酒2015" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAb-bP-X8j">
-                        <rect key="frame" x="168" y="54" width="197" height="31.5"/>
+                        <rect key="frame" x="168" y="53.5" width="197" height="31.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -89,21 +89,31 @@
                             <constraint firstAttribute="height" constant="1" id="TYI-v8-Zsk"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHX-UK-LMV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="186"/>
+                        <connections>
+                            <action selector="shoping:" destination="GmL-ZD-cn9" eventType="touchUpInside" id="SZq-J0-SfY"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="m0a-7W-Nnp" firstAttribute="leading" secondItem="pVm-e8-0XX" secondAttribute="trailing" constant="20" id="1kf-4c-Ibn"/>
                     <constraint firstAttribute="bottomMargin" secondItem="pVm-e8-0XX" secondAttribute="bottom" constant="20" id="4JN-gk-8ZU"/>
                     <constraint firstItem="iAb-bP-X8j" firstAttribute="leading" secondItem="pVm-e8-0XX" secondAttribute="trailing" constant="20" id="9ey-tm-GP5"/>
                     <constraint firstAttribute="bottomMargin" secondItem="zfP-Rh-U1V" secondAttribute="bottom" constant="70" id="Cfp-3q-wqk"/>
+                    <constraint firstItem="fHX-UK-LMV" firstAttribute="top" secondItem="fa3-Hi-0JJ" secondAttribute="top" id="FsL-ze-aWD"/>
                     <constraint firstItem="ImW-nZ-uTd" firstAttribute="leading" secondItem="fa3-Hi-0JJ" secondAttribute="leading" id="Gew-JS-ZIm"/>
                     <constraint firstAttribute="trailing" secondItem="xXH-7P-lw4" secondAttribute="trailing" id="Gxc-JP-usl"/>
+                    <constraint firstItem="fHX-UK-LMV" firstAttribute="leading" secondItem="fa3-Hi-0JJ" secondAttribute="leading" id="Je7-z8-iY4"/>
                     <constraint firstItem="zfP-Rh-U1V" firstAttribute="leading" secondItem="7Rm-i7-fL8" secondAttribute="trailing" constant="10" id="P4N-Qs-QDM"/>
                     <constraint firstItem="7Rm-i7-fL8" firstAttribute="top" secondItem="iAb-bP-X8j" secondAttribute="bottom" constant="5" id="Rn6-Oo-teb"/>
                     <constraint firstItem="xXH-7P-lw4" firstAttribute="top" secondItem="fa3-Hi-0JJ" secondAttribute="top" id="Te1-3U-6cs"/>
+                    <constraint firstAttribute="bottom" secondItem="fHX-UK-LMV" secondAttribute="bottom" id="V1n-M3-HeX"/>
                     <constraint firstAttribute="bottomMargin" secondItem="EZK-GC-rqc" secondAttribute="bottom" constant="20" id="XUG-8B-GhM"/>
                     <constraint firstItem="pVm-e8-0XX" firstAttribute="leading" secondItem="fa3-Hi-0JJ" secondAttribute="leadingMargin" constant="20" id="cUg-XW-7bR"/>
                     <constraint firstItem="xXH-7P-lw4" firstAttribute="leading" secondItem="fa3-Hi-0JJ" secondAttribute="leading" id="cZX-0o-5tM"/>
                     <constraint firstItem="EZK-GC-rqc" firstAttribute="top" secondItem="m0a-7W-Nnp" secondAttribute="bottom" id="dRw-N7-AMb"/>
+                    <constraint firstAttribute="trailing" secondItem="fHX-UK-LMV" secondAttribute="trailing" id="da5-zy-MFd"/>
                     <constraint firstAttribute="trailing" secondItem="ImW-nZ-uTd" secondAttribute="trailing" id="dsK-oS-eki"/>
                     <constraint firstAttribute="trailing" secondItem="iAb-bP-X8j" secondAttribute="trailing" constant="10" id="eWc-FA-Li1"/>
                     <constraint firstItem="EZK-GC-rqc" firstAttribute="leading" secondItem="pVm-e8-0XX" secondAttribute="trailing" constant="20" id="k1g-Df-QLf"/>

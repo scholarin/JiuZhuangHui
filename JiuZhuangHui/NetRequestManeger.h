@@ -13,9 +13,13 @@
 +(instancetype)shareManager;
 
 - (void)getMainViewInfoReponse:(void (^)(id reponseObjext, NSError *error))reponse;
-- (void)postPanicBuyingGoodsReponse:(void (^)(id reponseObject, NSError *error))reponse;
+
 
 
 - (void)getWineDatailInfoWithID:(NSString *)wineID reponse: (void(^)(id reponseObject, NSError *error))reponse;
+- (void)getWineDetailHTMLWithID:(NSString *)wineID reponse: (void(^)(id reponseObject, NSError *erroe))reponse;
+
+//酒庄页面网络请求
+- (void)getWineryMainWithPage:(NSInteger)page Reponse:(void(^)(id reponseObject, NSError *error))reponse;
 
 @end

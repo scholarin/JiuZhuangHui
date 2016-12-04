@@ -14,12 +14,16 @@
 
 #import "WineBuyViewController.h"
 #import "JiuZhuangHui.h"
+#import "MJRefresh.h"
 #import "WineDetailModel.h"
 #import "NetRequestManeger.h"
 
 #import "SDCycleScrollView.h"
 #import "WineTitleTableViewCell.h"
 #import "BasicTableHeaderView.h"
+
+#import "WineDetailViewController.h"
+
 
 
 static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
@@ -39,37 +43,58 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     [super viewDidLoad];
     
     
+    self.title = @"一酒一世界";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareWine)];
+    self.tabBarController.tabBar.hidden = YES;
     [self updateTableView];
     
     // Do any additional setup after loading the view.
 }
 
+
+- (void)shareWine{
+    
+}
 - (void)updateTableView{
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
     self.tableView.delegate     = self;
     self.tableView.dataSource   = self;
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.tableFooterView = ({
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 100)];
-        view.backgroundColor = kHeaderViewColor;
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
-        
-        NSAttributedString *attString = [[NSAttributedString alloc]initWithString:@"----点击查看图文详情----"
-                                                                      attributes:@{
-                                                                                    NSFontAttributeName : kContentTextFont,
-                                                                                    NSForegroundColorAttributeName : [UIColor blackColor]
-                                                                                    }];
-        [button setAttributedTitle:attString forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(presentDetailView) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
-        [self.tableView registerNib:[UINib nibWithNibName:kWineTitleTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kWineTitleTableViewCell];
-        view;
-    });
+    MJRefreshAutoStateFooter *refresh = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(presentDetailView)];
+    [refresh setTitle:@"----点击查看图文详情----" forState:MJRefreshStateRefreshing];
+    self.tableView.mj_footer = refresh;
+    [self.tableView registerNib:[UINib nibWithNibName:kWineTitleTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kWineTitleTableViewCell];
+//    self.tableView.tableFooterView = ({
+//        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 100)];
+//        view.backgroundColor = kHeaderViewColor;
+//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
+//        
+//        NSAttributedString *attString = [[NSAttributedString alloc]initWithString:@"----点击查看图文详情----"
+//                                                                      attributes:@{
+//                                                                                    NSFontAttributeName : kContentTextFont,
+//                                                                                    NSForegroundColorAttributeName : [UIColor blackColor]
+//                                                                                    }];
+//        [button setAttributedTitle:attString forState:UIControlStateNormal];
+//        [button addTarget:self action:@selector(presentDetailView) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:button];
+//        view;
+//    });
+    
+    
+//    UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pushDetailView)];
+//    [self.tableView addGestureRecognizer:gesture];
     
     [self.view addSubview:self.tableView];
     
 }
 
+
+- (void)pushDetailView{
+    if(self.tableView.scrollsToTop){
+        UIViewController *vc  = [[UIViewController alloc]init];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+    }
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requestWineDetailForID:self.wineID];
@@ -170,8 +195,15 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
 
 
 - (void)presentDetailView{
-    UIViewController *vc  = [[UIViewController alloc]init];
-    [self.navigationController presentViewController:vc animated:YES completion:nil];
+    WineDetailViewController *vc  = [[WineDetailViewController alloc]init];
+    vc.view.frame = CGRectMake(0, kScreen_Height, kScreen_Width, kScreen_Height);
+    
+    [self.view addSubview:vc.view];
+    
+    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        vc.view.frame = self.view.bounds;
+    } completion:nil];
+    
 }
 
 #pragma mark - tableViewDelegate

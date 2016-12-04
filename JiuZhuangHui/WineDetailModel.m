@@ -21,8 +21,8 @@
             self.goodsShopPrice     = wineDetailDic[@"shop_price"];
             self.goodsMarketPrice   = wineDetailDic[@"market_price"];
             self.likeNumber         = wineDetailDic[@"like_num"];
-            self.replyNumber        = wineDetailDic[@"reply_num"];
-            self.goodsInfoURL       = wineDetailDic[@"googs_info_url"];
+            self.replyNumber        = [wineDetailDic[@"reply_num"] isKindOfClass:[NSString class]] ? wineDetailDic[@"reply_num"] : [wineDetailDic[@"reply_num"] stringValue];
+            self.goodsInfoURL       = [wineDetailDic[@"googs_info_url"] isKindOfClass:[NSString class]] ? wineDetailDic[@"googs_info_url"] :[wineDetailDic[@"googs_info_url"] stringValue];
             
             NSDictionary *boxfulDic = wineDetailDic[@"linked_goods"][0];
             self.boxfulWines        = [[BoxfulWinesModel alloc]initWithBoxfuDic:boxfulDic] ;
@@ -41,6 +41,13 @@
                 [pictures addObject:pictureURL];
             }
             self.goodsPictures      = [pictures copy];
+            
+            NSMutableArray *replys = [NSMutableArray new];
+            for(NSDictionary *replyDic in wineDetailDic[@"reply_content"]){
+                ReplyContentModel *reply = [[ReplyContentModel alloc]initWithReplyDic:replyDic];
+                [replys addObject:reply];
+            }
+            self.goodsReplys = [replys copy];
         }
     }
     return self;

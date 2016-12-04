@@ -9,6 +9,7 @@
 #import "WinePurchaseModel.h"
 #import "WineryArticle.h"
 #import "BoxfulWinesModel.h"
+#import "ReplyContentModel.h"
 
 
 @interface WineDetailModel : WinePurchaseModel
@@ -18,6 +19,7 @@
 @property (nonatomic, copy) NSArray<WineryArticle *>  *wineryArticles;
 @property (nonatomic, copy) BoxfulWinesModel *boxfulWines;
 @property (nonatomic, copy) NSArray<NSString *> *goodsPictures;
+@property (nonatomic, copy) NSArray<ReplyContentModel *> *goodsReplys;
 
 
 - (instancetype)initWithWineDetailData:(id)data;

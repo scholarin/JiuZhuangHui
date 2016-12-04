@@ -13,8 +13,7 @@
 
 @protocol HotWineTableViewCellDelegate <NSObject>
 
-- (void)didSelectedLeftButtonForHotWineTableVeiwCell:(HotWineTableViewCell *)hotWineCell;
-- (void)didSelectedRightButtonForHotWineTableVeiwCell:(HotWineTableViewCell *)hotWineCell;
+- (void)hotWineTableViewCellTitle:(NSString *)cellTitle didselectedWineButton:(UIButton *)wineButton;
 
 @end
 @interface HotWineTableViewCell : UITableViewCell

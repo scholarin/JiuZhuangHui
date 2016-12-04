@@ -62,4 +62,12 @@
     return mainHeaderViewModel;
 }
 
+
+- (instancetype)copyWithZone:(NSZone *)zone{
+    MainHeaderViewModel *headerViewModel = [[[self class]allocWithZone:zone]init];
+    headerViewModel.topItemsArray = [_topItemsArray copy];
+    headerViewModel.playerPictiuresArray = [_playerPictiuresArray copy];
+    headerViewModel.bottomButtonsArray = [_bottomButtonsArray copy];
+    return headerViewModel;
+}
 @end

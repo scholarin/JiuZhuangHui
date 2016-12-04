@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *purchaseCountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *panicBuyingButton;
+@property (nonatomic, copy,readwrite) NSString *wineID;
 
 @end
 
@@ -42,7 +43,9 @@
 }
 
 - (IBAction)shoping:(id)sender {
-    [self.delegate selectShopingInPanicBuyCell:self];
+    
+    [self.delegate panicBuyTableViewCell:self didselectedWithWineID:self.wineID];
+    
 }
 
 - (void)setUIWithWinePurchaseModel:(WinePurchaseModel *)model{
@@ -51,8 +54,8 @@
     self.oldPriceLabel.text         = model.goodsMarketPrice;
     self.currentPriceLabel.text     = model.goodsShopPrice;
     self.purchaseCountLabel.text    = [NSString stringWithFormat:@"剩余：%@",model.goodsCount];
+    self.wineID                     = model.goodsID;
  
-    
 }
 
 @end

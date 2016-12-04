@@ -90,13 +90,13 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YF3-8t-pJN">
                         <rect key="frame" x="0.0" y="29.999999999999986" width="179.66666666666666" height="210.66666666666663"/>
                         <connections>
-                            <action selector="leftButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Yeb-Bm-HHg"/>
+                            <action selector="selectedWineButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="U1N-rv-JB5"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYX-GW-cp9">
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYX-GW-cp9">
                         <rect key="frame" x="179.66666666666663" y="30.999999999999986" width="179.33333333333337" height="201.66666666666663"/>
                         <connections>
-                            <action selector="rightButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ihA-KI-1RL"/>
+                            <action selector="selectedWineButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3dc-2N-4ch"/>
                         </connections>
                     </button>
                 </subviews>

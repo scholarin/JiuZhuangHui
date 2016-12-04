@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FirstLuanchViewController.h"
-#import "MainTableViewController.h"
+#import "RootTabBarViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,11 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    MainTableViewController *vc = [[MainTableViewController alloc]init];
-    UINavigationController *natVC = [[UINavigationController alloc]initWithRootViewController:vc];
-    self.window.rootViewController = natVC;
-    
-    
+    RootTabBarViewController *rootTabBarController = [[RootTabBarViewController alloc]init];
+    self.window.rootViewController = rootTabBarController;
     [self.window makeKeyAndVisible];
     
     return YES;
