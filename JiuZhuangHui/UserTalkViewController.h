@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserTalkViewController : UIViewController
+@interface UserTalkViewController : UITableViewController
 
 @end

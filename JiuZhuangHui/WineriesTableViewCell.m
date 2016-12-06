@@ -35,10 +35,11 @@
 }
 
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
-    if(self){
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
         _wineryImageView = [[UIImageView alloc]init];
+        _wineryImageView.layer.cornerRadius = 2;
+        _wineryImageView.clipsToBounds = YES;
         [self addSubview:_wineryImageView];
         [_wineryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self).offset(15);
@@ -48,7 +49,7 @@
         }];
         
         _wineryNameLabel = [[UILabel alloc]init];
-        _wineryNameLabel.font = [UIFont systemFontOfSize:13];
+        _wineryNameLabel.font = [UIFont systemFontOfSize:15];
         _wineryNameLabel.numberOfLines = 1;
         [self addSubview:_wineryNameLabel];
         [_wineryNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,7 +80,7 @@
 }
 
 +(CGFloat)heightOfWienriesCell{
-    return 70;
+    return 85;
 }
 
 @end

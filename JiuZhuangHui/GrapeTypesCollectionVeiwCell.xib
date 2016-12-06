@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EMk-wB-TPd" customClass="GrapeTypesCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="75" height="101"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="75" height="101"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRT-gB-YXv">
+                        <rect key="frame" x="0.0" y="0.0" width="75" height="81"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mn9-GG-WWj">
+                        <rect key="frame" x="0.0" y="81" width="75" height="20"/>
+                        <accessibility key="accessibilityConfiguration" identifier="GrapeTypesCollectionVeiwCell"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="wot-rd-BAW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Mn9-GG-WWj" firstAttribute="leading" secondItem="EMk-wB-TPd" secondAttribute="leading" id="9tQ-uZ-dgW"/>
+                <constraint firstItem="GRT-gB-YXv" firstAttribute="leading" secondItem="EMk-wB-TPd" secondAttribute="leading" id="IDL-ut-xtZ"/>
+                <constraint firstItem="GRT-gB-YXv" firstAttribute="top" secondItem="EMk-wB-TPd" secondAttribute="top" id="W6e-48-pa7"/>
+                <constraint firstAttribute="bottom" secondItem="Mn9-GG-WWj" secondAttribute="bottom" id="YAF-HQ-A40"/>
+                <constraint firstAttribute="trailing" secondItem="GRT-gB-YXv" secondAttribute="trailing" id="aPO-cy-XOi"/>
+                <constraint firstItem="Mn9-GG-WWj" firstAttribute="top" secondItem="GRT-gB-YXv" secondAttribute="bottom" id="aXd-3r-Q5E"/>
+                <constraint firstAttribute="trailing" secondItem="Mn9-GG-WWj" secondAttribute="trailing" id="kpl-Sf-xpk"/>
+            </constraints>
+            <size key="customSize" width="75" height="101"/>
+            <connections>
+                <outlet property="grapeImageView" destination="GRT-gB-YXv" id="Kzr-Cq-xSU"/>
+                <outlet property="grapeNameLabel" destination="Mn9-GG-WWj" id="L8J-KO-T7j"/>
+            </connections>
+            <point key="canvasLocation" x="13.5" y="-198.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

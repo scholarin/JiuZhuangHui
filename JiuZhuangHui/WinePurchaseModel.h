@@ -26,4 +26,6 @@
 
 + (NSArray *)getHotWineWithData:(id)data;
 + (NSArray *)getRecommendWineWithData:(id)data;
+
++ (NSArray *)getAllOfGoodlistWithData:(id)data;
 @end

@@ -10,4 +10,7 @@
 
 @interface BasicTableHeaderView : UIView
 
+
+- (instancetype)initWithHeight:(CGFloat)height;
+
 @end

@@ -14,7 +14,7 @@
 #import "ShopingCartViewController.h"
 #import "UserInfoViewController.h"
 
-
+#import "ShopingBarButtonItme.h"
 @interface RootTabBarViewController ()
 
 @end
@@ -55,7 +55,10 @@
     shopingCartNaVC.tabBarItem.title = @"购物车";
     [shopingCartNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
     [shopingCartNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
-    [shopingCartNaVC.tabBarItem setImage:[UIImage imageNamed:@"shoping"]];
+    
+    ShopingBarButtonItme *item = [[ShopingBarButtonItme alloc]initWithShopCartCount:5];
+    UIImage *image = [[self convertViewToImage:item] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [shopingCartNaVC.tabBarItem setImage:image];
     [shopingCartNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_shoping"]];
     
     UserInfoViewController *userInfoVc = [[UserInfoViewController alloc]init];
@@ -68,7 +71,6 @@
 
     
     self.viewControllers = @[mainNavC,wineryNaVC,userTalkNaVC,shopingCartNaVC,userInfoNaVC];
-
     // Do any additional setup after loading the view.
 }
 
@@ -77,14 +79,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+- (UIImage *)convertViewToImage:(UIView *)view
+{
+    UIGraphicsBeginImageContext(view.bounds.size);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return screenshot;
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end

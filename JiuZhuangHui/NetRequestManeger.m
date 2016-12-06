@@ -18,8 +18,17 @@
     return [[[self class]alloc]init];
 }
 
+- (void)geiRequestWithURL:(NSString *)urlString reponse: (void(^)(id reponseObject, NSError *error))reponse{
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil, error);
+    }];
+}
+
+
 - (void)getMainViewInfoReponse:(void (^)(id reponseObject, NSError *error))reponse{
-    
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     [sessionManager GET:kMainViewAPI parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         reponse(responseObject, nil);
@@ -77,7 +86,7 @@
     static NSString *wineryMainURLString = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/wineryMain";
     
     NSString *postString = [NSString stringWithFormat:@"{\"pagination\":{\"count\":10,\"limit\":10,\"page\":%ld}}",page];
-    NSDictionary *parameters = @{@"jons" : postString};
+    NSDictionary *parameters = @{@"json" : postString};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager POST:wineryMainURLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         reponse(responseObject,nil);
@@ -86,6 +95,51 @@
     }];
 }
 
+- (void)getFeatureWineryDataWithFeatureID:(NSString *)featureID name:(NSString *)featuerName page:(NSInteger)page reponse: (void(^)(id reponseObject, NSError *erroe))reponse{
+    NSString *postString = [NSString stringWithFormat:@"{\"filter\":{\"feature\":\"%@\",\"featureStr\":\"%@\"},\"pagination\":{\"count\":10,\"page\":%ld}}",featureID,featuerName,page];
+    NSString *postURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/wineries";
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:postURL parameters:@{@"json" : postString} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+    
+}
 
 
+- (void)getwineriesOfGrapeTyepWithGrapeID:(NSString *)grapeID name:(NSString *)name page:(NSInteger)page reponse:(void (^)(id reponseObject, NSError *error))reponse{
+   
+    NSString *postString = [NSString stringWithFormat:@"{\"filter\":{\"type\":\"%@\",\"typeStr\":\"%@\"},\"pagination\":{\"count\":10,\"page\":%ld}}",grapeID,name,page];
+    NSString *postURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/wineries";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:postURL parameters:@{@"json" : postString} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+}
+
+- (void)getAllOfWineWithPage:(NSInteger)page reponse: (void(^)(id reponseObject, NSError *error))reponse{
+    NSString *postString = [NSString stringWithFormat:@"{\"filter\":{},\"pagination\":{\"count\":9,\"page\":%ld}}",page];
+    NSString *postURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/search";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:postURL parameters:@{@"json" : postString} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+}
+
+- (void)getUserTalkDataReponse:(void (^)(id reponseObjece, NSError *error))reponse{
+    NSString *userTalkURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/discovery";
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    [sessionManager GET:userTalkURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil, error);
+    }];
+
+}
 @end

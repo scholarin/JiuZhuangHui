@@ -16,4 +16,8 @@
 @property (nonatomic, copy) NSString *wineryImage;
 
 + (NSArray *)getWineriesWithData:(id)data;
+
++ (NSArray *)getFeatureWineriesWithData:(id)data;
+
++ (NSArray *)getGrapeTypesOfWineriesWithData:(id)data;
 @end

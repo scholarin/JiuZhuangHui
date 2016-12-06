@@ -25,7 +25,6 @@
     self.webView = [[UIWebView alloc]init];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jiuzhuanghui.com/mobile/index.php?m=default&c=article&a=goods_info_app&id=333"]]];
     NSInteger height = [[self.webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] integerValue];
-    NSLog(@"%d",height);
     self.webView.frame = CGRectMake(0, 0, kScreen_Width, height);
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds];

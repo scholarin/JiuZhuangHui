@@ -36,6 +36,7 @@
 
 #import "WineryVideoViewController.h"
 #import "WineryDetailWebView.h"
+#import "AllWineViewController.h"
 
 
 
@@ -75,6 +76,10 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 
 }
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.tabBar.hidden = NO;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -237,6 +242,11 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 }
 
 - (void)mainHeaderView:(MainHeaderView *)mainHeaderView didSelectedBottomButton:(UIButton *)bottomButton{
+    if(bottomButton.tag == 4){
+        AllWineViewController *allWineVC = [[AllWineViewController alloc]init];
+        allWineVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:allWineVC animated:YES];
+    }
     
 }
 

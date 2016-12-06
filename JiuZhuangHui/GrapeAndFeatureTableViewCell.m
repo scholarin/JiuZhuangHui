@@ -30,8 +30,8 @@
     // Configure the view for the selected state
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    if(self = [super initWithFrame:frame]){
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
         _wineryTypeButtons = [[NSMutableArray alloc]init];
         _grapeTypeLabels = [[NSMutableArray alloc]init];
         _grapeTypeButtons = [[NSMutableArray alloc]init];
@@ -40,13 +40,15 @@
         
         for(int i = 0; i < 3; i++){
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(10 + i * (wineryTypeWidth + 10), 10, wineryTypeWidth, 30)];
-            button.tag = i;
+            button.layer.cornerRadius = 3;
+            button.clipsToBounds = YES;
+            
             if(i == 0){
-                [button setBackgroundColor:[UIColor redColor]];;
-            }if(i == 1){
+                [button setBackgroundColor:[UIColor colorWithRed:150/250.0 green:0 blue:0 alpha:1]];;
+            }else if(i == 1){
                 [button setBackgroundColor:[UIColor orangeColor]];
             }else{
-                [button setBackgroundColor:[UIColor greenColor]];
+                [button setBackgroundColor:[UIColor colorWithRed:0 green:90/250.0 blue:0 alpha:1]];
             }
             [button addTarget:self action:@selector(pressedWineryTypeButton:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -56,7 +58,7 @@
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(5, 60, kScreen_Width - 10, 20)];
         label.textAlignment = NSTextAlignmentCenter;
-        label.text = @"——————————————葡萄品种————————————";
+        label.text = @"—————————————葡萄品种————————————";
         label.font = [UIFont systemFontOfSize:12];
         label.textColor = [UIColor lightGrayColor];
         [self addSubview:label];
@@ -64,7 +66,7 @@
         
         CGFloat grapeWidth = (kScreen_Width - 120)/5.0;
         for(int i = 0; i < 5; i++){
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(70, 20 + i * (grapeWidth + 20), grapeWidth, grapeWidth)];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(20 + i * (grapeWidth + 20),85 , grapeWidth, grapeWidth)];
             button.layer.cornerRadius = grapeWidth/2;
             button.clipsToBounds = YES;
             button.tag = i;
@@ -72,7 +74,7 @@
             [self addSubview:button];
             [_grapeTypeButtons addObject:button];
             
-            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(70 + grapeWidth, 20 + i*(grapeWidth + 20), grapeWidth, 20)];
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake( 20 + i*(grapeWidth + 20),85 + grapeWidth, grapeWidth, 20)];
             label.font = [UIFont systemFontOfSize:12];
             label.textAlignment = NSTextAlignmentCenter;
             
@@ -96,10 +98,15 @@
 
 - (void)setUIWithGrapes:(NSArray *)grapes andWineryFeatures:(NSArray *)features{
     for(int i = 0; i < 3; i++){
-        UIButton *button = _wineryTypeButtons[i];
+        UIButton *button = _wineryTypeButtons[2-i];
+        button.tag = i;
         WineryFeatureModel *wineryFeature = features[i];
-        NSAttributedString *attributeButtonTitle = [[NSAttributedString alloc]initWithString:wineryFeature.wineryFeatureName attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12] , NSForegroundColorAttributeName : [UIColor whiteColor] }];
-        [button setAttributedTitle:attributeButtonTitle forState:UIControlStateNormal];
+        NSString *wineryFeatureName = wineryFeature.wineryFeatureName;
+        if(wineryFeatureName && wineryFeatureName.length > 0){
+             NSAttributedString *attributeButtonTitle = [[NSAttributedString alloc]initWithString:wineryFeature.wineryFeatureName attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11] , NSForegroundColorAttributeName : [UIColor whiteColor] }];
+            [button setAttributedTitle:attributeButtonTitle forState:UIControlStateNormal];
+        }
+       
     }
     
     for(int i = 0; i < 5; i++){
@@ -117,6 +124,6 @@
 }
 
 + (CGFloat)heightOfGrapeAndFeature{
-    return 150;
+    return 170;
 }
 @end

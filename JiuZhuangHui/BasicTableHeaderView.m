@@ -20,9 +20,13 @@
 */
 
 - (instancetype)init{
+    return [self initWithHeight:10];
+}
+
+- (instancetype)initWithHeight:(CGFloat)height{
     self = [super init];
     if(self){
-        self.frame = CGRectMake(0, 0, kScreen_Width, 5);
+        self.frame = CGRectMake(0, 0, kScreen_Width, height);
         self.backgroundColor = kHeaderViewColor;
     }
     return self;

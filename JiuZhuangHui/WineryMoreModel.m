@@ -23,7 +23,7 @@
 
 - (instancetype)initWithWineryDic:(NSDictionary *)wineryDic{
     if(self = [super init]){
-        self.wineryID = wineryDic[@"id"];
+        self.wineryID = wineryDic[@"winery_id"];
         self.wineryName = wineryDic[@"name"];
         self.wineryImage = wineryDic[@"thumb_url"];
         self.wineryInfo = wineryDic[@"info"];
@@ -41,4 +41,20 @@
     }
     return [wineries copy];
 }
+
++ (NSArray *)getFeatureWineriesWithData:(id)data{
+    NSMutableArray *featuerWineries = [NSMutableArray new];
+    for(NSDictionary *wineryDic in data[@"data"][@"winery"]){
+        WineryMoreModel *winery = [[WineryMoreModel alloc]initWithWineryDic:wineryDic];
+        [featuerWineries addObject:winery];
+    }
+    return [featuerWineries copy];
+}
+
++ (NSArray *)getGrapeTypesOfWineriesWithData:(id)data{
+    
+    return [[self class] getFeatureWineriesWithData:data];
+    
+}
+
 @end

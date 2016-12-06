@@ -34,6 +34,7 @@ static NSString *wineBasicURL = @"http://www.jiuzhuanghui.com/mobile/index.php?m
     [self.view addSubview:self.webView];
     
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(share)];
     if(self.wineryID.length > 0){
         NSString *wineryDetailURL = [webBasicURL stringByAppendingString:self.wineryID];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:wineryDetailURL]]];
@@ -50,15 +51,7 @@ static NSString *wineBasicURL = @"http://www.jiuzhuanghui.com/mobile/index.php?m
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
@@ -68,9 +61,9 @@ static NSString *wineBasicURL = @"http://www.jiuzhuanghui.com/mobile/index.php?m
         isShould =NO;
         NSString *wineID = [requestSting substringFromIndex:requestSting.length - 3];
         WineBuyViewController *wineBuyVC = [[WineBuyViewController alloc]init];
+        wineBuyVC.hidesBottomBarWhenPushed = YES;
         wineBuyVC.wineID =wineID;
-        UINavigationController *natVC = [[UINavigationController alloc]initWithRootViewController:wineBuyVC];
-        [self.navigationController pushViewController:natVC animated:YES ];
+        [self.navigationController pushViewController:wineBuyVC animated:YES ];
     }
     return isShould;
 }

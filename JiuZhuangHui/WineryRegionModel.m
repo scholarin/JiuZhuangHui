@@ -18,7 +18,7 @@
             _wineryRegionID = wineryRegionDic[@"wineregion_id"];
             _wineryRegionNanme = wineryRegionDic[@"name"];
             _wineryRegionImage = wineryRegionDic[@"img"];
-            _wineryRegionImage = wineryRegionDic[@"place"];
+            _wineryRegionPlace = wineryRegionDic[@"place"];
         }
     }
     return self;

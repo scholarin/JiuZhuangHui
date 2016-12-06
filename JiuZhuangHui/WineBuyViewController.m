@@ -45,7 +45,6 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     
     self.title = @"一酒一世界";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareWine)];
-    self.tabBarController.tabBar.hidden = YES;
     [self updateTableView];
     
     // Do any additional setup after loading the view.

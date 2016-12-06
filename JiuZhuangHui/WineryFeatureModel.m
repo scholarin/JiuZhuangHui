@@ -31,7 +31,7 @@
 
 + (NSArray *)getWineryFeaturesWithData:(id)data{
     NSMutableArray *wineryFetures = [NSMutableArray new];
-    for(NSDictionary *featureDic in data){
+    for(NSDictionary *featureDic in data[@"data"][@"feature"]){
         WineryFeatureModel *wineryFeatuer = [[WineryFeatureModel alloc]initWithDic:featureDic];
         [wineryFetures addObject:wineryFeatuer];
     }

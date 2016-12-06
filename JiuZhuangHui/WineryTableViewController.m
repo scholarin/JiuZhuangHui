@@ -9,6 +9,7 @@
 #import "WineryTableViewController.h"
 #import "JiuZhuangHui.h"
 #import "NetRequestManeger.h"
+#import "MJRefresh.h"
 
 #import "WineryMoreModel.h"
 #import "WineryRegionModel.h"
@@ -20,11 +21,19 @@
 #import "GrapeAndFeatureTableViewCell.h"
 #import "BasicTableHeaderView.h"
 
+//点击要PUSH的页面
+
+#import "WeatherViewController.h"
+#import "WineryFeatureTableViewController.h"
+#import "GrapeTypeTableViewController.h"
+#import "GrapeTypeCollectionViewController.h"
+
+
 
 static NSString *kGrapeAndFeatureViewCell = @"GrapeAndFeatureTableViewCell";
 static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
 
-@interface WineryTableViewController ()
+@interface WineryTableViewController ()<WineryRegionViewDelegate,GrapeAndFeatureTableViewCellDelegate>
 
 @property (assign, nonatomic)   NSInteger page;
 @property (strong, nonatomic)   WineryRegionModel *wineryRegion;
@@ -38,12 +47,15 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
     [self.tableView registerClass:[GrapeAndFeatureTableViewCell class] forCellReuseIdentifier:kGrapeAndFeatureViewCell];
     [self.tableView registerClass:[WineriesTableViewCell class] forCellReuseIdentifier:kWineriesTableViewCell];
+    self.tableView.mj_footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateData)];
+    
     
     self.page = 1;
-    
     [self getPostRequestFotWinery];
     // Do any additional setup after loading the view.
 }
@@ -53,14 +65,44 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
+- (void)loadMore{
+    self.page++;
+    [self getPostRequestFotWinery];
+    [self.tableView.mj_footer endRefreshing];
+}
+
+- (void)updateData{
+    self.page = 1;
+    [self.wineries removeAllObjects];
+    [self getPostRequestFotWinery];
+    [self.tableView.mj_header endRefreshing];
+}
+
+
+- (NSMutableArray *)wineries{
+    if(_wineries == nil){
+        _wineries = [[NSMutableArray alloc]init];
+    }
+    return _wineries;
+}
 - (void)getPostRequestFotWinery{
     
     NetRequestManeger *manager = [NetRequestManeger shareManager];
     [manager getWineryMainWithPage:self.page Reponse:^(id reponseObject, NSError *error) {
-        self.wineryRegion = [[WineryRegionModel alloc]initWithWineryRegionData:reponseObject];
-        self.wineryFeatures = [WineryFeatureModel getWineryFeaturesWithData:reponseObject];
-        self.grapes = [GrapeModel getGrapeTypesWithData:reponseObject];
-        [self.wineries addObjectsFromArray: [WineryMoreModel getWineriesWithData:reponseObject]];
+        self.wineryRegion = [[WineryRegionModel alloc]initWithWineryRegionData:reponseObject].wineryRegionID ? [[WineryRegionModel alloc]initWithWineryRegionData:reponseObject] : self.wineryRegion;
+        self.wineryFeatures = [WineryFeatureModel getWineryFeaturesWithData:reponseObject].count > 0? [WineryFeatureModel getWineryFeaturesWithData:reponseObject] :self.wineryFeatures;
+        self.grapes = [GrapeModel getGrapeTypesWithData:reponseObject].count > 0? [GrapeModel getGrapeTypesWithData:reponseObject] :self.grapes ;
+        
+        NSArray *wineries = [WineryMoreModel getWineriesWithData:reponseObject];
+        if(wineries.count < 10){              //每页加载10个数据，当请求获取的数据少于10个时显示没有更多
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        [self.wineries addObjectsFromArray: wineries];
         [self.tableView reloadData];
     }];
 }
@@ -88,6 +130,8 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
             cell = [[UITableViewCell alloc]init];
         }
         WineryRegionVeiw *regionView = [WineryRegionVeiw shareWineryRegionView];
+        regionView.delegete = self;
+        [regionView setUpdataUIWith:self.wineryRegion];
         [cell addSubview:regionView];
         [regionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.right.equalTo(cell);
@@ -95,6 +139,7 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
         return cell;
     }else if(indexPath.section == 1){
         GrapeAndFeatureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kGrapeAndFeatureViewCell];
+        cell.delegate = self;
         [cell setUIWithGrapes:self.grapes andWineryFeatures:self.wineryFeatures];
         return cell;
     }else{
@@ -105,7 +150,7 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
             return cell;
         }
         WineriesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kWineriesTableViewCell];
-        WineryMoreModel *winery = self.wineries[indexPath.row - 1];
+        WineryMoreModel *winery = self.wineries.count > 0 ?self.wineries[indexPath.row - 1] : nil;  //数组数据和刷新获得的数据不同步
         [cell setCellWithWineryImage:winery.wineryImage Title:winery.wineryName Desc:winery.wineryInfo];
         return cell;
     }
@@ -143,7 +188,45 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
     return height;
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 0 || indexPath.section == 1){
+        return nil;
+    }
+    return indexPath;
+}
 
+#pragma mark - wineryRegionViewDelegate
+
+- (void)wineryRegionView:(WineryRegionVeiw *)regionView pressWeatherButton:(UIButton *)button{
+    WeatherViewController *weatherVC = [[WeatherViewController alloc]init];
+    [self.navigationController pushViewController:weatherVC animated:YES];
+}
+
+- (void)wineryRegionView:(WineryRegionVeiw *)regionView pressIntroductionButton:(UIButton *)button{
+    
+}
+#pragma mark - wineriesTableViewDelegate
+
+- (void)grapeAndFeatureTabeleViewCell:(GrapeAndFeatureTableViewCell *)cell didSelectedGrapeButton:(UIButton *)button{
+    if(button.tag != 4){
+        GrapeModel *grape = self.grapes[button.tag];
+        GrapeTypeTableViewController *grapeVC = [[GrapeTypeTableViewController alloc]init];
+        [grapeVC setGrapeID:grape.grapeID Name:grape.grapeName image:grape.grapeImage detail:grape.grapeDesc];
+        [self.navigationController pushViewController:grapeVC animated:YES];
+    }else{
+        GrapeTypeCollectionViewController *grapeCollectionVC = [[GrapeTypeCollectionViewController alloc]init];
+        [grapeCollectionVC setGrapeTypeArray:self.grapes];
+        [self.navigationController pushViewController:grapeCollectionVC animated:YES];
+    }
+
+}
+
+- (void)grapeAndFeatureTabeleViewCell:(GrapeAndFeatureTableViewCell *)cell didSelectedFeatureButton:(UIButton *)button{
+    WineryFeatureTableViewController *featuerVC = [[WineryFeatureTableViewController alloc]init];
+    WineryFeatureModel *feature = self.wineryFeatures[button.tag];
+    [featuerVC setFeatureID:feature.wineryFeatureID name:feature.wineryFeatureName];
+    [self.navigationController pushViewController:featuerVC animated:YES];
+}
 /*
 #pragma mark - Navigation
 

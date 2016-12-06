@@ -64,6 +64,19 @@
     return [recommendWines copy];
 }
 
++ (NSArray *)getAllOfGoodlistWithData:(id)data{
+    NSMutableArray *goodlist = [NSMutableArray new];
+    for(NSDictionary *wineDic in data[@"data"][@"goods_list"]){
+        WinePurchaseModel *wine =[[WinePurchaseModel alloc]init];
+        wine.goodsID = wineDic[@"id"];
+        wine.goodsName = wineDic[@"goods_name"];
+        wine.goodsShopPrice = wineDic[@"shop_price"];
+        wine.goodsImage = wineDic[@"img"][@"small"];
+        [goodlist addObject:wine];
+    }
+    return [goodlist copy];
+}
+
 - (instancetype)initWineModelForDic: (NSDictionary *)wineDic{
     if(self = [super init]){
         self.goodsID           = wineDic[@"goods_id"];

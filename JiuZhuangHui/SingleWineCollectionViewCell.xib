@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SingleWineCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="218" height="358"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="218" height="358"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PZ7-ho-X8f">
+                        <rect key="frame" x="0.0" y="0.0" width="218" height="292"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥138.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHP-eJ-aUL">
+                        <rect key="frame" x="5" y="328" width="104" height="25"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Ehj-M7-Sxt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQk-NA-L22">
+                        <rect key="frame" x="109" y="328" width="104" height="25"/>
+                        <color key="backgroundColor" red="1" green="0.65229060374149661" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="zU0-wd-6Qj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="加入购物车">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="addShopCart:" destination="gTV-IL-0wX" eventType="touchUpInside" id="eCv-e4-756"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xa0-xk-TK7">
+                        <rect key="frame" x="0.0" y="322" width="218" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="bXo-q7-AiT"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="夏桐传统工艺天然高泡酒" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Br3-Pz-EON">
+                        <rect key="frame" x="5" y="302" width="208" height="15"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="PZ7-ho-X8f" secondAttribute="trailing" id="3jb-71-Mgd"/>
+                <constraint firstItem="xa0-xk-TK7" firstAttribute="top" secondItem="Br3-Pz-EON" secondAttribute="bottom" constant="5" id="7XT-r6-Q0h"/>
+                <constraint firstItem="Br3-Pz-EON" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Eif-aD-SzJ"/>
+                <constraint firstAttribute="bottom" secondItem="yHP-eJ-aUL" secondAttribute="bottom" constant="5" id="KIB-VD-MW5"/>
+                <constraint firstAttribute="trailing" secondItem="xa0-xk-TK7" secondAttribute="trailing" id="LKh-Qu-IXu"/>
+                <constraint firstAttribute="trailing" secondItem="Br3-Pz-EON" secondAttribute="trailing" constant="5" id="ONv-YM-yHh"/>
+                <constraint firstItem="bQk-NA-L22" firstAttribute="height" secondItem="yHP-eJ-aUL" secondAttribute="height" id="P4m-Kt-N18"/>
+                <constraint firstItem="bQk-NA-L22" firstAttribute="leading" secondItem="yHP-eJ-aUL" secondAttribute="trailing" id="Q5i-IB-1zH"/>
+                <constraint firstItem="PZ7-ho-X8f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TK8-Bl-KBa"/>
+                <constraint firstItem="yHP-eJ-aUL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="UXF-aQ-M8T"/>
+                <constraint firstAttribute="trailing" secondItem="bQk-NA-L22" secondAttribute="trailing" constant="5" id="bJQ-SX-gnf"/>
+                <constraint firstItem="xa0-xk-TK7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bu3-DL-2Hs"/>
+                <constraint firstAttribute="bottom" secondItem="bQk-NA-L22" secondAttribute="bottom" constant="5" id="ctB-mI-jcP"/>
+                <constraint firstItem="Br3-Pz-EON" firstAttribute="top" secondItem="PZ7-ho-X8f" secondAttribute="bottom" constant="10" id="hX4-7t-ulX"/>
+                <constraint firstItem="PZ7-ho-X8f" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ibC-cZ-Kv4"/>
+                <constraint firstItem="bQk-NA-L22" firstAttribute="width" secondItem="yHP-eJ-aUL" secondAttribute="width" id="kcc-uy-5Uj"/>
+                <constraint firstItem="bQk-NA-L22" firstAttribute="top" secondItem="xa0-xk-TK7" secondAttribute="bottom" constant="5" id="mZe-PS-h4Y"/>
+            </constraints>
+            <size key="customSize" width="218" height="358"/>
+            <connections>
+                <outlet property="priceLable" destination="yHP-eJ-aUL" id="xGC-Ri-3ze"/>
+                <outlet property="wineImageView" destination="PZ7-ho-X8f" id="pEn-MU-DFA"/>
+                <outlet property="wineNameLabel" destination="Br3-Pz-EON" id="5q7-1D-QMZ"/>
+            </connections>
+            <point key="canvasLocation" x="-109" y="-28"/>
+        </collectionViewCell>
+    </objects>
+</document>
