@@ -15,4 +15,8 @@
 @property (nonatomic, copy) NSString *articleURL;
 
 - (instancetype)initWithArticleDic:(NSDictionary *)articleDic;
+
+
+//欧盟SGS检测报告
++ (NSArray *)getArticlesWithData:(id)data;
 @end

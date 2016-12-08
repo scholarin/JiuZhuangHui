@@ -21,7 +21,8 @@
 @property(nonatomic, weak)id<LikeAndReplyViewDelegate>delegate;
 
 
-- (void)setLikeButtonLikeCount:(NSInteger)count isLiked:(BOOL)isLiked;
-- (void)setReplyButtonReplyCount:(NSInteger)count isReplyed:(BOOL)isReply;
+- (void)setLikeButtonLikeCount:(NSString *)count isLiked:(BOOL)isLiked;
+- (void)setReplyButtonReplyCount:(NSString *)count isReplyed:(BOOL)isReply;
 
++(instancetype)shareLikeAndReplyView;
 @end

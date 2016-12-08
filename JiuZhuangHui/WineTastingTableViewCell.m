@@ -7,9 +7,11 @@
 //
 
 #import "WineTastingTableViewCell.h"
+#import "JiuZhuangHui.h"
 
 #import "LikeAndReplyView.h"
 #import "SDCycleScrollView.h"
+#import "WineDetailModel.h"
 
 
 @interface WineTastingTableViewCell ()<LikeAndReplyViewDelegate>
@@ -20,8 +22,10 @@
 @property (weak, nonatomic) IBOutlet SDCycleScrollView *wineScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *wineDetailLabel;
 
-@property (weak, nonatomic) IBOutlet LikeAndReplyView *likeAndReplyView;
+@property (strong, nonatomic) LikeAndReplyView *likeAndReplyView;
 @property (weak, nonatomic) IBOutlet UIButton *goBuyButton;
+
+@property (strong, nonatomic)WineDetailModel *wineDetail;
 
 @end
 @implementation WineTastingTableViewCell
@@ -30,8 +34,15 @@
     [super awakeFromNib];
     self.wineTopImageView.layer.cornerRadius = 20;
     self.wineTopImageView.clipsToBounds = YES;
-    
     self.goBuyButton.layer.cornerRadius = 8;
+    
+    self.wineScrollView.autoScroll = NO;
+    self.likeAndReplyView = [LikeAndReplyView shareLikeAndReplyView];
+    [self addSubview:self.likeAndReplyView];
+    [self.likeAndReplyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.goBuyButton.mas_top);
+        make.left.equalTo(self).offset(20);
+    }];
     // Initialization code
 }
 
@@ -41,17 +52,37 @@
     // Configure the view for the selected state
 }
 - (IBAction)goBuy:(UIButton *)sender {
+    
+    [self.delegate didSelectedGoBuyButtonOfWineTastingTableViewCell:self wineID:self.wineDetail.goodsID];
+    
 }
 
+- (void)setWineDetailModel:(WineDetailModel *)wineDetail{
+    _wineDetail = wineDetail;
+    
+    [self.wineTopImageView sd_setImageWithURL:[NSURL URLWithString: wineDetail.goodsPictures[0]]];
+    self.wineNameLabel.text = wineDetail.goodsName;
+    self.wineEnglishLabel.text = wineDetail.goodsEnglishName;
+    self.wineScrollView.imageURLStringsGroup = wineDetail.goodsPictures;
+    self.wineDetailLabel.text = wineDetail.goodsDescription;
+    [self.likeAndReplyView setLikeButtonLikeCount:wineDetail.likeNumber isLiked:NO];
+    [self.likeAndReplyView setReplyButtonReplyCount:wineDetail.replyNumber isReplyed:NO];
+    
+}
 
++ (CGFloat)height{
+    return 420;
+}
 #pragma mark - likeandreplyview delegate
 - (void)didSelectedReplyButtonLikeAndReplyView:(LikeAndReplyView *)view{
     
+    [self.delegate didSelectedReplyButtonOfWineTastingTableViewCell:self wineID:self.wineDetail.goodsID];
     
 }
 
 - (void)didSelectedLikeButtonLikeAndReplyView:(LikeAndReplyView *)view{
     
+    [self.delegate didSelectedLikeButtonOfWineTastingTableViewCell:self wineID:self.wineDetail.goodsID];
 }
 
 #pragma mark - sdcyclescrollview delegate

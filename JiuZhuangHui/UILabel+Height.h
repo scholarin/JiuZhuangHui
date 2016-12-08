@@ -16,4 +16,6 @@
 
 + (CGFloat)labelHeightWithString:(NSString *)string font:(UIFont *)font;
 
++ (CGFloat)labelHeightWithString:(NSString *)string font:(UIFont *)font offSet:(CGFloat)offset;
+
 @end

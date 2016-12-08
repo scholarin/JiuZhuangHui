@@ -22,6 +22,10 @@
 @property (nonatomic, copy) NSArray <WinePurchaseModel *> *wineryGoodLists;
 
 
-
+//首页酒庄展示数组
 + (NSArray *)getWinerysWithData:(id)data;
+
+//用户说页面酒庄故事展示数组
++ (NSArray *)getWineryOwersWithData:(id)data;
+
 @end

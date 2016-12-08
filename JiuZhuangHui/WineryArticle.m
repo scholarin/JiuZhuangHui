@@ -28,4 +28,16 @@
     
     return wineryArticle;
 }
+
++ (NSArray *)getArticlesWithData:(id)data{
+    NSMutableArray *articles = [NSMutableArray new];
+    for(NSDictionary *articleDic in data[@"data"][@"article"]){
+        WineryArticle *article = [[WineryArticle alloc]init];
+        article.articleID   = articleDic[@"article_id"];
+        article.articleName = articleDic[@"article_title"];
+        article.articleURL  = articleDic[@"article_url"];
+        [articles addObject:article];
+    }
+    return [articles copy];
+}
 @end

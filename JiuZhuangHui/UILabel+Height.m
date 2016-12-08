@@ -18,6 +18,12 @@
 
 
 + (CGFloat)labelHeightWithString:(NSString *)string font:(UIFont *)font{
+    
+    return [[self class]labelHeightWithString:string font:font offSet:0];
+    
+}
+
++ (CGFloat)labelHeightWithString:(NSString *)string font:(UIFont *)font offSet:(CGFloat)offset{
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentLeft;
@@ -25,7 +31,7 @@
     NSDictionary * attributes = @{NSFontAttributeName : font,
                                   NSParagraphStyleAttributeName : paragraphStyle};
     
-    CGSize contentSize = [string boundingRectWithSize:CGSizeMake(kScreen_Width - 20, MAXFLOAT)
+    CGSize contentSize = [string boundingRectWithSize:CGSizeMake(kScreen_Width - 20 -offset, MAXFLOAT)
                                               options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
                                            attributes:attributes
                                               context:nil].size;

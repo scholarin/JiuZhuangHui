@@ -52,4 +52,18 @@
     return [wineries copy];
 }
 
+
++ (NSArray *)getWineryOwersWithData:(id)data{
+    NSMutableArray *wineryOwers = [NSMutableArray new];
+    for(NSDictionary *wineryDic in data[@"data"][@"article"]){
+        WineryModel *wineryModel = [[WineryModel alloc]init];
+        wineryModel.wineryID             = wineryDic[@"article_id"];
+        wineryModel.wineryTitle          = wineryDic[@"article_title"];
+        wineryModel.winerySubtitle       = wineryDic[@"article_subtitle"];
+        wineryModel.wineryOwnerImage     = wineryDic[@"title_img"];
+        wineryModel.wineryVideoImage     = wineryDic[@"article_img"];
+        [wineryOwers addObject:wineryModel];
+    }
+    return [wineryOwers copy];
+}
 @end

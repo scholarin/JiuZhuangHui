@@ -53,8 +53,63 @@
     return self;
 }
 
+- (instancetype)initWithWineTastingData:(id)data{
+    if(!data) return nil;
+    NSDictionary *wineTastingDic = data[@"data"];
+    return [self initWithWineTastingDic:wineTastingDic];;
+}
+
+- (instancetype)initWithWineTastingDic:(NSDictionary *)wineTastingDic{
+    if(self = [super init]){
+        self.goodsName          = wineTastingDic[@"wine_name"];
+        self.goodsEnglishName   = wineTastingDic[@"en_name"];
+        self.goodsDescription   = wineTastingDic[@"content"];
+        self.likeNumber         = wineTastingDic[@"like_num"];
+        self.replyNumber        = [NSString stringWithFormat:@"%ld",[wineTastingDic[@"reply_count"] integerValue]];
+        self.goodsInfoURL       = wineTastingDic[@"share"];
+        self.goodsID            = wineTastingDic[@"id_value"];
+        
+        NSMutableArray *goodsPictures = [NSMutableArray new];
+        for(NSDictionary *dict in wineTastingDic[@"img"]){
+            NSString *pictureURL = dict[@"img_url"];
+            [goodsPictures addObject:pictureURL];
+        }
+        self.goodsPictures      = [goodsPictures copy];
+        
+        NSMutableArray *replyList = [NSMutableArray new];
+        for(NSDictionary *replyDict in wineTastingDic[@"reply"]){
+            ReplyContentModel *replyContent = [[ReplyContentModel alloc]initWithReplyDic:replyDict];
+            [replyList addObject:replyContent];
+        }
+        self.goodsReplys        = [replyList copy];
+    }
+    return self;
+}
 
 
++ (NSArray *)getWineTastingListWithData:(id)data{
+    if(!data) return nil;
+    NSMutableArray *wineTastingList = [NSMutableArray new];
+    for(NSDictionary *wineTastingDic in data[@"data"]){
+        WineDetailModel *model = [[WineDetailModel alloc]initWithWineTastingDic:wineTastingDic];
+        [wineTastingList addObject:model];
+    }
+    NSArray *array = [wineTastingList copy];
+    return array;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone{
+    
+    WineDetailModel *detailModel    = [[[self class]allocWithZone:zone]init];
+    detailModel.goodsEnglishName    = [self.goodsEnglishName copy];
+    detailModel.goodsInfoURL        = [self.goodsInfoURL copy];
+    detailModel.wineryArticles      = [self.wineryArticles copy];
+    detailModel.boxfulWines         = [self.boxfulWines copy];
+    detailModel.goodsPictures       = [self.goodsPictures copy];
+    detailModel.goodsReplys         = [self.goodsReplys copy];
+    detailModel.goodsDescription    = [self.goodsDescription copy];
+    return self;
+}
 //@property (nonatomic, copy) NSString *goodsID;
 //@property (nonatomic, copy) NSString *goodsName;
 //@property (nonatomic, copy) NSString *goodsMarketPrice;
@@ -69,4 +124,7 @@
 //@property (nonatomic, copy) NSString *goodsInfoURL;
 //@property (nonatomic, copy) NSArray<WineryArticle *>  *wineryArticles;
 //@property (nonatomic, copy) BoxfulWinesModel *boxfulWines;
+//@property (nonatomic, copy) NSArray<NSString *> *goodsPictures;
+//@property (nonatomic, copy) NSArray<ReplyContentModel *> *goodsReplys;
+//@property (nonatomic, copy) NSString *goodsDescription;
 @end

@@ -41,17 +41,25 @@
     [self.delegate didSelectedReplyButtonLikeAndReplyView:self];
 }
 
-- (void)setLikeButtonLikeCount:(NSInteger)count isLiked:(BOOL)isLiked{
-    [self.likeButton setTitle:[NSString stringWithFormat:@"%ld",count] forState:UIControlStateNormal];
++ (instancetype)shareLikeAndReplyView{
+    return [[[NSBundle mainBundle]loadNibNamed:@"LikeAndReplyView" owner:self options:nil] firstObject];
+}
+
+- (void)setLikeButtonLikeCount:(NSString *)count isLiked:(BOOL)isLiked{
+    [self.likeButton setTitle:count forState:UIControlStateNormal];
+//    if(count && count.length > 0){
+//        NSAttributedString *title = [[NSAttributedString alloc]initWithString:count attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:8]}];
+//        [self.likeButton setAttributedTitle:title forState:UIControlStateNormal];
+//    }
+ 
     if(isLiked){
         self.likeButton.layer.borderColor = [UIColor redColor].CGColor;
     }
     
 }
 
-- (void)setReplyButtonReplyCount:(NSInteger)count isReplyed:(BOOL)isReply{
-    [self.replyButton setTitle:[NSString stringWithFormat:@"%ld",count] forState:UIControlStateNormal];
-    
+- (void)setReplyButtonReplyCount:(NSString *)count isReplyed:(BOOL)isReply{
+    [self.replyButton setTitle:count forState:UIControlStateNormal];
     if(isReply){
         self.replyButton.layer.borderColor = [UIColor redColor].CGColor;
     }

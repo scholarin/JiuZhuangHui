@@ -7,18 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-@class WineTastingTableViewCell;
 
+@class WineTastingTableViewCell;
+@class WineDetailModel;
 
 @protocol WineTastingTableViewCellDelagate <NSObject>
 
-- (void)didSelectedLikeButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell;
-- (void)didSelectedReplyButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell;
+- (void)didSelectedLikeButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell wineID:(NSString *)wineID;
+- (void)didSelectedReplyButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell wineID:(NSString *)wineID;
+- (void)didSelectedGoBuyButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell wineID:(NSString *)wineID;
 
-- (void)didSelectedGoBuyButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell;
 @end
 @interface WineTastingTableViewCell : UITableViewCell
 
-//- (void)setUIWithWineTastingModel:(
+@property(weak,nonatomic)id<WineTastingTableViewCellDelagate>delegate;
+
+- (void)setWineDetailModel:(WineDetailModel *)wineDetail;
++ (CGFloat)height;
 
 @end

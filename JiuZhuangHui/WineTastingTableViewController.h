@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WineTastingTableViewController : UITableViewController
+@interface WineTastingTableViewController : UIViewController
+
+
+- (void)setWineTastingID:(NSString *)wineTastingID name:(NSString *)wineName;
 
 @end

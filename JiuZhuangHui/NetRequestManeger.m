@@ -39,24 +39,6 @@
 }
 
 
-//- (void)postPanicBuyingGoodsReponse:(void (^)(id reponseObject, NSError *error))reponse{
-//    
-//    NSDictionary *postParameters = @{@"json" : @"{\"session\":{\"sid\":\"376800e9b0ec23cff5a99eb8778e358569c6c3c4\",\"uid\":5423}}"};
-//    
-//    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-//    [sessionManager POST:kPanicBuyingAPI parameters:postParameters progress:^(NSProgress * _Nonnull uploadProgress) {
-//        
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        reponse(responseObject, nil);
-//        //NSLog(@"%@",responseObject);
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        reponse(nil, error);
-//        //NSLog(@"%@",error);
-//    }];
-//    
-//}
-
-
 - (void)getWineDatailInfoWithID:(NSString *)wineID reponse:(void (^)(id reponseObject, NSError * error))reponse{
     
     NSString *wineURLString = [NSString stringWithFormat:@"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/goods&goods_id=%@&open_url=/goods.php?",wineID];
@@ -139,6 +121,40 @@
         reponse(responseObject, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         reponse(nil, error);
+    }];
+
+}
+
+
+- (void)getWineTastingWithTastingID:(NSString *)tastingID reponse: (void(^)(id reponseObject, NSError *error))reponse{
+    NSString *wineTastingURL = [NSString stringWithFormat:@"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/tasting&tasting_id=%@",tastingID];
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    [sessionManager GET:wineTastingURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil, error);
+    }];
+}
+
+- (void)getWineTastingListWithPage:(NSInteger)page reponse: (void(^)(id reponseObject, NSError *error))reponse{
+    NSString *wineTastingURL = [NSString stringWithFormat:@"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/tastingList&limit=7&page=%ld",page];
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    [sessionManager GET:wineTastingURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil, error);
+    }];
+}
+
+
+- (void)getWineryWorkersWithPage:(NSInteger)page reponse:(void (^)(id reponseObject, NSError *error))reponse{
+    NSString *postString = [NSString stringWithFormat:@"{\"pagination\":{\"count\":10,\"page\":%ld}}",page];
+    NSString *postURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/newsList";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:postURL parameters:@{@"json" : postString} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
     }];
 
 }

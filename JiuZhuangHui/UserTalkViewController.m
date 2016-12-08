@@ -16,6 +16,12 @@
 #import "UserTalkModel.h"
 #import "WineTastingModel.h"
 #import "WineryDetailWebView.h"
+#import "WineTastingTableViewController.h"
+
+#import "WineTastingListViewController.h"
+#import "OwerStoryTableViewController.h"
+#import "WineryAritcleTableViewController.h"
+#import "WineryWorkerTableViewController.h"
 
 static NSString *const kUserTalkTableViewCell = @"userTalkTableViewCell";
 @interface UserTalkViewController ()<UserTalkTableViewCellDelegate>
@@ -158,20 +164,15 @@ static NSString *const kUserTalkTableViewCell = @"userTalkTableViewCell";
     }
 }
 
-
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height;
     if(indexPath.section == 0 ||(indexPath.section == 1 &&indexPath.row == 1) || (indexPath.section == 2 && indexPath.row == 1)){
         height = 160;
     }else{
-        height = 40;
+        height = 45;
     }
     return height;
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     CGFloat height;
@@ -183,14 +184,45 @@ static NSString *const kUserTalkTableViewCell = @"userTalkTableViewCell";
     return height;
 }
 
-
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if(section == 0) return nil;
     BasicTableHeaderView *headerview = [[BasicTableHeaderView alloc]init];
     return headerview;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 2 && indexPath.row == 0){
+        WineTastingListViewController *wineTastingListVC = [[WineTastingListViewController alloc]init];
+        [self.navigationController pushViewController:wineTastingListVC animated:YES];
+    }else if(indexPath.section == 3){
+        UIViewController *webVC = [[UIViewController alloc]init];
+        UIWebView *webView = [[UIWebView alloc]initWithFrame:webVC.view.bounds];
+        if(indexPath.row == 0){
+            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jiuzhuanghui.com/mobile/index.php?m=default&c=discovery&a=interview_app"]]];
+        }else{
+             [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jiuzhuanghui.com/mobile/index.php?m=default&c=discovery&a=support_app"]]];
+        }
+        
+        [webVC.view addSubview:webView];
+        webVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webVC animated:YES];
+    }else if(indexPath.section == 4){
+        if(indexPath.row == 0){
+            OwerStoryTableViewController *owerStoryVC = [[OwerStoryTableViewController alloc]init];
+            owerStoryVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:owerStoryVC animated:YES];
+        }else if(indexPath.row == 1){
+            WineryAritcleTableViewController *articleVC = [[WineryAritcleTableViewController alloc]init];
+            articleVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:articleVC animated:YES];
+        }
+    }else if(indexPath.section == 5){
+        if(indexPath.row == 0){
+            WineryWorkerTableViewController *wineryWorkerVC = [[WineryWorkerTableViewController alloc]init];
+            [self.navigationController pushViewController:wineryWorkerVC animated:YES];
+        }
+    }
+}
 
 #pragma mark -UserTalkCollectionDelegate
 
@@ -203,6 +235,11 @@ static NSString *const kUserTalkTableViewCell = @"userTalkTableViewCell";
         [self.navigationController pushViewController:webView animated:YES];
     }else{
         
+        WineTastingTableViewController *tastingTVC = [[WineTastingTableViewController alloc]init];
+        WineTastingModel *wineTasting = self.wineTastingList[itme];
+        [tastingTVC setWineTastingID:wineTasting.wineTastingID name:wineTasting.wineTastingName];
+        tastingTVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:tastingTVC animated:YES];
     }
 }
 /*

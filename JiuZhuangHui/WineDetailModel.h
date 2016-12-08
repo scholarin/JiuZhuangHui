@@ -12,7 +12,7 @@
 #import "ReplyContentModel.h"
 
 
-@interface WineDetailModel : WinePurchaseModel
+@interface WineDetailModel : WinePurchaseModel<NSCopying>
 
 @property (nonatomic, copy) NSString *goodsEnglishName;
 @property (nonatomic, copy) NSString *goodsInfoURL;
@@ -20,9 +20,16 @@
 @property (nonatomic, copy) BoxfulWinesModel *boxfulWines;
 @property (nonatomic, copy) NSArray<NSString *> *goodsPictures;
 @property (nonatomic, copy) NSArray<ReplyContentModel *> *goodsReplys;
+@property (nonatomic, copy) NSString *goodsDescription;
 
-
+//解析并返回商品详情页页面数据
 - (instancetype)initWithWineDetailData:(id)data;
+
+//解析并返回用户酒评页面数据
+- (instancetype)initWithWineTastingData:(id)data;
+
+//返回酒品圈数据
++ (NSArray *)getWineTastingListWithData:(id)data;
 @end
 
 

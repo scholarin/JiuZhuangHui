@@ -266,6 +266,8 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 - (void)goWebViewWithURLString:(NSString *)URLSting{
     TopItemPushVC *pushVC = [[TopItemPushVC alloc]init];
     pushVC.webURLString = URLSting;
+    pushVC.webTitle = @"好酒慢慢来-酒庄惠-只卖葡萄庄园酒";
+    pushVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pushVC animated:YES];
 }
 

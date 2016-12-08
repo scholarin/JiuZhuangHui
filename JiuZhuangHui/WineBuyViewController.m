@@ -199,7 +199,7 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     
     [self.view addSubview:vc.view];
     
-    [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         vc.view.frame = self.view.bounds;
     } completion:nil];
     

@@ -11,5 +11,6 @@
 @interface TopItemPushVC : UIViewController
 
 @property (nonatomic, copy) NSString *webURLString;
+@property (nonatomic, copy) NSString *webTitle;
 
 @end

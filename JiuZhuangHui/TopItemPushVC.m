@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"好酒慢慢来-酒庄惠-只卖葡萄庄园酒";
+    self.title = self.webTitle;
     
     
     self.webView = [[UIWebView alloc]initWithFrame:kScreen_Bounds];
