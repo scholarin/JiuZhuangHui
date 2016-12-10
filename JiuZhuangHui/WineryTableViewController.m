@@ -20,27 +20,21 @@
 #import "WineriesTableViewCell.h"
 #import "GrapeAndFeatureTableViewCell.h"
 #import "BasicTableHeaderView.h"
-
 //点击要PUSH的页面
-
 #import "WeatherViewController.h"
 #import "WineryFeatureTableViewController.h"
 #import "GrapeTypeTableViewController.h"
 #import "GrapeTypeCollectionViewController.h"
 
-
-
 static NSString *kGrapeAndFeatureViewCell = @"GrapeAndFeatureTableViewCell";
 static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
 
 @interface WineryTableViewController ()<WineryRegionViewDelegate,GrapeAndFeatureTableViewCellDelegate>
-
 @property (assign, nonatomic)   NSInteger page;
 @property (strong, nonatomic)   WineryRegionModel *wineryRegion;
 @property (copy, nonatomic)     NSArray *wineryFeatures;
 @property (copy, nonatomic)     NSArray *grapes;
 @property (copy, nonatomic)     NSMutableArray *wineries;
-
 @end
 
 @implementation WineryTableViewController
@@ -53,8 +47,6 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
     [self.tableView registerClass:[WineriesTableViewCell class] forCellReuseIdentifier:kWineriesTableViewCell];
     self.tableView.mj_footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateData)];
-    
-    
     self.page = 1;
     [self getPostRequestFotWinery];
     // Do any additional setup after loading the view.
@@ -70,6 +62,7 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
 }
+
 - (void)loadMore{
     self.page++;
     [self getPostRequestFotWinery];
@@ -83,13 +76,13 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
     [self.tableView.mj_header endRefreshing];
 }
 
-
 - (NSMutableArray *)wineries{
     if(_wineries == nil){
         _wineries = [[NSMutableArray alloc]init];
     }
     return _wineries;
 }
+
 - (void)getPostRequestFotWinery{
     
     NetRequestManeger *manager = [NetRequestManeger shareManager];
@@ -218,7 +211,6 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
         [grapeCollectionVC setGrapeTypeArray:self.grapes];
         [self.navigationController pushViewController:grapeCollectionVC animated:YES];
     }
-
 }
 
 - (void)grapeAndFeatureTabeleViewCell:(GrapeAndFeatureTableViewCell *)cell didSelectedFeatureButton:(UIButton *)button{

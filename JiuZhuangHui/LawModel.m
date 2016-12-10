@@ -6,13 +6,13 @@
 //  Copyright © 2016年 Mosin Nagant. All rights reserved.
 //
 
-#import "lawModel.h"
+#import "LawModel.h"
 
-@implementation lawModel
+@implementation LawModel
 
 
 - (instancetype)copyWithZone:(NSZone *)zone{
-    lawModel *law = [[[self class]allocWithZone:zone]init];
+    LawModel *law = [[[self class]allocWithZone:zone]init];
     law.lawID               = [_lawID copy];
     law.lawTitle            = [_lawTitle copy];
     law.lawSmallImage       = [_lawSmallImage copy];
@@ -35,9 +35,19 @@
 + (NSArray *)getlawsWithData:(id)data{
     NSMutableArray *laws = [[NSMutableArray alloc]init];
     for(NSDictionary *lawDic in data[@"data"][@"article"]){
-        lawModel *law = [[self alloc]initWithlawDic:lawDic];
+        LawModel *law = [[self alloc]initWithlawDic:lawDic];
         [laws addObject:law];
     }
     return [laws copy];
 }
+
++ (NSArray *)getlawContentImagesWithData:(id)data{
+    
+    NSMutableArray *images = [NSMutableArray new];
+    for(NSString *imageURL in data[@"data"]){
+        [images addObject:imageURL];
+    }
+    return [images copy];
+}
+
 @end

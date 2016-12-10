@@ -28,6 +28,7 @@
     model.userTalkTitle = [_userTalkTitle copy];
     model.userTalkDetailURL = [_userTalkDetailURL copy];
     model.userTalkTime = [_userTalkTime copy];
+    model.userTalkType = [_userTalkType copy];
     return model;
 }
 
@@ -39,9 +40,18 @@
         self.userTalkTime = dic[@"article_time"];
         self.userTalkDetailURL = dic[@"article_url"];
         self.userTalkImage = dic[@"article_img"];
+        self.userTalkType = dic[@"article_type"];
     }
     return self;
 }
 
++ (NSArray *)getUserTalkDetailListWithData:(id)data{
+    NSMutableArray *userTalkDetailList = [NSMutableArray new];
+    for(NSDictionary *userTalkDic in data[@"data"][@"article"]){
+        UserTalkModel *userTalk = [[UserTalkModel alloc]initWithDic:userTalkDic];
+        [userTalkDetailList addObject:userTalk];
+    }
+    return [userTalkDetailList copy];
+}
 
 @end

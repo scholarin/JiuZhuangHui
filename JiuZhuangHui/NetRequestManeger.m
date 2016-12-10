@@ -9,6 +9,7 @@
 #import "NetRequestManeger.h"
 #import "AFNetWorking.h"
 #import "JiuZhuangHui.h"
+#import "LogIn.h"
 
 
 @implementation NetRequestManeger
@@ -157,5 +158,64 @@
         reponse(nil,error);
     }];
 
+}
+
+- (void)getLawImagesWithID:(NSString *)lawID reponse:(void (^)(id, NSError *))reponse{
+    NSString *lawImageURL = [NSString stringWithFormat:@"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/articleImg&article_id=%@",lawID];
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    [sessionManager GET:lawImageURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil, error);
+    }];
+}
+
+- (void)getShopCartWinesReponse:(void(^)(id reponseObjcet, NSError *error))reponse{
+    NSString *postString = [NSString stringWithFormat:@"{%@}",[LogIn JSONWithCurrentUser]];
+    NSString *postURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/cart/list";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:postURL parameters:@{@"json" : postString} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+}
+
+- (void)getUserInfoWithURL:(NSString *)urlString PostString:(NSString *)posting reponse:(void(^)( id reponseObject,  NSError * error))reponse{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *postDic = nil;
+    posting != nil ? postDic = @{ @"json" : [NSString stringWithFormat:@"{%@}",posting]} : nil;
+    [manager POST:urlString parameters:postDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+}
+
+//用户上传头像
+static NSString *baseURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/user/update";
+- (void)postUserIconWithData:(NSData *)imageData reponse:(void(^)(id reponseObject, NSError *error))reponse{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *parameter = @{@"json": [NSString stringWithFormat:@"{%@}",[LogIn JSONWithCurrentUser]] };
+    [manager POST:baseURL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:imageData name:@"user_img" fileName:@"user_img" mimeType:@"image/png"];
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+
+}
+//用户上传其他信息
+- (void)postUserInfoWithCateory:(NSString *)cateOry info:(NSString *)info reponse:(void(^)(id reponseObject, NSError *error))reponse{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //json	{"email":"12222222@jiuzhuanghui.com","sex":"1","nickname":"mosin","session":{"sid":"308fb85f07279990b17dffadc0573eba53f11772","uid":5423}}
+    NSString *postString = [NSString stringWithFormat:@"{\"%@\":\"%@\",%@}",cateOry,info,[LogIn JSONWithCurrentUser]];
+    NSDictionary *parameters = @{@"json": postString};
+    [manager POST:baseURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
 }
 @end

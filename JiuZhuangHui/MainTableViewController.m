@@ -7,15 +7,11 @@
 //
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
-
-
 #import "MainTableViewController.h"
 #import "JiuZhuangHui.h"
-
 #import "WinePurchaseModel.h"
 #import "PanicBuyTableViewCell.h"
 #import "NetRequestManeger.h"
-
 #import "MainHeaderViewModel.h"
 #import "MainHeaderView.h"
 #import "TopItemModel.h"
@@ -23,22 +19,17 @@
 #import "BottomButtonModel.h"
 #import "TopItemPushVC.h"
 #import "WineBuyViewController.h"
-
 #import "HotWineTableViewCell.h"
 #import "TopicTableViewCell.h"
 #import "TopicViewModel.h"
-
 #import "WineryModel.h"
 #import "WineryTableViewCell.h"
-
 #import "OriginatorModel.h"
 #import "OriginatorTableViewCell.h"
-
 #import "WineryVideoViewController.h"
 #import "WineryDetailWebView.h"
 #import "AllWineViewController.h"
-
-
+#import "DrinkWithFoodTableViewController.h"
 
 static  NSString  *kPanicBuyingPurchase = @"PanicBuyTableViewCell";
 static  NSString  *kHotWineTableViewCell = @"HotWineTableViewCell";
@@ -47,7 +38,6 @@ static  NSString  *kWineryTableViewCell = @"WineryTableViewCell";
 static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 
 @interface MainTableViewController ()<MainHeaderViewDelegate,WineryTableViewCellDelegate,HotWineTableViewCellDelegate,PanicBuyTableViewCellDelegate>
-
 @property (strong, nonatomic)WinePurchaseModel   *panicBuyingPurchase;
 @property (strong, nonatomic)MainHeaderViewModel *mainHeaderViewModel;
 @property (strong, nonatomic)NSArray   *hotWines;
@@ -56,36 +46,29 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 @property (strong, nonatomic)NSArray   *wineries;
 @property (strong, nonatomic)OriginatorModel *originator;
 @property (strong, nonatomic)UIRefreshControl *refresh;
-
 @end
-
 @implementation MainTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"酒庄惠";
     [self.tableView registerNib:[UINib nibWithNibName:kPanicBuyingPurchase bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kPanicBuyingPurchase];
     [self.tableView registerNib:[UINib nibWithNibName:kHotWineTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kHotWineTableViewCell ];
     [self.tableView registerClass:[TopicTableViewCell class] forCellReuseIdentifier:kTopicTableViewCell];
     [self.tableView registerNib:[UINib nibWithNibName:kWineryTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kWineryTableViewCell];
     [self.tableView registerClass:[OriginatorTableViewCell class] forCellReuseIdentifier:kOriginatorTableViewCell];
-    
     [self.tableView addSubview:self.refresh];
-    
     [self requestPanicBuyingPurchase];
-
 }
-
 
 - (void)viewWillAppear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 - (UIRefreshControl *)refresh{
     if(!_refresh){
@@ -98,12 +81,10 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     return _refresh;
 }
 
-
 - (void)updateUI{
     [self requestPanicBuyingPurchase];
     [_refresh endRefreshing];
 }
-
 
 - (void)requestPanicBuyingPurchase{
     
@@ -131,7 +112,6 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 
     return 1;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0){
@@ -165,7 +145,6 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     }
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height = 0;
     if(indexPath.section == 0){
@@ -182,8 +161,6 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     
     return height;
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     CGFloat height = 0;
@@ -219,8 +196,6 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     }
 }
 
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 3){
         
@@ -232,6 +207,7 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
         [self goWebViewWithURLString:self.originator.originatorWebURL];
     }
 }
+
 #pragma  mark - mainHeaderViewDelegate
 
 - (void)mainHeaderView:(MainHeaderView *)mainHeaderView didSelectedTopItem:(UIButton *)topItem{
@@ -246,6 +222,9 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
         AllWineViewController *allWineVC = [[AllWineViewController alloc]init];
         allWineVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:allWineVC animated:YES];
+    }else if(bottomButton.tag == 1){
+        DrinkWithFoodTableViewController *drinkVC = [[DrinkWithFoodTableViewController alloc]init];
+        [self.navigationController pushViewController:drinkVC animated:YES];
     }
     
 }
@@ -271,16 +250,13 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     [self.navigationController pushViewController:pushVC animated:YES];
 }
 
-
 #pragma mark - pancibuy delegate 
-
 
 - (void)panicBuyTableViewCell:(PanicBuyTableViewCell *)cell didselectedWithWineID:(NSString *)wineID{
     
     [self showWineBuyTableViewWithWineID:wineID];
     
 }
-
 
 #pragma mark - hotwine recommend delegate
 
@@ -294,7 +270,6 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     }
     [self showWineBuyTableViewWithWineID:wine.goodsID];
 }
-
 
 #pragma mark - WineryTableViewCellDelegate
 
@@ -331,8 +306,6 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     
 }
 
-
-
 //进入商品售卖页面
 - (void)showWineBuyTableViewWithWineID:(NSString *)wineID{
     
@@ -348,5 +321,9 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     wineryDetailWeb.wineryID = urlSting;
     [self.navigationController pushViewController:wineryDetailWeb animated:YES];
     
+}
+
+- (void)dealloc{
+    NSLog(@"释放了");
 }
 @end

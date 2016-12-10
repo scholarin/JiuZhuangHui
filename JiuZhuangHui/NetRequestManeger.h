@@ -45,4 +45,17 @@
 //产区工作者列表页
 - (void)getWineryWorkersWithPage:(NSInteger)page reponse: (void(^)(id reponseObject, NSError *error))reponse;
 
+//产区法律展示图片
+- (void)getLawImagesWithID:(NSString *)lawID reponse:(void(^)(id reponseObject, NSError *error))reponse;
+
+//购物车酒类展示
+- (void)getShopCartWinesReponse:(void(^)(id reponseObjcet, NSError *error))reponse;
+
+
+//用户信息请求
+- (void)getUserInfoWithURL:(NSString *)urlString PostString:(NSString *)posting reponse:(void(^)( id reponseObject,  NSError *error))reponse;
+//用户上传头像
+- (void)postUserIconWithData:(NSData *)imageData reponse:(void(^)(id reponseObject, NSError *error))reponse;
+//用户上传其他信息
+- (void)postUserInfoWithCateory:(NSString *)cateOry info:(NSString *)info reponse:(void(^)(id reponseObject, NSError *error))reponse;
 @end

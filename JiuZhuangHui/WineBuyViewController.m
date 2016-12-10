@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Mosin Nagant. All rights reserved.
 //
 /***********************************************************
- * 需要继续实现功能，添加购物，拖拽从底部弹出加入一个视图，
+ *
  *
  *
  *
@@ -21,10 +21,7 @@
 #import "SDCycleScrollView.h"
 #import "WineTitleTableViewCell.h"
 #import "BasicTableHeaderView.h"
-
 #import "WineDetailViewController.h"
-
-
 
 static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
 
@@ -41,7 +38,6 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     self.title = @"一酒一世界";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareWine)];
@@ -60,49 +56,32 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     self.tableView.dataSource   = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     MJRefreshAutoStateFooter *refresh = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(presentDetailView)];
-    [refresh setTitle:@"----点击查看图文详情----" forState:MJRefreshStateRefreshing];
     self.tableView.mj_footer = refresh;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateUI)];
     [self.tableView registerNib:[UINib nibWithNibName:kWineTitleTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kWineTitleTableViewCell];
-//    self.tableView.tableFooterView = ({
-//        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 100)];
-//        view.backgroundColor = kHeaderViewColor;
-//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
-//        
-//        NSAttributedString *attString = [[NSAttributedString alloc]initWithString:@"----点击查看图文详情----"
-//                                                                      attributes:@{
-//                                                                                    NSFontAttributeName : kContentTextFont,
-//                                                                                    NSForegroundColorAttributeName : [UIColor blackColor]
-//                                                                                    }];
-//        [button setAttributedTitle:attString forState:UIControlStateNormal];
-//        [button addTarget:self action:@selector(presentDetailView) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:button];
-//        view;
-//    });
-    
-    
-//    UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pushDetailView)];
-//    [self.tableView addGestureRecognizer:gesture];
     
     [self.view addSubview:self.tableView];
     
 }
 
-
-- (void)pushDetailView{
-    if(self.tableView.scrollsToTop){
-        UIViewController *vc  = [[UIViewController alloc]init];
-        [self.navigationController presentViewController:vc animated:YES completion:nil];
-    }
+- (void)updateUI{
+    [self requestWineDetailForID:self.wineID];
 }
+
+- (void)presentDetailView{
+    WineDetailViewController *vc  = [[WineDetailViewController alloc]init];
+    vc.wineID = self.wineID;
+    vc.view.frame = CGRectMake(0, kScreen_Height, kScreen_Width, kScreen_Height);
+    [self.view addSubview:vc.view];
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        vc.view.frame = self.view.bounds;
+    } completion:nil];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requestWineDetailForID:self.wineID];
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)requestWineDetailForID:(NSString *)wineID{
@@ -112,6 +91,7 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
             NSLog(@"%@",error);
         }else{
             self.wineDetail = [[WineDetailModel alloc]initWithWineDetailData:reponseObject];
+            [self.tableView.mj_header endRefreshing];
             [self.tableView reloadData];
         }
     }];
@@ -192,33 +172,11 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
 }
 
 
-
-- (void)presentDetailView{
-    WineDetailViewController *vc  = [[WineDetailViewController alloc]init];
-    vc.view.frame = CGRectMake(0, kScreen_Height, kScreen_Width, kScreen_Height);
-    
-    [self.view addSubview:vc.view];
-    
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        vc.view.frame = self.view.bounds;
-    } completion:nil];
-    
-}
-
 #pragma mark - tableViewDelegate
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     return nil;
 }
-/*
- 
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

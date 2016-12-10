@@ -30,11 +30,21 @@
 		5149286E1DEDC81F000322C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5149286D1DEDC81F000322C4 /* main.m */; };
 		514928711DEDC81F000322C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 514928701DEDC81F000322C4 /* AppDelegate.m */; };
 		514928791DEDC820000322C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514928781DEDC820000322C4 /* Assets.xcassets */; };
-		5149287C1DEDC820000322C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5149287A1DEDC820000322C4 /* LaunchScreen.storyboard */; };
 		5149288E1DEDCB71000322C4 /* MNAutoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5149288D1DEDCB71000322C4 /* MNAutoScrollView.m */; };
 		514928A41DEE75B9000322C4 /* FirstLuanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514928A31DEE75B9000322C4 /* FirstLuanchViewController.m */; };
 		514928A71DEE9427000322C4 /* RootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514928A61DEE9427000322C4 /* RootTabBarViewController.m */; };
 		514928AB1DEE9652000322C4 /* PanicBuyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 514928AA1DEE9652000322C4 /* PanicBuyTableViewCell.m */; };
+		514A26151DFAEA2700BD76B8 /* LogIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A26141DFAEA2700BD76B8 /* LogIn.m */; };
+		514A26181DFAEA6F00BD76B8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A26171DFAEA6F00BD76B8 /* User.m */; };
+		514A261C1DFAEF3500BD76B8 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A261B1DFAEF3500BD76B8 /* Address.m */; };
+		514A261F1DFB1B4A00BD76B8 /* LoginTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A261E1DFB1B4A00BD76B8 /* LoginTableViewController.m */; };
+		514A26261DFBC02E00BD76B8 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A26241DFBC02E00BD76B8 /* SettingTableViewController.m */; };
+		514A262A1DFBF19E00BD76B8 /* SettNameTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A26291DFBF19E00BD76B8 /* SettNameTableViewController.m */; };
+		514A262D1DFC04B500BD76B8 /* MessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A262C1DFC04B500BD76B8 /* MessageTableViewController.m */; };
+		514A26301DFC3F9600BD76B8 /* DrinkWithFood.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A262F1DFC3F9600BD76B8 /* DrinkWithFood.m */; };
+		514A26331DFC44FF00BD76B8 /* DrinkWithFoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A26321DFC44FF00BD76B8 /* DrinkWithFoodTableViewController.m */; };
+		514A26361DFC47D100BD76B8 /* DrinkWithFoodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 514A26351DFC47D100BD76B8 /* DrinkWithFoodTableViewCell.m */; };
+		514A26381DFC626300BD76B8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514A26371DFC626300BD76B8 /* Launch Screen.storyboard */; };
 		514B71791DF0739E00EFBC3A /* HotWineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 514B71771DF0739E00EFBC3A /* HotWineTableViewCell.m */; };
 		514B717A1DF0739E00EFBC3A /* HotWineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 514B71781DF0739E00EFBC3A /* HotWineTableViewCell.xib */; };
 		5155A1B91DF4174800B63A8C /* ReplyContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5155A1B81DF4174800B63A8C /* ReplyContentModel.m */; };
@@ -101,6 +111,12 @@
 		51BDF5EB1DF3019300CDBBB2 /* UserTalkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5EA1DF3019300CDBBB2 /* UserTalkViewController.m */; };
 		51BDF5EE1DF301BB00CDBBB2 /* ShopingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5ED1DF301BB00CDBBB2 /* ShopingCartViewController.m */; };
 		51BDF5F11DF3031300CDBBB2 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BDF5F01DF3031300CDBBB2 /* UserInfoViewController.m */; };
+		51DFE24C1DF9497800DC1E72 /* LawDetailCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFE24B1DF9497800DC1E72 /* LawDetailCollectionViewController.m */; };
+		51DFE24F1DF949A200DC1E72 /* LawDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFE24E1DF949A200DC1E72 /* LawDetailCollectionViewCell.m */; };
+		51DFE2521DF9603B00DC1E72 /* TalkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFE2511DF9603B00DC1E72 /* TalkTableViewController.m */; };
+		51DFE2561DF974BD00DC1E72 /* UserTalkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFE2551DF974BD00DC1E72 /* UserTalkTableViewController.m */; };
+		51DFE2591DF9944100DC1E72 /* UserTalkDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFE2581DF9944100DC1E72 /* UserTalkDetailTableViewCell.m */; };
+		51DFE25C1DF9A39400DC1E72 /* ShopingCartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFE25B1DF9A39400DC1E72 /* ShopingCartTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,14 +155,12 @@
 		512001C51DF937AD00E50852 /* LawCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LawCollectionViewCell.m; sourceTree = "<group>"; };
 		512001C71DF93A6800E50852 /* LawsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LawsCollectionViewController.h; sourceTree = "<group>"; };
 		512001C81DF93A6800E50852 /* LawsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LawsCollectionViewController.m; sourceTree = "<group>"; };
-		512001CA1DF93C9F00E50852 /* LawModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LawModel.h; sourceTree = "<group>"; };
 		512001CB1DF93C9F00E50852 /* LawModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LawModel.m; sourceTree = "<group>"; };
 		514928691DEDC81F000322C4 /* JiuZhuangHui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiuZhuangHui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5149286D1DEDC81F000322C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5149286F1DEDC81F000322C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		514928701DEDC81F000322C4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		514928781DEDC820000322C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5149287B1DEDC820000322C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5149287D1DEDC820000322C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5149288B1DEDCA70000322C4 /* JiuZhuangHui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiuZhuangHui.h; sourceTree = "<group>"; };
 		5149288C1DEDCB71000322C4 /* MNAutoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNAutoScrollView.h; sourceTree = "<group>"; };
@@ -157,6 +171,27 @@
 		514928A61DEE9427000322C4 /* RootTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarViewController.m; sourceTree = "<group>"; };
 		514928A91DEE9652000322C4 /* PanicBuyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanicBuyTableViewCell.h; sourceTree = "<group>"; };
 		514928AA1DEE9652000322C4 /* PanicBuyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanicBuyTableViewCell.m; sourceTree = "<group>"; };
+		514A26131DFAEA2700BD76B8 /* LogIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogIn.h; sourceTree = "<group>"; };
+		514A26141DFAEA2700BD76B8 /* LogIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogIn.m; sourceTree = "<group>"; };
+		514A26161DFAEA6F00BD76B8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		514A26171DFAEA6F00BD76B8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		514A261A1DFAEF3500BD76B8 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		514A261B1DFAEF3500BD76B8 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		514A261D1DFB1B4A00BD76B8 /* LoginTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewController.h; sourceTree = "<group>"; };
+		514A261E1DFB1B4A00BD76B8 /* LoginTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewController.m; sourceTree = "<group>"; };
+		514A26231DFBC02E00BD76B8 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		514A26241DFBC02E00BD76B8 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
+		514A26281DFBF19E00BD76B8 /* SettNameTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettNameTableViewController.h; sourceTree = "<group>"; };
+		514A26291DFBF19E00BD76B8 /* SettNameTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettNameTableViewController.m; sourceTree = "<group>"; };
+		514A262B1DFC04B500BD76B8 /* MessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewController.h; sourceTree = "<group>"; };
+		514A262C1DFC04B500BD76B8 /* MessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewController.m; sourceTree = "<group>"; };
+		514A262E1DFC3F9600BD76B8 /* DrinkWithFood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrinkWithFood.h; sourceTree = "<group>"; };
+		514A262F1DFC3F9600BD76B8 /* DrinkWithFood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrinkWithFood.m; sourceTree = "<group>"; };
+		514A26311DFC44FF00BD76B8 /* DrinkWithFoodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrinkWithFoodTableViewController.h; sourceTree = "<group>"; };
+		514A26321DFC44FF00BD76B8 /* DrinkWithFoodTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrinkWithFoodTableViewController.m; sourceTree = "<group>"; };
+		514A26341DFC47D100BD76B8 /* DrinkWithFoodTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrinkWithFoodTableViewCell.h; sourceTree = "<group>"; };
+		514A26351DFC47D100BD76B8 /* DrinkWithFoodTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrinkWithFoodTableViewCell.m; sourceTree = "<group>"; };
+		514A26371DFC626300BD76B8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		514B71761DF0739E00EFBC3A /* HotWineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotWineTableViewCell.h; sourceTree = "<group>"; };
 		514B71771DF0739E00EFBC3A /* HotWineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotWineTableViewCell.m; sourceTree = "<group>"; };
 		514B71781DF0739E00EFBC3A /* HotWineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotWineTableViewCell.xib; sourceTree = "<group>"; };
@@ -279,6 +314,19 @@
 		51BDF5ED1DF301BB00CDBBB2 /* ShopingCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopingCartViewController.m; sourceTree = "<group>"; };
 		51BDF5EF1DF3031300CDBBB2 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		51BDF5F01DF3031300CDBBB2 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		51DFE2491DF9434400DC1E72 /* LawModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LawModel.h; sourceTree = "<group>"; };
+		51DFE24A1DF9497800DC1E72 /* LawDetailCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LawDetailCollectionViewController.h; sourceTree = "<group>"; };
+		51DFE24B1DF9497800DC1E72 /* LawDetailCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LawDetailCollectionViewController.m; sourceTree = "<group>"; };
+		51DFE24D1DF949A200DC1E72 /* LawDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LawDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		51DFE24E1DF949A200DC1E72 /* LawDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LawDetailCollectionViewCell.m; sourceTree = "<group>"; };
+		51DFE2501DF9603B00DC1E72 /* TalkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkTableViewController.h; sourceTree = "<group>"; };
+		51DFE2511DF9603B00DC1E72 /* TalkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkTableViewController.m; sourceTree = "<group>"; };
+		51DFE2541DF974BD00DC1E72 /* UserTalkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTalkTableViewController.h; sourceTree = "<group>"; };
+		51DFE2551DF974BD00DC1E72 /* UserTalkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTalkTableViewController.m; sourceTree = "<group>"; };
+		51DFE2571DF9944100DC1E72 /* UserTalkDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTalkDetailTableViewCell.h; sourceTree = "<group>"; };
+		51DFE2581DF9944100DC1E72 /* UserTalkDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTalkDetailTableViewCell.m; sourceTree = "<group>"; };
+		51DFE25A1DF9A39400DC1E72 /* ShopingCartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopingCartTableViewCell.h; sourceTree = "<group>"; };
+		51DFE25B1DF9A39400DC1E72 /* ShopingCartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopingCartTableViewCell.m; sourceTree = "<group>"; };
 		8695FFC0F4696FEE8AEB8AC4 /* Pods-JiuZhuangHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JiuZhuangHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JiuZhuangHui/Pods-JiuZhuangHui.debug.xcconfig"; sourceTree = "<group>"; };
 		9152EAABF94D037CEA4D0E9A /* libPods-JiuZhuangHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JiuZhuangHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -315,7 +363,7 @@
 				512001951DF7076F00E50852 /* WineTastingModel.m */,
 				512001C11DF90A4200E50852 /* WineryWorker.h */,
 				512001C21DF90A4200E50852 /* WineryWorker.m */,
-				512001CA1DF93C9F00E50852 /* LawModel.h */,
+				51DFE2491DF9434400DC1E72 /* LawModel.h */,
 				512001CB1DF93C9F00E50852 /* LawModel.m */,
 			);
 			name = userTalk;
@@ -360,7 +408,7 @@
 				514928701DEDC81F000322C4 /* AppDelegate.m */,
 				5149288B1DEDCA70000322C4 /* JiuZhuangHui.h */,
 				514928781DEDC820000322C4 /* Assets.xcassets */,
-				5149287A1DEDC820000322C4 /* LaunchScreen.storyboard */,
+				514A26371DFC626300BD76B8 /* Launch Screen.storyboard */,
 				5149287D1DEDC820000322C4 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -403,6 +451,12 @@
 				5155A1C61DF456D900B63A8C /* main */,
 				5155A1C51DF456CF00B63A8C /* winery */,
 				512001901DF7070500E50852 /* userTalk */,
+				514A26131DFAEA2700BD76B8 /* LogIn.h */,
+				514A26141DFAEA2700BD76B8 /* LogIn.m */,
+				514A26161DFAEA6F00BD76B8 /* User.h */,
+				514A26171DFAEA6F00BD76B8 /* User.m */,
+				514A261A1DFAEF3500BD76B8 /* Address.h */,
+				514A261B1DFAEF3500BD76B8 /* Address.m */,
 			);
 			name = Medol;
 			sourceTree = "<group>";
@@ -414,6 +468,7 @@
 				5155A1BF1DF4517F00B63A8C /* MiansubVc */,
 				5155A1C01DF451C200B63A8C /* wineryVC */,
 				5155A21A1DF691C200B63A8C /* userTalkVC */,
+				514A26121DFA9D8E00BD76B8 /* userInfoVC */,
 			);
 			name = Vc;
 			sourceTree = "<group>";
@@ -441,8 +496,25 @@
 				51BDF59C1DF17E2800CDBBB2 /* OriginatorTableViewCell.m */,
 				51B345CB1DF05DA10027078C /* LineThrough.h */,
 				51B345CC1DF05DA10027078C /* LineThrough.m */,
+				514A26341DFC47D100BD76B8 /* DrinkWithFoodTableViewCell.h */,
+				514A26351DFC47D100BD76B8 /* DrinkWithFoodTableViewCell.m */,
 			);
 			name = mainVCView;
+			sourceTree = "<group>";
+		};
+		514A26121DFA9D8E00BD76B8 /* userInfoVC */ = {
+			isa = PBXGroup;
+			children = (
+				514A261D1DFB1B4A00BD76B8 /* LoginTableViewController.h */,
+				514A261E1DFB1B4A00BD76B8 /* LoginTableViewController.m */,
+				514A26231DFBC02E00BD76B8 /* SettingTableViewController.h */,
+				514A26241DFBC02E00BD76B8 /* SettingTableViewController.m */,
+				514A26281DFBF19E00BD76B8 /* SettNameTableViewController.h */,
+				514A26291DFBF19E00BD76B8 /* SettNameTableViewController.m */,
+				514A262B1DFC04B500BD76B8 /* MessageTableViewController.h */,
+				514A262C1DFC04B500BD76B8 /* MessageTableViewController.m */,
+			);
+			name = userInfoVC;
 			sourceTree = "<group>";
 		};
 		5155A1BF1DF4517F00B63A8C /* MiansubVc */ = {
@@ -460,6 +532,8 @@
 				51B345CF1DF0635E0027078C /* TopItemPushVC.m */,
 				5155A2131DF5CE3C00B63A8C /* AllWineViewController.h */,
 				5155A2141DF5CE3C00B63A8C /* AllWineViewController.m */,
+				514A26311DFC44FF00BD76B8 /* DrinkWithFoodTableViewController.h */,
+				514A26321DFC44FF00BD76B8 /* DrinkWithFoodTableViewController.m */,
 			);
 			name = MiansubVc;
 			sourceTree = "<group>";
@@ -548,6 +622,8 @@
 			children = (
 				512001A11DF737E700E50852 /* WineTastingTableViewController.h */,
 				512001A21DF737E700E50852 /* WineTastingTableViewController.m */,
+				51DFE2541DF974BD00DC1E72 /* UserTalkTableViewController.h */,
+				51DFE2551DF974BD00DC1E72 /* UserTalkTableViewController.m */,
 				512001AD1DF80B2C00E50852 /* WineTastingListViewController.h */,
 				512001AE1DF80B2C00E50852 /* WineTastingListViewController.m */,
 				512001B01DF863E400E50852 /* OwerStoryTableViewController.h */,
@@ -558,6 +634,10 @@
 				512001BF1DF909C900E50852 /* WineryWorkerTableViewController.m */,
 				512001C71DF93A6800E50852 /* LawsCollectionViewController.h */,
 				512001C81DF93A6800E50852 /* LawsCollectionViewController.m */,
+				51DFE24A1DF9497800DC1E72 /* LawDetailCollectionViewController.h */,
+				51DFE24B1DF9497800DC1E72 /* LawDetailCollectionViewController.m */,
+				51DFE2501DF9603B00DC1E72 /* TalkTableViewController.h */,
+				51DFE2511DF9603B00DC1E72 /* TalkTableViewController.m */,
 			);
 			name = userTalkVC;
 			sourceTree = "<group>";
@@ -582,6 +662,10 @@
 				512001BC1DF905CE00E50852 /* WineryWorkerTableViewCell.m */,
 				512001C41DF937AD00E50852 /* LawCollectionViewCell.h */,
 				512001C51DF937AD00E50852 /* LawCollectionViewCell.m */,
+				51DFE24D1DF949A200DC1E72 /* LawDetailCollectionViewCell.h */,
+				51DFE24E1DF949A200DC1E72 /* LawDetailCollectionViewCell.m */,
+				51DFE2571DF9944100DC1E72 /* UserTalkDetailTableViewCell.h */,
+				51DFE2581DF9944100DC1E72 /* UserTalkDetailTableViewCell.m */,
 			);
 			name = userTalk;
 			sourceTree = "<group>";
@@ -606,6 +690,8 @@
 				51B345C01DF016B90027078C /* PlayerPictureModel.m */,
 				51B345C21DF016D10027078C /* BottomButtonModel.h */,
 				51B345C31DF016D10027078C /* BottomButtonModel.m */,
+				514A262E1DFC3F9600BD76B8 /* DrinkWithFood.h */,
+				514A262F1DFC3F9600BD76B8 /* DrinkWithFood.m */,
 			);
 			name = MainHeaderView;
 			sourceTree = "<group>";
@@ -619,6 +705,8 @@
 				5155A20E1DF5CBC600B63A8C /* SingleWineCollectionViewCell.h */,
 				5155A20F1DF5CBC600B63A8C /* SingleWineCollectionViewCell.m */,
 				5155A2101DF5CBC600B63A8C /* SingleWineCollectionViewCell.xib */,
+				51DFE25A1DF9A39400DC1E72 /* ShopingCartTableViewCell.h */,
+				51DFE25B1DF9A39400DC1E72 /* ShopingCartTableViewCell.m */,
 			);
 			name = wineBuyView;
 			sourceTree = "<group>";
@@ -720,9 +808,9 @@
 			files = (
 				512001A01DF72B9A00E50852 /* LikeAndReplyView.xib in Resources */,
 				51B345CA1DF02AAD0027078C /* MainHeaderView.xib in Resources */,
-				5149287C1DEDC820000322C4 /* LaunchScreen.storyboard in Resources */,
 				51B345AC1DEFC4850027078C /* PanicBuyTableViewCell.xib in Resources */,
 				5120019B1DF7228F00E50852 /* WineTastingTableViewCell.xib in Resources */,
+				514A26381DFC626300BD76B8 /* Launch Screen.storyboard in Resources */,
 				51BDF59A1DF1522600CDBBB2 /* WineryTableViewCell.xib in Resources */,
 				514B717A1DF0739E00EFBC3A /* HotWineTableViewCell.xib in Resources */,
 				5155A1DE1DF469D800B63A8C /* WineryRegionView.xib in Resources */,
@@ -790,7 +878,10 @@
 			files = (
 				51B345BE1DF016A20027078C /* TopItemModel.m in Sources */,
 				512001961DF7076F00E50852 /* WineTastingModel.m in Sources */,
+				514A261C1DFAEF3500BD76B8 /* Address.m in Sources */,
+				514A26361DFC47D100BD76B8 /* DrinkWithFoodTableViewCell.m in Sources */,
 				5155A1F31DF52E7100B63A8C /* WineryFeatureHeaderModel.m in Sources */,
+				514A26261DFBC02E00BD76B8 /* SettingTableViewController.m in Sources */,
 				51BDF5DC1DF2FD3100CDBBB2 /* BasicNavigationBar.m in Sources */,
 				51B345CD1DF05DA10027078C /* LineThrough.m in Sources */,
 				51BDF59D1DF17E2800CDBBB2 /* OriginatorTableViewCell.m in Sources */,
@@ -804,6 +895,7 @@
 				5155A1ED1DF526EE00B63A8C /* WineriesTableHeaderView.m in Sources */,
 				514928A71DEE9427000322C4 /* RootTabBarViewController.m in Sources */,
 				51B345C11DF016B90027078C /* PlayerPictureModel.m in Sources */,
+				51DFE24C1DF9497800DC1E72 /* LawDetailCollectionViewController.m in Sources */,
 				51BDF5991DF1522600CDBBB2 /* WineryTableViewCell.m in Sources */,
 				51BDF5CA1DF27CD200CDBBB2 /* BoxfulWinesModel.m in Sources */,
 				51BDF5CD1DF287A800CDBBB2 /* WineBuyViewController.m in Sources */,
@@ -818,9 +910,12 @@
 				5155A1BC1DF420E300B63A8C /* WineDetailViewController.m in Sources */,
 				5155A1CF1DF457D800B63A8C /* GrapeModel.m in Sources */,
 				51B345BB1DF015670027078C /* MainHeaderViewModel.m in Sources */,
+				514A262A1DFBF19E00BD76B8 /* SettNameTableViewController.m in Sources */,
 				512001AF1DF80B2C00E50852 /* WineTastingListViewController.m in Sources */,
+				514A262D1DFC04B500BD76B8 /* MessageTableViewController.m in Sources */,
 				5120019E1DF72B1F00E50852 /* LikeAndReplyView.m in Sources */,
 				51B345C81DF023F60027078C /* MainHeaderView.m in Sources */,
+				514A26331DFC44FF00BD76B8 /* DrinkWithFoodTableViewController.m in Sources */,
 				5155A1C91DF4574600B63A8C /* WineryRegionModel.m in Sources */,
 				5155A1F61DF533CC00B63A8C /* WineryFeatureTableViewController.m in Sources */,
 				51B345B51DEFDF2B0027078C /* NetRequestManeger.m in Sources */,
@@ -828,25 +923,32 @@
 				5155A1B91DF4174800B63A8C /* ReplyContentModel.m in Sources */,
 				5155A2021DF5789000B63A8C /* GrapeTypeTableViewController.m in Sources */,
 				51BDF5921DF12FEB00CDBBB2 /* WineryModel.m in Sources */,
+				51DFE2561DF974BD00DC1E72 /* UserTalkTableViewController.m in Sources */,
 				514B71791DF0739E00EFBC3A /* HotWineTableViewCell.m in Sources */,
+				514A26151DFAEA2700BD76B8 /* LogIn.m in Sources */,
 				512001C91DF93A6800E50852 /* LawsCollectionViewController.m in Sources */,
+				51DFE24F1DF949A200DC1E72 /* LawDetailCollectionViewCell.m in Sources */,
 				5155A1D51DF4592D00B63A8C /* WineryMoreModel.m in Sources */,
 				512001CC1DF93C9F00E50852 /* LawModel.m in Sources */,
 				5155A2291DF694A100B63A8C /* UserTalkCollectionViewCell.m in Sources */,
 				5155A1CC1DF457B300B63A8C /* WineryFeatureModel.m in Sources */,
 				512001931DF7073E00E50852 /* UserTalkModel.m in Sources */,
+				51DFE2521DF9603B00DC1E72 /* TalkTableViewController.m in Sources */,
 				512001B61DF8644F00E50852 /* OwerStoryTableViewCell.m in Sources */,
+				514A26181DFAEA6F00BD76B8 /* User.m in Sources */,
 				514928AB1DEE9652000322C4 /* PanicBuyTableViewCell.m in Sources */,
 				5155A1E41DF481E400B63A8C /* WineriesTableViewCell.m in Sources */,
 				5155A1C41DF453D800B63A8C /* WineryRegionVeiw.m in Sources */,
 				512001C31DF90A4200E50852 /* WineryWorker.m in Sources */,
 				5155A1FF1DF5730E00B63A8C /* GrapeDetaliTableViewCell.m in Sources */,
 				512001C01DF909C900E50852 /* WineryWorkerTableViewController.m in Sources */,
+				51DFE25C1DF9A39400DC1E72 /* ShopingCartTableViewCell.m in Sources */,
 				5149286E1DEDC81F000322C4 /* main.m in Sources */,
 				51BDF5EB1DF3019300CDBBB2 /* UserTalkViewController.m in Sources */,
 				5155A2081DF5A1A900B63A8C /* GrapeTypesCollectionViewCell.m in Sources */,
 				51BDF5D21DF2895500CDBBB2 /* WineTitleTableViewCell.m in Sources */,
 				5155A2051DF5A01300B63A8C /* GrapeTypeCollectionViewController.m in Sources */,
+				514A261F1DFB1B4A00BD76B8 /* LoginTableViewController.m in Sources */,
 				51B345AF1DEFD53D0027078C /* WinePurchaseModel.m in Sources */,
 				5155A1E11DF473BC00B63A8C /* GrapeAndFeatureTableViewCell.m in Sources */,
 				5120019A1DF7228F00E50852 /* WineTastingTableViewCell.m in Sources */,
@@ -861,6 +963,8 @@
 				512001BA1DF873D800E50852 /* WineryAritcleTableViewController.m in Sources */,
 				5155A1EA1DF521F600B63A8C /* WeatherViewController.m in Sources */,
 				51B345B81DF006440027078C /* MainTableViewController.m in Sources */,
+				51DFE2591DF9944100DC1E72 /* UserTalkDetailTableViewCell.m in Sources */,
+				514A26301DFC3F9600BD76B8 /* DrinkWithFood.m in Sources */,
 				51BDF58F1DF1209C00CDBBB2 /* TopicViewModel.m in Sources */,
 				5149288E1DEDCB71000322C4 /* MNAutoScrollView.m in Sources */,
 				5155A1FC1DF5493500B63A8C /* UILabel+Height.m in Sources */,
@@ -871,17 +975,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		5149287A1DEDC820000322C4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5149287B1DEDC820000322C4 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5149287E1DEDC820000322C4 /* Debug */ = {

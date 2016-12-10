@@ -8,6 +8,17 @@
 
 #import "WinePurchaseModel.h"
 
+static  NSString    *const  kGoodsID        = @"goodsID";
+static  NSString    *const  kGoodsName      = @"goodsName";
+static  NSString    *const  kGoodsCount     = @"goodsCount";
+static  NSString    *const  kGoodsImage     = @"goodsImage";
+static  NSString    *const  kGoodsShopPrice = @"GoodsShopPrice";
+static  NSString    *const  kGoodsMarketPrice = @"goodsMarketPrice";
+static  NSString    *const  kgoodsSmallImage = @"goodsSmallImage";
+static  NSString    *const  kLikeNumber     = @"likeNumber";
+static  NSString    *const  kReplyNumber    = @"replyNumber";
+static  NSString    *const  kGoodsShortName = @"goodShortName";
+
 @implementation WinePurchaseModel
 
 - (instancetype)copyWithZone:(NSZone *)zone{
@@ -21,8 +32,36 @@
     winePurchase.goodsSmallImage    =       [_goodsSmallImage copy];
     winePurchase.likeNumber         =       [_likeNumber copy];
     winePurchase.replyNumber        =       [_replyNumber copy];
+    winePurchase.goodsShortName     =       [_goodsShortName copy];
     
     return winePurchase;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:self.goodsID forKey:kGoodsID];
+    [aCoder encodeObject:self.goodsName forKey:kGoodsName];
+    [aCoder encodeObject:self.goodsCount forKey:kGoodsCount];
+    [aCoder encodeObject:self.goodsImage forKey:kGoodsImage];
+    [aCoder encodeObject:self.goodsShopPrice forKey:kGoodsShopPrice];
+    [aCoder encodeObject:self.goodsMarketPrice forKey:kGoodsMarketPrice];
+    [aCoder encodeObject:self.likeNumber forKey:kLikeNumber];
+    [aCoder encodeObject:self.replyNumber forKey:kReplyNumber];
+    [aCoder encodeObject:self.goodsShortName forKey:kGoodsShortName];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+    if(self = [super init]){
+        self.goodsID        = [aDecoder decodeObjectForKey:kGoodsID];
+        self.goodsName      = [aDecoder decodeObjectForKey:kGoodsName];
+        self.goodsCount     =  [aDecoder decodeObjectForKey:kGoodsCount];
+        self.goodsImage     = [aDecoder decodeObjectForKey:kGoodsImage];
+        self.goodsShopPrice = [aDecoder decodeObjectForKey:kGoodsShopPrice];
+        self.goodsMarketPrice = [aDecoder decodeObjectForKey:kGoodsMarketPrice];
+        self.likeNumber     = [aDecoder decodeObjectForKey:kLikeNumber];
+        self.replyNumber    = [aDecoder decodeObjectForKey:kReplyNumber];
+        self.goodsShortName = [aDecoder decodeObjectForKey:kGoodsShortName];
+    }
+    return self;
 }
 
 - (instancetype)initWithPanicBuyData:(id)data{
@@ -50,8 +89,6 @@
 }
 
 + (NSArray *)getRecommendWineWithData:(id)data{
-    
-    
     NSMutableArray *recommendWines = [NSMutableArray new];
     if([data isKindOfClass:[NSDictionary class]]){
         NSDictionary *dataDic = data[@"data"];
@@ -103,56 +140,59 @@
     }
     return self;
 }
+
++ (NSArray *)getShopCartWineListWithData:(id)data{
+    NSMutableArray *wines = [NSMutableArray new];
+    for(NSDictionary *wineDic in data[@"data"][@"goods_list"]){
+        WinePurchaseModel *wine = [[WinePurchaseModel alloc]init];
+        wine.goodsID = wineDic[@"goods_id"];
+        wine.goodsName = wineDic[@"goods_name"];
+        wine.goodsImage = wineDic[@"img"][@"small"];
+        wine.goodsShopPrice = [wineDic[@"goods_price"] substringFromIndex:1];
+        wine.goodsCount = wineDic[@"goods_number"];
+        [wines addObject:wine];
+    }
+    return [wines copy];
+}
+
+
+- (instancetype)initWithDrinkWithFoodDic:(NSDictionary *)wineDic{
+    if(self = [super init]){
+        self.goodsID = wineDic[@"goods_id"];
+        self.goodsName = wineDic[@"goods_name"];
+        self.goodsShortName = wineDic[@"goods_short_name"];
+        self.goodsImage = wineDic[@"goods_thumb"];
+        self.goodsShopPrice = wineDic[@"shop_price"];
+        self.goodsCount = wineDic[@"goods_number"];
+    }
+    return self;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end
 
-//data = {
-//    "focus_img" =  {
-//                    "ad_code"   = "1467500109510454915.png";
-//                    "ad_name"   = "\U597d\U9152\U6162\U6162\U6765";
-//                    img = "http://www.jiuzhuanghui.com/data/afficheimg/1467500109510454915.png";
-//                    };
-//    "goods_list" =  (
-//                        {
-//                        "can_handsel" = 0;
-//                        "extension_code" = "";
-//                        "goods_attr" = "";
-//                        "goods_attr_id" = "";
-//                        "goods_id" = 333;
-//                        "goods_img" = "images/201611/goods_img/333_G_1480266867156.jpg";
-//                        "goods_name" = "\U8fe6\U5357\U7f8e\U5730\U99a5\U53f8\U4ee4\U534a\U751c\U767d\U8461\U8404\U91522015";
-//                        "goods_number" = 1;
-//                        "goods_price" = "\Uffe5118.00";
-//                        "goods_sn" = ECS000333;
-//                        img =  {
-//                            small = "http://www.jiuzhuanghui.com/images/201611/thumb_img/333_thumb_G_1480266867025.jpg";
-//                            thumb = "http://www.jiuzhuanghui.com/images/201611/goods_img/333_G_1480266867156.jpg";
-//                            url = "http://www.jiuzhuanghui.com/images/201611/source_img/333_G_1480266867985.jpg";
-//                        };
-//                        "is_gift" = 0;
-//                        "is_real" = 1;
-//                        "is_shipping" = 0;
-//                        "market_price" = "\Uffe5149.00";
-//                        "original_img" = "images/201611/source_img/333_G_1480266867985.jpg";
-//                        "parent_id" = 0;
-//                        pid = 333;
-//                        "rec_id" = 98;
-//                        "rec_type" = 0;
-//                        subtotal = "\Uffe5118.00";
-//                        tag =                 (
-//                    );
-//                                }
-//                                );
-//        total =         {
-//            "goods_amount" = 118;
-//            "goods_price" = "\Uffe5118.00";
-//            "market_price" = "\Uffe5149.00";
-//            "real_goods_count" = 1;
-//            "save_rate" = "21%";
-//            saving = "\Uffe531.00";
-//            "virtual_goods_count" = 0;
-//        };
-//    };
-//    status =     {
-//        succeed = 1;
-//    };
-//}
+

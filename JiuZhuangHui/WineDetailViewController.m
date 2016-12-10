@@ -10,6 +10,7 @@
 #import "NetRequestManeger.h"
 #import "JiuZhuangHui.h"
 
+static NSString *const wineDetailURL = @"http://www.jiuzhuanghui.com/mobile/index.php?m=default&c=article&a=goods_info_app&id=";
 @interface WineDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic)UIWebView *webView;
@@ -23,10 +24,8 @@
     [super viewDidLoad];
     
     self.webView = [[UIWebView alloc]init];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jiuzhuanghui.com/mobile/index.php?m=default&c=article&a=goods_info_app&id=333"]]];
-    NSInteger height = [[self.webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] integerValue];
-    self.webView.frame = CGRectMake(0, 0, kScreen_Width, height);
-    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[wineDetailURL stringByAppendingString:self.wineID]]]];
+    self.webView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Height);
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
     self.tableView.tableHeaderView = self.webView;
     self.tableView.delegate = self;
@@ -52,24 +51,5 @@
     UITableViewCell *cell = [[UITableViewCell alloc]init];
     return cell;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-//- (void)requestHTML: (NSString *)wineID{
-//    NetRequestManeger *manager = [NetRequestManeger shareManager];
-//    [manager getWineDetailHTMLWithID:wineID reponse:^(id reponseObject, NSError *error) {
-//        if(error){
-//            NSLog(@"%@",error);
-//            return ;
-//        }
-//        [self.webView loadHTMLString:reponseObject[@"data"] baseURL:nil];
-//    }];
-//}
 @end

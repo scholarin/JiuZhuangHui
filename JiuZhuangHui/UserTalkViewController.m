@@ -22,6 +22,9 @@
 #import "OwerStoryTableViewController.h"
 #import "WineryAritcleTableViewController.h"
 #import "WineryWorkerTableViewController.h"
+#import "LawsCollectionViewController.h"
+#import "TalkTableViewController.h"
+#import "UserTalkTableViewController.h"
 
 static NSString *const kUserTalkTableViewCell = @"userTalkTableViewCell";
 @interface UserTalkViewController ()<UserTalkTableViewCellDelegate>
@@ -119,7 +122,7 @@ static NSString *const kUserTalkTableViewCell = @"userTalkTableViewCell";
         if(!cell){
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
         }
-        cell.textLabel.font = [UIFont systemFontOfSize:17];
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.detailTextLabel.textColor = [UIColor lightGrayColor];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -191,7 +194,14 @@ static NSString *const kUserTalkTableViewCell = @"userTalkTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section == 2 && indexPath.row == 0){
+    
+    if(indexPath.section == 1 ){
+        UserTalkTableViewController *userTalkVC = [[UserTalkTableViewController alloc]init];
+        userTalkVC.hidesBottomBarWhenPushed = YES;
+        userTalkVC.title = @"中国葡萄庄园酒 用户说";
+        [self.navigationController pushViewController:userTalkVC animated:YES];
+        
+    }else if(indexPath.section == 2 && indexPath.row == 0){
         WineTastingListViewController *wineTastingListVC = [[WineTastingListViewController alloc]init];
         [self.navigationController pushViewController:wineTastingListVC animated:YES];
     }else if(indexPath.section == 3){
@@ -220,7 +230,15 @@ static NSString *const kUserTalkTableViewCell = @"userTalkTableViewCell";
         if(indexPath.row == 0){
             WineryWorkerTableViewController *wineryWorkerVC = [[WineryWorkerTableViewController alloc]init];
             [self.navigationController pushViewController:wineryWorkerVC animated:YES];
+        }else if(indexPath.row == 1){
+            LawsCollectionViewController *lawVC = [[LawsCollectionViewController alloc]init];
+            [self.navigationController pushViewController:lawVC animated:YES];
         }
+    }else{
+        TalkTableViewController *talkVC = [[TalkTableViewController alloc]init];
+        talkVC.hidesBottomBarWhenPushed = YES;
+        talkVC.title = @"吐槽我们";
+        [self.navigationController pushViewController:talkVC animated:YES];
     }
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface lawCollectionViewCell : UICollectionViewCell
+@interface LawCollectionViewCell : UICollectionViewCell
 
 
 - (void)setlawItemWithName:(NSString *)name image:(NSString *)imageURL;

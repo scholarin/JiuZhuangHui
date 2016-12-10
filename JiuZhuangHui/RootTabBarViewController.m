@@ -33,7 +33,6 @@
     [mainNavC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_home"]];
     
     
-    NSLog(@"tabbar加载了");
     WineryTableViewController *wineryVC = [[WineryTableViewController alloc]init];
     BasicNavigationViewController *wineryNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:wineryVC];
     wineryNaVC.tabBarItem.title = @"酒庄";
@@ -53,12 +52,11 @@
     ShopingCartViewController *shopCartVC = [[ShopingCartViewController alloc]init];
     BasicNavigationViewController *shopingCartNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:shopCartVC];
     shopingCartNaVC.tabBarItem.title = @"购物车";
+    shopingCartNaVC.tabBarItem.badgeValue = @"5";
+    shopingCartNaVC.tabBarItem.badgeColor = [UIColor redColor];
     [shopingCartNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
     [shopingCartNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
-    
-    ShopingBarButtonItme *item = [[ShopingBarButtonItme alloc]initWithShopCartCount:5];
-    UIImage *image = [[self convertViewToImage:item] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [shopingCartNaVC.tabBarItem setImage:image];
+    [shopingCartNaVC.tabBarItem setImage:[UIImage imageNamed:@"shoping"]];
     [shopingCartNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_shoping"]];
     
     UserInfoViewController *userInfoVc = [[UserInfoViewController alloc]init];

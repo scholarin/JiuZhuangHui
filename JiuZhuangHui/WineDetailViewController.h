@@ -10,4 +10,6 @@
 
 @interface WineDetailViewController : UIViewController
 
+@property (nonatomic, copy) NSString *wineID;
+
 @end

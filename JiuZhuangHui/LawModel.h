@@ -1,5 +1,5 @@
 //
-//  lawModel.h
+//  LawModel.h
 //  JiuZhuangHui
 //
 //  Created by MosinNagant on 2016/12/8.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface lawModel : NSObject<NSCopying>
+@interface LawModel : NSObject<NSCopying>
 
 @property (nonatomic, copy) NSString *lawID;
 @property (nonatomic, copy) NSString *lawTitle;
@@ -19,6 +19,7 @@
 
 - (instancetype)initWithlawDic:(NSDictionary *)lawDic;
 + (NSArray *)getlawsWithData:(id)data;
++ (NSArray *)getlawContentImagesWithData:(id)data;
 
 
 @end

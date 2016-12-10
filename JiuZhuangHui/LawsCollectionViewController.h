@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface lawsCollectionViewController : UICollectionViewController
+@interface LawsCollectionViewController : UICollectionViewController
 
 @end

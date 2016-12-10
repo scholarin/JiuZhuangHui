@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WinePurchaseModel : NSObject<NSCopying>
+@interface WinePurchaseModel : NSObject<NSCopying,NSCoding>
 
 @property (nonatomic, copy) NSString *goodsID;
 @property (nonatomic, copy) NSString *goodsName;
@@ -19,13 +19,21 @@
 @property (nonatomic, copy) NSString *goodsSmallImage;
 @property (nonatomic, copy) NSString *likeNumber;
 @property (nonatomic, copy) NSString *replyNumber;
+@property (nonatomic, copy) NSString *goodsShortName;
 
 - (instancetype)initWithPanicBuyData:(id)data;
 - (instancetype)initWineModelForDic: (NSDictionary *)wineDic;
 - (instancetype)initWineryGoodListForDic:(NSDictionary *)wineDic;
+- (instancetype)initWithDrinkWithFoodDic:(NSDictionary *)wineDic;
 
 + (NSArray *)getHotWineWithData:(id)data;
 + (NSArray *)getRecommendWineWithData:(id)data;
 
+
+//首页全部酒类列表
 + (NSArray *)getAllOfGoodlistWithData:(id)data;
+
+//购物车酒类列表
+
++ (NSArray *)getShopCartWineListWithData:(id)data;
 @end

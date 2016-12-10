@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserInfoViewController : UIViewController
+@interface UserInfoViewController : UITableViewController
+
+
+@property (nonatomic, assign) BOOL isLogin;
 
 @end

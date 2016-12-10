@@ -15,7 +15,10 @@
 @property (nonatomic, copy) NSString *userTalkTime;
 @property (nonatomic, copy) NSString *userTalkImage;
 @property (nonatomic, copy) NSString *userTalkDetailURL;
+@property (nonatomic, copy) NSString *userTalkType;
 
 + (NSArray *)getUserTalkListWithData:(id)data;
 
+//返回用户说详情页面数组
++ (NSArray *)getUserTalkDetailListWithData:(id)data;
 @end

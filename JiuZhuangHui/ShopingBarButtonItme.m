@@ -43,12 +43,12 @@ static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
         _label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_label];
         
-        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self);
-            make.top.equalTo(self).offset(5);
-            make.height.equalTo(@12);
-            
-        }];
+//        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(self);
+//            make.top.equalTo(self).offset(5);
+//            make.height.equalTo(@12);
+//            
+//        }];
         
         _button = [[UIButton alloc]init];
         [self addSubview:_button];

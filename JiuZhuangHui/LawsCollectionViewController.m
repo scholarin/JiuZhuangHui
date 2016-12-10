@@ -8,15 +8,21 @@
 
 #import "lawsCollectionViewController.h"
 #import "lawCollectionViewCell.h"
+#import "NetRequestManeger.h"
+#import "LawModel.h"
 #import "JiuZhuangHui.h"
+
+#import "LawDetailCollectionViewController.h"
 
 static NSString *const klawCollectionViewCell = @"lawCollectionViewCell";
 
-@interface lawsCollectionViewController ()
+@interface LawsCollectionViewController ()
+
+@property(nonatomic, strong)NSArray *laws;
 
 @end
 
-@implementation lawsCollectionViewController
+@implementation LawsCollectionViewController
 
 static NSString * const reuseIdentifier = @"Cell";
 
@@ -28,7 +34,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Register cell classes
     self.collectionView.backgroundColor = kHeaderViewColor;
-    [self.collectionView registerClass:[lawCollectionViewCell class] forCellWithReuseIdentifier:klawCollectionViewCell];
+    [self.collectionView registerClass:[LawCollectionViewCell class] forCellWithReuseIdentifier:klawCollectionViewCell];
+    [self requestLaws];
     
     // Do any additional setup after loading the view.
 }
@@ -37,7 +44,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (instancetype)init{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     CGFloat width = (kScreen_Width - 30)/2;
-    layout.itemSize = CGSizeMake(width, width * 16/9);
+    layout.itemSize = CGSizeMake(width, width * 4/3);
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
@@ -47,6 +54,17 @@ static NSString * const reuseIdentifier = @"Cell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)requestLaws{
+    NetRequestManeger *manager = [NetRequestManeger shareManager];
+    NSString *urlWithString = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/articleList&cat_id=142&limit=7&page=1";
+    [manager geiRequestWithURL:urlWithString reponse:^(id reponseObject, NSError *error) {
+        self.laws = [LawModel getlawsWithData:reponseObject];
+        [self.collectionView reloadData];
+    }];
+}
+
 
 /*
 #pragma mark - Navigation
@@ -61,53 +79,33 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+
+    return self.laws.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
+    LawCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:klawCollectionViewCell forIndexPath:indexPath];
+    LawModel *law = self.laws[indexPath.item];
+    [cell setlawItemWithName:law.lawTitle image:law.lawSmallImage];
     return cell;
 }
 
+
+
 #pragma mark <UICollectionViewDelegate>
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    LawModel *law = self.laws[indexPath.item];
+    LawDetailCollectionViewController *lawDetailVC = [[LawDetailCollectionViewController alloc]init];
+    lawDetailVC.hidesBottomBarWhenPushed = YES;
+    lawDetailVC.title = law.lawTitle;
+    lawDetailVC.lawID = law.lawID;
+    [self.navigationController pushViewController:lawDetailVC animated:YES];
 }
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
-
 @end
