@@ -18,6 +18,7 @@ static  NSString    *const  kgoodsSmallImage = @"goodsSmallImage";
 static  NSString    *const  kLikeNumber     = @"likeNumber";
 static  NSString    *const  kReplyNumber    = @"replyNumber";
 static  NSString    *const  kGoodsShortName = @"goodShortName";
+static  NSString    *const  kGoodsTastingID = @"goodsTastingID";
 
 @implementation WinePurchaseModel
 
@@ -33,6 +34,7 @@ static  NSString    *const  kGoodsShortName = @"goodShortName";
     winePurchase.likeNumber         =       [_likeNumber copy];
     winePurchase.replyNumber        =       [_replyNumber copy];
     winePurchase.goodsShortName     =       [_goodsShortName copy];
+    winePurchase.goodsTastingID     =       [_goodsTastingID copy];
     
     return winePurchase;
 }
@@ -47,6 +49,7 @@ static  NSString    *const  kGoodsShortName = @"goodShortName";
     [aCoder encodeObject:self.likeNumber forKey:kLikeNumber];
     [aCoder encodeObject:self.replyNumber forKey:kReplyNumber];
     [aCoder encodeObject:self.goodsShortName forKey:kGoodsShortName];
+    [aCoder encodeObject:self.goodsTastingID forKey:kGoodsTastingID];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -60,6 +63,7 @@ static  NSString    *const  kGoodsShortName = @"goodShortName";
         self.likeNumber     = [aDecoder decodeObjectForKey:kLikeNumber];
         self.replyNumber    = [aDecoder decodeObjectForKey:kReplyNumber];
         self.goodsShortName = [aDecoder decodeObjectForKey:kGoodsShortName];
+        self.goodsTastingID = [aDecoder decodeObjectForKey:kGoodsTastingID];
     }
     return self;
 }
@@ -137,6 +141,7 @@ static  NSString    *const  kGoodsShortName = @"goodShortName";
         self.goodsCount        = wineDic[@"goods_number"];
         self.likeNumber        = wineDic[@"like_num"];
         self.replyNumber       = wineDic[@"reply_num"];
+        self.goodsTastingID    = wineDic[@"tasting_id"];
     }
     return self;
 }

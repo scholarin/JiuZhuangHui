@@ -22,10 +22,12 @@
 #import "WineTitleTableViewCell.h"
 #import "BasicTableHeaderView.h"
 #import "WineDetailViewController.h"
+#import "LogIn.h"
+#import "WineTastingTableViewController.h"
 
 static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
 
-@interface WineBuyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
+@interface WineBuyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,WineTitleTableViewCellDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *buyTabBar;
@@ -46,6 +48,16 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestWineDetailForID:self.wineID];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    self.tabBarController.tabBar.hidden = NO;
+}
 
 - (void)shareWine{
     
@@ -56,6 +68,7 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     self.tableView.dataSource   = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     MJRefreshAutoStateFooter *refresh = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(presentDetailView)];
+    [refresh setTitle:@"上拉加载商品详情" forState:MJRefreshStateIdle];
     self.tableView.mj_footer = refresh;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateUI)];
     [self.tableView registerNib:[UINib nibWithNibName:kWineTitleTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kWineTitleTableViewCell];
@@ -76,12 +89,6 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         vc.view.frame = self.view.bounds;
     } completion:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self requestWineDetailForID:self.wineID];
-    
 }
 
 - (void)requestWineDetailForID:(NSString *)wineID{
@@ -126,7 +133,9 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
         return cell;
     }else if(indexPath.section == 1){
         WineTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kWineTitleTableViewCell];
+        cell.delegate = self;
         [cell setWineBuyUIFor:self.wineDetail];
+        [cell setIsLikeedWine:[LogIn isLikeWithWine:self.wineID]];
         return cell;
     }else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bottomCellsID];
@@ -178,5 +187,27 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     return nil;
 }
 
+#pragma makr - WineTitleTableViewCellDelegate
+- (void)WineTitleTableViewCell:(WineTitleTableViewCell *)cell didPressedLikeButton:(UIButton *)likeButton{
+    if([LogIn isLikeWithWine:self.wineID]){
+        [self showAlertView];
+    }else{
+        [LogIn likeWineWithID:self.wineID];
+    }
+}
 
+- (void)showAlertView{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"你已经点过赞了" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
+- (void)WineTitleTableViewCell:(WineTitleTableViewCell *)cell didPressedReplyButton:(UIButton *)ReplyButton{
+    WineTastingTableViewController *wineTastingVC = [[WineTastingTableViewController alloc]init];
+    wineTastingVC.hidesBottomBarWhenPushed = YES;
+    [wineTastingVC setWineTastingID:self.wineDetail.goodsTastingID name:self.wineDetail.goodsName];
+    [self.navigationController pushViewController:wineTastingVC animated:YES];
+}
 @end

@@ -9,6 +9,7 @@
 #import <AVKit/AVKit.h>
 #import "MainTableViewController.h"
 #import "JiuZhuangHui.h"
+#import "Login.h"
 #import "WinePurchaseModel.h"
 #import "PanicBuyTableViewCell.h"
 #import "NetRequestManeger.h"
@@ -30,6 +31,8 @@
 #import "WineryDetailWebView.h"
 #import "AllWineViewController.h"
 #import "DrinkWithFoodTableViewController.h"
+#import "PrizeWineTableViewController.h"
+#import "WineTastingTableViewController.h"
 
 static  NSString  *kPanicBuyingPurchase = @"PanicBuyTableViewCell";
 static  NSString  *kHotWineTableViewCell = @"HotWineTableViewCell";
@@ -135,8 +138,16 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     }else if(indexPath.section < self.wineries.count + 4){
         WineryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kWineryTableViewCell];
         cell.delegate = self;
-        [cell seWineryUIForMolde:self.wineries[indexPath.section-4]];
-        
+        WineryModel *winery = self.wineries[indexPath.section-4];
+        [cell seWineryUIForMolde:winery];
+        WinePurchaseModel *wine = winery.wineryGoodLists[0];
+        if ([LogIn isLikeWithWine:wine.goodsID]){
+            [cell setLefeWineIsLiked:YES];
+        }
+        wine = winery.wineryGoodLists[1];
+        if([LogIn isLikeWithWine:wine.goodsID]){
+            [cell setRightWineIsLiked:YES];
+        }
         return cell;
     }else{
         OriginatorTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kOriginatorTableViewCell];
@@ -144,6 +155,7 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
         return cell;
     }
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height = 0;
@@ -225,6 +237,10 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     }else if(bottomButton.tag == 1){
         DrinkWithFoodTableViewController *drinkVC = [[DrinkWithFoodTableViewController alloc]init];
         [self.navigationController pushViewController:drinkVC animated:YES];
+    }else if(bottomButton.tag == 2){
+        PrizeWineTableViewController *prizeVc = [[PrizeWineTableViewController alloc]init];
+        prizeVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:prizeVc animated:YES];
     }
     
 }
@@ -274,11 +290,44 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
 #pragma mark - WineryTableViewCellDelegate
 
 - (void)WineryTableViewCell:(WineryTableViewCell *)cell didPressedLikeButton:(UIButton *)button fromID:(NSString *)wineryID{
-    
+    //找出酒厂
+    WineryModel *winery = nil;
+    for(int i = 0; i < self.wineries.count; i++){
+        winery = self.wineries[i];
+        if([winery.wineryID isEqualToString:wineryID]){
+            break;
+        }
+    }
+    //找是否喜欢过
+    WinePurchaseModel *wine = winery.wineryGoodLists[button.tag];
+    if([LogIn isLikeWithWine:wine.goodsID]){
+        [self shouAlertView];
+    }else{
+        [LogIn likeWineWithID:wine.goodsID];
+    }
+}
+
+- (void)shouAlertView{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"你已经点过赞了" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 - (void)WineryTableViewCell:(WineryTableViewCell *)cell didPressedReplyButton:(UIButton *)button fromID:(NSString *)wineryID{
-    
+    WineryModel *winery = nil;
+    for(int i = 0; i < self.wineries.count; i++){
+        winery = self.wineries[i];
+        if([winery.wineryID isEqualToString:wineryID]){
+            break;
+        }
+    }
+    WinePurchaseModel *wine = winery.wineryGoodLists[button.tag];
+    WineTastingTableViewController *wineTastingVC = [[WineTastingTableViewController alloc]init];
+    [wineTastingVC setWineTastingID:wine.goodsTastingID name:wine.goodsName];
+    wineTastingVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:wineTastingVC animated:YES];
 }
 
 - (void)WineryTableViewCell:(WineryTableViewCell *)cell didPressedWineShowButton:(UIButton *)button fromID:(NSString *)wineryID{

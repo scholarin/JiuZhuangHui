@@ -26,6 +26,8 @@
 
 + (CGFloat)heightForWineryCell;
 - (void)seWineryUIForMolde:(WineryModel *)wineryModel;
+- (void)setLefeWineIsLiked:(BOOL)isLiked;
+- (void)setRightWineIsLiked:(BOOL)isLiked;
 
 
 @end

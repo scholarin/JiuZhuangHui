@@ -44,6 +44,8 @@
 //wineryID
 @property (copy, nonatomic) NSString *wineryID;
 @property (copy, nonatomic) NSString *videoPlayURL;
+@property (assign, nonatomic)BOOL isLikeLeftWine;
+@property (assign, nonatomic)BOOL isLikeRightWine;
 
 @end
 @implementation WineryTableViewCell
@@ -140,9 +142,53 @@
 }
 
 - (IBAction)likeIt:(UIButton *)sender {
+    if(sender.tag == 0 && !self.isLikeLeftWine){
+        self.isLikeLeftWine = YES;
+        [self likeLeftWine];
+    }else if(sender.tag == 1 && !self.isLikeRightWine){
+        self.isLikeRightWine = YES;
+        [self likeRightWine];
+    }
     [self.delegate WineryTableViewCell:self didPressedLikeButton:sender fromID:self.wineryID];
 }
 
+- (void)setLefeWineIsLiked:(BOOL)isLiked{
+    self.isLikeLeftWine = isLiked;
+    if(isLiked){
+        [self likeLeftWine];
+    }
+}
+
+- (void)setRightWineIsLiked:(BOOL)isLiked{
+    self.isLikeRightWine = isLiked;
+    if(isLiked){
+        [self likeRightWine];
+    }
+}
+
+- (void)likeLeftWine{
+    self.leftLikeButton.layer.borderColor       = [UIColor redColor].CGColor;
+    [self.leftLikeButton setImage:[UIImage imageNamed:@"lighted_like"] forState:UIControlStateNormal];
+    NSInteger likeNumber = [self.leftLikeButton.currentTitle integerValue];
+    NSString *likeString = [NSString stringWithFormat:@"%ld",++likeNumber];
+    NSAttributedString *likeTitle = [[NSAttributedString alloc]initWithString:likeString attributes:@{
+                                                                                                NSForegroundColorAttributeName : [UIColor redColor],
+                                                                                                NSFontAttributeName : [UIFont systemFontOfSize:10]
+                                                                                                }];
+    [self.leftLikeButton setAttributedTitle:likeTitle forState:UIControlStateNormal];
+}
+
+- (void)likeRightWine{
+    self.rightLikeButton.layer.borderColor       = [UIColor redColor].CGColor;
+    [self.rightLikeButton setImage:[UIImage imageNamed:@"lighted_like"] forState:UIControlStateNormal];
+    NSInteger likeNumber = [self.rightLikeButton.currentTitle integerValue];
+    NSString *likeString = [NSString stringWithFormat:@"%ld",++likeNumber];
+    NSAttributedString *likeTitle = [[NSAttributedString alloc]initWithString:likeString attributes:@{
+                                                                                                 NSForegroundColorAttributeName : [UIColor redColor],
+                                                                                                 NSFontAttributeName : [UIFont systemFontOfSize:10]
+                                                                                                 }];
+    [self.rightLikeButton setAttributedTitle:likeTitle forState:UIControlStateNormal];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

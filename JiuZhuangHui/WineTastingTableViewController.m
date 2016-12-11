@@ -20,11 +20,14 @@
 #import "WineBuyViewController.h"
 
 #import "WriteTalkView.h"
+#import "LogIn.h"
+#import "LoginTableViewController.h"
 
 
 
 static NSString *const kWineShowCell = @"wineShou";
 static NSString *const kWineTastingCell = @"winetasting";
+static NSString *const kReplyURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/tasting/reply";
 
 @interface WineTastingTableViewController ()<WineTastingTableViewCellDelagate,UITableViewDelegate,UITableViewDataSource>
 
@@ -32,7 +35,7 @@ static NSString *const kWineTastingCell = @"winetasting";
 @property(nonatomic, copy)NSString *wineTastingID;
 @property(nonatomic, strong) WineDetailModel *wineTastingShow;
 @property(nonatomic, strong)UIBarButtonItem *rightBarButtonItem;
-
+@property(nonatomic, strong)UIBarButtonItem *leftBarbuttonItem;
 @property(nonatomic, strong)WriteTalkView *writeTalkView;
 
 @end
@@ -54,6 +57,7 @@ static NSString *const kWineTastingCell = @"winetasting";
     
     self.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share" ] style:UIBarButtonItemStylePlain target:self action:@selector(share)];
     self.navigationItem.rightBarButtonItem = self.rightBarButtonItem;
+    self.leftBarbuttonItem = self.navigationItem.leftBarButtonItem;
     
     BasicTableHeaderView *footView = [[BasicTableHeaderView alloc]initWithHeight:50];
     self.tableView.tableFooterView = footView;
@@ -63,15 +67,12 @@ static NSString *const kWineTastingCell = @"winetasting";
 
 
 - (void)updateUI{
-    
     [self requestWineTastingForWineTastingID:self.wineTastingID];
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)share{
     
@@ -90,6 +91,7 @@ static NSString *const kWineTastingCell = @"winetasting";
             return;
         }
         self.wineTastingShow = [[WineDetailModel alloc]initWithWineTastingData:reponseObject];
+        [self.tableView.mj_header endRefreshing];
         [self.tableView reloadData];
     }];
 }
@@ -119,38 +121,60 @@ static NSString *const kWineTastingCell = @"winetasting";
     
 }
 - (void)goWriteReply{
-    self.writeTalkView = [[WriteTalkView alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height)];
-    [self.view addSubview:self.writeTalkView];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(replyWine)];
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.writeTalkView.frame = CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height);
+    if([LogIn isLogIn]){
+        self.writeTalkView = [[WriteTalkView alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height)];
+        [self.view addSubview:self.writeTalkView];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(replyWine)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.writeTalkView.frame = CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height);
+        } completion:nil];
+    }else{
+        LoginTableViewController *loginVC = [[LoginTableViewController alloc]init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
+}
+
+- (void)dismiss{
+    self.navigationItem.rightBarButtonItem = self.rightBarButtonItem;
+    self.navigationItem.leftBarButtonItem = self.leftBarbuttonItem;
+    [self requestWineTastingForWineTastingID:self.wineTastingID];
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.writeTalkView.frame = CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height);
     } completion:nil];
+    [self.writeTalkView removeFromSuperview];
+}
+
+- (void)postReplyWithContent:(NSString *)content{
+    NSString *postString = [NSString stringWithFormat:@"\"tasting_id\":%@,\"content\":\"%@\",%@",self.wineTastingID,content,[LogIn JSONWithCurrentUser]];
+    NetRequestManeger *manager = [NetRequestManeger shareManager];
+    [manager postReplyWithURL:kReplyURL content:postString reponse:^(id reponseObject, NSError *error) {
+        if(reponseObject){
+            [self alertShowWithTitle:@"评论成功"];
+            [self requestWineTastingForWineTastingID:self.wineTastingID];
+        }
+    }];
     
 }
 
-
 - (void)replyWine{
-    //发送一个网络请求
-    //将rightBarbuttonItem换掉
-    //重新请求评论数据更新UI
-    //移除当前的subview
-#warning 发送一个POST请求
     
-    if(self.writeTalkView.textView.text.length <= 0){
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请输入商品评价" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alertController animated:YES completion:nil];
-        [NSThread sleepForTimeInterval:0.5];
-        [alertController dismissViewControllerAnimated:YES completion:nil];
+    if(self.writeTalkView.textView.text.length == 0){
+        [self alertShowWithTitle:@"请输入商品评价"];
     }else{
-        self.navigationItem.rightBarButtonItem = self.rightBarButtonItem;
-        [self requestWineTastingForWineTastingID:self.wineTastingID];
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.writeTalkView.frame = CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height);
-        } completion:nil];
-        [self.writeTalkView removeFromSuperview];
+        [self postReplyWithContent:self.writeTalkView.textView.text];
+        [self dismiss];
     }
-    
+}
+
+- (void)alertShowWithTitle:(NSString *)title{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:title preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 #pragma mark - Table view data source
 
@@ -169,7 +193,9 @@ static NSString *const kWineTastingCell = @"winetasting";
     if(indexPath.section == 0){
         WineTastingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kWineShowCell];
         cell.delegate = self;
+        [cell setIsLiked:[LogIn isLikeWithWine:self.wineTastingShow.goodsID]];
         [cell setWineDetailModel:self.wineTastingShow];
+        
         return cell;
     }else{
         WineTastingContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kWineTastingCell];
@@ -201,15 +227,21 @@ static NSString *const kWineTastingCell = @"winetasting";
     return view;
 }
 
-
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    return nil;
+}
 #pragma mark - WineTastingTableViewCellDelagate
 
 - (void)didSelectedLikeButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell wineID:(NSString *)wineID{
-    
+    if([LogIn isLikeWithWine:wineID]){
+        [self showAlert];
+    }else{
+        [LogIn likeWineWithID:wineID];
+    }
 }
 
 - (void)didSelectedReplyButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell wineID:(NSString *)wineID{
-    
+    [self goWriteReply];
 }
 
 - (void)didSelectedGoBuyButtonOfWineTastingTableViewCell:(WineTastingTableViewCell *)cell wineID:(NSString *)wineID{
@@ -219,6 +251,13 @@ static NSString *const kWineTastingCell = @"winetasting";
     [self.navigationController pushViewController:wineBuyVC animated:YES];
 }
 
+- (void)showAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"你已经点过赞了" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    });
+}
 /*
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {

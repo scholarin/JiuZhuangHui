@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
 
+@property (assign, nonatomic)BOOL isLike;
+
 
 @end
 @implementation LikeAndReplyView
@@ -46,16 +48,12 @@
 }
 
 - (void)setLikeButtonLikeCount:(NSString *)count isLiked:(BOOL)isLiked{
-    [self.likeButton setTitle:count forState:UIControlStateNormal];
-//    if(count && count.length > 0){
-//        NSAttributedString *title = [[NSAttributedString alloc]initWithString:count attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:8]}];
-//        [self.likeButton setAttributedTitle:title forState:UIControlStateNormal];
-//    }
- 
     if(isLiked){
-        self.likeButton.layer.borderColor = [UIColor redColor].CGColor;
+        self.isLike = YES;
+        [self likeItWithCount:count];
+    }else{
+        [self.likeButton setTitle:count forState:UIControlStateNormal];
     }
-    
 }
 
 - (void)setReplyButtonReplyCount:(NSString *)count isReplyed:(BOOL)isReply{
@@ -65,5 +63,19 @@
     }
     
 }
+
+- (void)likeItWithCount:(NSString *)count{
+    self.likeButton.layer.borderColor       = [UIColor redColor].CGColor;
+    [self.likeButton setImage:[UIImage imageNamed:@"lighted_like"] forState:UIControlStateNormal];
+    NSInteger likeNumber = [count integerValue];
+    NSString *likeString = [NSString stringWithFormat:@"%ld",++likeNumber];
+    NSAttributedString *likeTitle = [[NSAttributedString alloc]initWithString:likeString attributes:@{
+                                                                                                      NSForegroundColorAttributeName : [UIColor redColor],
+                                                                                                      NSFontAttributeName : [UIFont systemFontOfSize:10]
+                                                                                                      }];
+    [self.likeButton setAttributedTitle:likeTitle forState:UIControlStateNormal];
+
+}
+
 
 @end

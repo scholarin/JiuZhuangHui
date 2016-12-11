@@ -24,5 +24,7 @@
 @property (weak, nonatomic)id<WineTitleTableViewCellDelegate> delegate;
 
 - (void)setWineBuyUIFor:(WineDetailModel *)wineDetailModel;
+- (void)setIsLikeedWine:(BOOL)isliked;
+
 + (CGFloat)heightForTitleCell;
 @end

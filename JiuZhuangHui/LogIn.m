@@ -11,6 +11,7 @@
 static  NSString    *const  kIsLogin = @"isLogin";
 static  NSString    *const  kSid = @"sid";
 static  NSString    *const  kUid = @"uid";
+static  NSString    *const  kLikeWines = @"likeWines";
 @implementation LogIn
 
 + (BOOL)isLogIn{
@@ -56,5 +57,34 @@ static  NSString    *const  kUid = @"uid";
 + (NSString *)JSONWithCurrentData:(NSDictionary *)dic{
     NSString *JSONString = [NSString stringWithFormat:@"{\"session\":{\"%@\":\"%@\",\"%@\":\"%@\"}}",@"phone",dic[@"phone"],@"password",dic[@"password"]];
     return JSONString;
+}
+
++ (BOOL)isLikeWithWine:(NSString *)wineID{
+    NSArray *likeWines = [[NSUserDefaults standardUserDefaults] objectForKey:kLikeWines];
+    if(!likeWines) return NO;
+    int i;
+    for(i = 0; i < likeWines.count; i++){
+        if([wineID isEqualToString:likeWines[i]]){
+            break;
+        }
+    }
+    if (i < likeWines.count) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
++ (void)likeWineWithID:(NSString *)wineID{
+    NSArray *likeWines = [[NSUserDefaults standardUserDefaults] objectForKey:kLikeWines];
+    NSMutableArray *mutableWines = nil;
+    if(likeWines){
+        mutableWines = [likeWines mutableCopy];
+    }else{
+        mutableWines = [NSMutableArray new];
+    }
+    [mutableWines addObject:wineID];
+    [[NSUserDefaults standardUserDefaults] setObject:[mutableWines copy] forKey:kLikeWines];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end

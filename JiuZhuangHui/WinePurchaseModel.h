@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString *likeNumber;
 @property (nonatomic, copy) NSString *replyNumber;
 @property (nonatomic, copy) NSString *goodsShortName;
+@property (nonatomic, copy) NSString *goodsTastingID;
 
 - (instancetype)initWithPanicBuyData:(id)data;
 - (instancetype)initWineModelForDic: (NSDictionary *)wineDic;
@@ -29,11 +30,9 @@
 + (NSArray *)getHotWineWithData:(id)data;
 + (NSArray *)getRecommendWineWithData:(id)data;
 
-
 //首页全部酒类列表
 + (NSArray *)getAllOfGoodlistWithData:(id)data;
 
 //购物车酒类列表
-
 + (NSArray *)getShopCartWineListWithData:(id)data;
 @end

@@ -218,4 +218,15 @@ static NSString *baseURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/user/upd
         reponse(nil,error);
     }];
 }
+
+- (void)postReplyWithURL:(NSString *)url content:(NSString *)content reponse:(void(^)(id reponseObject, NSError *error))reponse{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *postDic = nil;
+    content != nil ? postDic = @{ @"json" : [NSString stringWithFormat:@"{%@}",content]} : nil;
+    [manager POST:url parameters:postDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+}
 @end

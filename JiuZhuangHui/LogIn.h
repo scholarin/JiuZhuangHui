@@ -16,6 +16,7 @@
 + (void)logOut;
 + (NSDictionary *)dataCurrentUser;
 + (NSString *)JSONWithCurrentUser;
-
++ (BOOL)isLikeWithWine:(NSString *)wineID;
++ (void)likeWineWithID:(NSString *)wineID;
 
 @end

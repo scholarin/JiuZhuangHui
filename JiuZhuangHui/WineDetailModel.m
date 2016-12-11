@@ -23,7 +23,7 @@
             self.likeNumber         = wineDetailDic[@"like_num"];
             self.replyNumber        = [wineDetailDic[@"reply_num"] isKindOfClass:[NSString class]] ? wineDetailDic[@"reply_num"] : [wineDetailDic[@"reply_num"] stringValue];
             self.goodsInfoURL       = [wineDetailDic[@"googs_info_url"] isKindOfClass:[NSString class]] ? wineDetailDic[@"googs_info_url"] :[wineDetailDic[@"googs_info_url"] stringValue];
-            
+            self.goodsTastingID     = wineDetailDic[@"tasting_id"];
             NSDictionary *boxfulDic = [wineDetailDic[@"linked_goods"] count] > 0 ?  wineDetailDic[@"linked_goods"][0] : nil;
             self.boxfulWines        = [[BoxfulWinesModel alloc]initWithBoxfuDic:boxfulDic] ;
             
@@ -110,21 +110,5 @@
     detailModel.goodsDescription    = [self.goodsDescription copy];
     return self;
 }
-//@property (nonatomic, copy) NSString *goodsID;
-//@property (nonatomic, copy) NSString *goodsName;
-//@property (nonatomic, copy) NSString *goodsMarketPrice;
-//@property (nonatomic, copy) NSString *goodsShopPrice;
-//@property (nonatomic, copy) NSString *goodsImage;
-//@property (nonatomic, copy) NSString *goodsCount;
-//@property (nonatomic, copy) NSString *goodsSmallImage;
-//@property (nonatomic, copy) NSString *likeNumber;
-//@property (nonatomic, copy) NSString *replyNumber;
 
-//@property (nonatomic, copy) NSString *goodsEnglishName;
-//@property (nonatomic, copy) NSString *goodsInfoURL;
-//@property (nonatomic, copy) NSArray<WineryArticle *>  *wineryArticles;
-//@property (nonatomic, copy) BoxfulWinesModel *boxfulWines;
-//@property (nonatomic, copy) NSArray<NSString *> *goodsPictures;
-//@property (nonatomic, copy) NSArray<ReplyContentModel *> *goodsReplys;
-//@property (nonatomic, copy) NSString *goodsDescription;
 @end

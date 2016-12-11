@@ -58,4 +58,7 @@
 - (void)postUserIconWithData:(NSData *)imageData reponse:(void(^)(id reponseObject, NSError *error))reponse;
 //用户上传其他信息
 - (void)postUserInfoWithCateory:(NSString *)cateOry info:(NSString *)info reponse:(void(^)(id reponseObject, NSError *error))reponse;
+
+//上传用户评价
+- (void)postReplyWithURL:(NSString *)url content:(NSString *)content reponse:(void(^)(id reponseObject, NSError *error))reponse;
 @end

@@ -23,6 +23,7 @@
 @property(weak,nonatomic)id<WineTastingTableViewCellDelagate>delegate;
 
 - (void)setWineDetailModel:(WineDetailModel *)wineDetail;
+- (void)setIsLiked:(BOOL)isLiked;
 + (CGFloat)height;
 
 @end
