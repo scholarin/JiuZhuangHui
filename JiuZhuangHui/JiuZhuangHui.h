@@ -28,6 +28,8 @@
 #define kMainViewAPI @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/index"
 
 #define kHeaderViewColor [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]
+#define kOrangeColor [UIColor colorWithRed:255/255.0 green:160/255.0 blue:25/255.0  alpha:1]
 
+static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
 
 #endif /* JiuZhuangHui_h */

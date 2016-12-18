@@ -21,7 +21,6 @@
 @property (nonatomic, copy) NSArray<WinePurchaseModel*> *shopingCartWines;
 
 
-+ (instancetype)share;
 - (instancetype)initWithData:(id)data;
 
 @end

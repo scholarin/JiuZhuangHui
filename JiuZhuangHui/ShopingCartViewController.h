@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShopingCartViewController : UITableViewController
+@interface ShopingCartViewController : UIViewController
 
 @end

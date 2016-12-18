@@ -20,6 +20,7 @@
 #import "WineryFeatureHeaderModel.h"
 #import "WineriesTableHeaderView.h"
 #import "WineriesTableViewCell.h"
+#import "WineryDetailTableViewController.h"
 
 
 static NSString *kFeatureHeaderCell = @"FeatureHeaderCell";
@@ -136,7 +137,7 @@ static NSString *kBuildingWineriesURL = @"http://www.jiuzhuanghui.com/ecmobile/?
 
 - (void)requestBuildingWineries{
     NetRequestManeger *manager = [NetRequestManeger shareManager];
-    [manager geiRequestWithURL:kBuildingWineriesURL reponse:^(id reponseObject, NSError *error) {
+    [manager getRequestWithURL:kBuildingWineriesURL reponse:^(id reponseObject, NSError *error) {
         self.buildHeaderDic = @{
                                 @"title" : reponseObject[@"data"][@"title"],
                                 @"image" : reponseObject[@"data"][@"img"]
@@ -249,5 +250,19 @@ static NSString *kBuildingWineriesURL = @"http://www.jiuzhuanghui.com/ecmobile/?
         return nil;
     }
     return indexPath;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(!self.isBuilding){
+        WineryDetailTableViewController *wineryDetailVc = [[WineryDetailTableViewController alloc]init];
+        if(indexPath.section == 0){
+            return;
+        }else{
+            WineryMoreModel *winery = self.wineries[indexPath.row];
+            wineryDetailVc.wineryID = winery.wineryID;
+            wineryDetailVc.wineryName = winery.wineryName;
+        }
+        [self.navigationController pushViewController:wineryDetailVc animated:YES];
+    }
 }
 @end

@@ -17,8 +17,8 @@
 #import "WinePurchaseModel.h"
 #import "WineBuyViewController.h"
 #import "ShopingBarButtonItme.h"
-
-static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
+#import "LogIn.h"
+#import "ShopingCartViewController.h"
 
 @interface AllWineViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,SingleWineCollectionViewCellDelagate>
 
@@ -37,19 +37,30 @@ static NSString * const kSingleWineCell = @"singlewineCell";
     
     self.page = 1;
     
-    ShopingBarButtonItme *item = [[ShopingBarButtonItme alloc]initWithShopCartCount:5];
-    [item addTarget:self action:@selector(goShopCart) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:item];
+    [self setRightButtonItem];
     [self showCollection];
     [self requestAllOfWineWithPage:self.page];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setRightButtonItem{
+    
+    if([LogIn isLogIn]){
+        NetRequestManeger *manager = [NetRequestManeger shareManager];
+        [manager getShopCartWinesReponse:^(id reponseObjcet, NSError *error) {
+            NSArray *goodlist = [WinePurchaseModel getShopCartWineListWithData:reponseObjcet];
+            NSInteger cartWinesCount = 0;
+            if(goodlist.count > 0){
+                for(WinePurchaseModel *wine in goodlist){
+                    cartWinesCount += [wine.goodsCount integerValue];
+                }
+            }
+            ShopingBarButtonItme *item = [[ShopingBarButtonItme alloc]initWithShopCartCount:cartWinesCount];
+            [item addTarget:self action:@selector(goShopCart) forControlEvents:UIControlEventTouchUpInside];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:item];
+        }];
+    }
 }
-
 
 - (void)showCollection{
     UICollectionViewFlowLayout  *layout = [[UICollectionViewFlowLayout alloc]init];
@@ -71,7 +82,9 @@ static NSString * const kSingleWineCell = @"singlewineCell";
 
 
 - (void)goShopCart{
-    NSLog(@"进入gouwuche");
+    ShopingCartViewController *shopCartVC = [[ShopingCartViewController alloc]init];
+    shopCartVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:shopCartVC animated:YES];
 }
 - (void)loadMore{
     self.page++;
@@ -131,8 +144,20 @@ static NSString * const kSingleWineCell = @"singlewineCell";
 
 - (void)singleWineCollectionViewCell:(SingleWineCollectionViewCell *)cell didSelectedWineID:(NSString *)wineID{
     [[NSNotificationCenter defaultCenter]postNotificationName:kShopCartNumberChange object:nil userInfo:@{@"count" : @1}];
-    NSLog(@"加入购物车");
+    [self postWineBuyInfoWithWineID:wineID];
 }
+
+- (void)postWineBuyInfoWithWineID:(NSString *)wineID {
+    NetRequestManeger *manger = [NetRequestManeger shareManager];
+    [manger postWineBuyInfoWithWineID:wineID count:1 reponse:^(id reponseObject, NSError *error) {
+        if(error){
+            NSLog(@"加入购物车失败,%@",error);
+        }else{
+            NSLog(@"已经加入购物车");
+        }
+    }];
+}
+
 /*
 #pragma mark - Navigation
 

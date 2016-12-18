@@ -13,9 +13,15 @@
 #import "UserTalkViewController.h"
 #import "ShopingCartViewController.h"
 #import "UserInfoViewController.h"
+#import "NetRequestManeger.h"  
+#import "WinePurchaseModel.h"
+#import "LogIn.h"
 
 #import "ShopingBarButtonItme.h"
+static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
 @interface RootTabBarViewController ()
+
+@property (nonatomic, strong)BasicNavigationViewController *mainNavC,*wineryNaVC,*userTalkNaVC,*shopingCartNaVC,*userInfoNaVC;
 
 @end
 
@@ -25,51 +31,71 @@
     [super viewDidLoad];
     
     MainTableViewController *mainTVC = [[MainTableViewController alloc]init];
-    BasicNavigationViewController *mainNavC = [[BasicNavigationViewController alloc]initWithRootViewController:mainTVC];
-    mainNavC.tabBarItem.title = @"首页";
-    [mainNavC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
-    [mainNavC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
-    [mainNavC.tabBarItem setImage:[UIImage imageNamed:@"home"]];
-    [mainNavC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_home"]];
+    self.mainNavC = [[BasicNavigationViewController alloc]initWithRootViewController:mainTVC];
+    _mainNavC.tabBarItem.title = @"首页";
+    [_mainNavC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
+    [_mainNavC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
+    [_mainNavC.tabBarItem setImage:[UIImage imageNamed:@"home"]];
+    [_mainNavC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_home"]];
     
     
     WineryTableViewController *wineryVC = [[WineryTableViewController alloc]init];
-    BasicNavigationViewController *wineryNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:wineryVC];
-    wineryNaVC.tabBarItem.title = @"酒庄";
-    [wineryNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
-    [wineryNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
-    [wineryNaVC.tabBarItem setImage:[UIImage imageNamed:@"winery"]];
-    [wineryNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_winery"]];
+    self.wineryNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:wineryVC];
+    _wineryNaVC.tabBarItem.title = @"酒庄";
+    [_wineryNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
+    [_wineryNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
+    [_wineryNaVC.tabBarItem setImage:[UIImage imageNamed:@"winery"]];
+    [_wineryNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_winery"]];
     
     UserTalkViewController *userTalkVC = [[UserTalkViewController alloc]init];
-    BasicNavigationViewController *userTalkNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:userTalkVC];
-    userTalkNaVC.tabBarItem.title = @"用户说";
-    [userTalkNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
-    [userTalkNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
-    [userTalkNaVC.tabBarItem setImage:[UIImage imageNamed:@"talk"]];
-    [userTalkNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_talk"]];
-    
+    self.userTalkNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:userTalkVC];
+    _userTalkNaVC.tabBarItem.title = @"用户说";
+    [_userTalkNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
+    [_userTalkNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
+    [_userTalkNaVC.tabBarItem setImage:[UIImage imageNamed:@"talk"]];
+    [_userTalkNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_talk"]];
     ShopingCartViewController *shopCartVC = [[ShopingCartViewController alloc]init];
-    BasicNavigationViewController *shopingCartNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:shopCartVC];
-    shopingCartNaVC.tabBarItem.title = @"购物车";
-    shopingCartNaVC.tabBarItem.badgeValue = @"5";
-    shopingCartNaVC.tabBarItem.badgeColor = [UIColor redColor];
-    [shopingCartNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
-    [shopingCartNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
-    [shopingCartNaVC.tabBarItem setImage:[UIImage imageNamed:@"shoping"]];
-    [shopingCartNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_shoping"]];
+    self.shopingCartNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:shopCartVC];
     
+    
+    _shopingCartNaVC.tabBarItem.title = @"购物车";
+    if([LogIn isLogIn]){
+        NetRequestManeger *manager = [NetRequestManeger shareManager];
+        [manager getShopCartWinesReponse:^(id reponseObjcet, NSError *error) {
+            NSArray *goodlist = [WinePurchaseModel getShopCartWineListWithData:reponseObjcet];
+            if(goodlist.count > 0){
+                NSInteger wineCount = 0;
+                for(WinePurchaseModel *wine in goodlist){
+                    wineCount += [wine.goodsCount integerValue];
+                }
+                _shopingCartNaVC.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",wineCount];
+            }
+        }];
+    }
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(addShopCart:) name:kShopCartNumberChange object:nil];
+    [_shopingCartNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
+    [_shopingCartNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
+    [_shopingCartNaVC.tabBarItem setImage:[UIImage imageNamed:@"shoping"]];
+    [_shopingCartNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_shoping"]];
+
     UserInfoViewController *userInfoVc = [[UserInfoViewController alloc]init];
-    BasicNavigationViewController *userInfoNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:userInfoVc];
-    userInfoNaVC.tabBarItem.title = @"会员";
-    [userInfoNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
-    [userInfoNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
-    [userInfoNaVC.tabBarItem setImage:[UIImage imageNamed:@"user"]];
-    [userInfoNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_user"]];
+    self.userInfoNaVC = [[BasicNavigationViewController alloc]initWithRootViewController:userInfoVc];
+    _userInfoNaVC.tabBarItem.title = @"会员";
+    [_userInfoNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState: UIControlStateNormal];
+    [_userInfoNaVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]}  forState: UIControlStateSelected];
+    [_userInfoNaVC.tabBarItem setImage:[UIImage imageNamed:@"user"]];
+    [_userInfoNaVC.tabBarItem setSelectedImage:[UIImage imageNamed:@"lighted_user"]];
 
     
-    self.viewControllers = @[mainNavC,wineryNaVC,userTalkNaVC,shopingCartNaVC,userInfoNaVC];
+    self.viewControllers = @[_mainNavC,_wineryNaVC,_userTalkNaVC,_shopingCartNaVC,_userInfoNaVC];
     // Do any additional setup after loading the view.
+}
+
+- (void)addShopCart:(NSNotification *)not{
+    NSInteger count = [not.userInfo[@"count"] integerValue];
+    NSInteger oldCount = [self.shopingCartNaVC.tabBarItem.badgeValue integerValue];
+    NSString *newCount = [NSString stringWithFormat:@"%ld",count + oldCount];
+    self.shopingCartNaVC.tabBarItem.badgeValue = newCount;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +111,12 @@
     UIGraphicsEndImageContext();
     
     return screenshot;
+}
+
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
 }
 
 #pragma mark - Navigation

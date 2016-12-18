@@ -25,6 +25,7 @@
 #import "WineryFeatureTableViewController.h"
 #import "GrapeTypeTableViewController.h"
 #import "GrapeTypeCollectionViewController.h"
+#import "WineryDetailTableViewController.h"
 
 static NSString *kGrapeAndFeatureViewCell = @"GrapeAndFeatureTableViewCell";
 static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
@@ -188,6 +189,14 @@ static NSString *kWineriesTableViewCell = @"wineriesTableViewCell";
     return indexPath;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row == 0) return;
+    WineryDetailTableViewController *wineryDetailVC = [[WineryDetailTableViewController alloc]init];
+    WineryMoreModel *winery = self.wineries[indexPath.row - 1];
+    wineryDetailVC.wineryID = winery.wineryID;
+    wineryDetailVC.wineryName = winery.wineryName;
+    [self.navigationController pushViewController:wineryDetailVC animated:YES];
+}
 #pragma mark - wineryRegionViewDelegate
 
 - (void)wineryRegionView:(WineryRegionVeiw *)regionView pressWeatherButton:(UIButton *)button{

@@ -13,4 +13,6 @@
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)UIControlEvents;
 
 - (instancetype)initWithShopCartCount:(NSInteger)count;
+- (instancetype)initWithFrame:(CGRect)frame count:(NSInteger)count image:(NSString *)imageName;
+
 @end

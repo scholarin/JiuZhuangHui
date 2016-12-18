@@ -19,7 +19,7 @@ static  NSString    *const  kLikeNumber     = @"likeNumber";
 static  NSString    *const  kReplyNumber    = @"replyNumber";
 static  NSString    *const  kGoodsShortName = @"goodShortName";
 static  NSString    *const  kGoodsTastingID = @"goodsTastingID";
-
+static  NSString    *const  kGoodsRecID = @"goodsRecID";
 @implementation WinePurchaseModel
 
 - (instancetype)copyWithZone:(NSZone *)zone{
@@ -35,6 +35,7 @@ static  NSString    *const  kGoodsTastingID = @"goodsTastingID";
     winePurchase.replyNumber        =       [_replyNumber copy];
     winePurchase.goodsShortName     =       [_goodsShortName copy];
     winePurchase.goodsTastingID     =       [_goodsTastingID copy];
+    winePurchase.goodsRecID         =       [_goodsRecID copy];
     
     return winePurchase;
 }
@@ -50,6 +51,7 @@ static  NSString    *const  kGoodsTastingID = @"goodsTastingID";
     [aCoder encodeObject:self.replyNumber forKey:kReplyNumber];
     [aCoder encodeObject:self.goodsShortName forKey:kGoodsShortName];
     [aCoder encodeObject:self.goodsTastingID forKey:kGoodsTastingID];
+    [aCoder encodeObject:self.goodsRecID forKey:kGoodsRecID];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -64,6 +66,7 @@ static  NSString    *const  kGoodsTastingID = @"goodsTastingID";
         self.replyNumber    = [aDecoder decodeObjectForKey:kReplyNumber];
         self.goodsShortName = [aDecoder decodeObjectForKey:kGoodsShortName];
         self.goodsTastingID = [aDecoder decodeObjectForKey:kGoodsTastingID];
+        self.goodsRecID     = [aDecoder decodeObjectForKey:kGoodsRecID];
     }
     return self;
 }
@@ -82,11 +85,15 @@ static  NSString    *const  kGoodsTastingID = @"goodsTastingID";
     
     NSMutableArray *hotWines = [NSMutableArray new];
     if([data isKindOfClass:[NSDictionary class]]){
-        NSDictionary *dataDic = data[@"data"];
-        for(NSDictionary *goodsHotDic in dataDic[@"hot"]){
-            WinePurchaseModel *winePurchaseModel = [[WinePurchaseModel alloc]initWineModelForDic:goodsHotDic];
-            [hotWines addObject:winePurchaseModel];
-            NSLog(@"goodsID = %@,goodsName =%@",winePurchaseModel.goodsID,winePurchaseModel.goodsName);
+        NSArray *dataArray = data[@"data"][@"hot"];
+        if(dataArray.count > 2){
+            for(NSDictionary *goodsHotDic in dataArray){
+                WinePurchaseModel *winePurchaseModel = [[WinePurchaseModel alloc]initWineModelForDic:goodsHotDic];
+                [hotWines addObject:winePurchaseModel];
+                NSLog(@"goodsID = %@,goodsName =%@",winePurchaseModel.goodsID,winePurchaseModel.goodsName);
+            }
+        }else{
+            return [[self class]getRecommendWineWithData:data];
         }
     }
     return [hotWines copy];
@@ -155,6 +162,7 @@ static  NSString    *const  kGoodsTastingID = @"goodsTastingID";
         wine.goodsImage = wineDic[@"img"][@"small"];
         wine.goodsShopPrice = [wineDic[@"goods_price"] substringFromIndex:1];
         wine.goodsCount = wineDic[@"goods_number"];
+        wine.goodsRecID = wineDic[@"rec_id"];
         [wines addObject:wine];
     }
     return [wines copy];
@@ -173,6 +181,17 @@ static  NSString    *const  kGoodsTastingID = @"goodsTastingID";
     return self;
 }
 
+- (instancetype)initWithGiftWithDic:(NSDictionary *)wineDic{
+    if(self = [super init]){
+        self.goodsID = wineDic[@"goods_id"];
+        self.goodsName = wineDic[@"goods_name"];
+        self.goodsImage = wineDic[@"goods_thumb"];
+        self.goodsShopPrice = wineDic[@"shop_price"];
+        self.goodsCount = wineDic[@"goods_number"];
+        self.goodsShortName = wineDic[@"goods_brief"];
+    }
+    return self;
+}
 
 
 

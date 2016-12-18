@@ -11,6 +11,7 @@
 #import "BlocksKit+UIKit.h"
 #import "BasicTableHeaderView.h"
 #import "NetRequestManeger.h"
+#import "WinePurchaseModel.h"
 #import "LogIn.h"
 
 @interface LoginTableViewController ()<UITextFieldDelegate>
@@ -125,15 +126,34 @@
             [self presentViewController:alert animated:NO completion:nil];
             return;
         }
+        
         NSDictionary *logInDic = @{
                                    @"sid": reponseObject[@"data"][@"session"][@"sid"],
                                    @"uid": reponseObject[@"data"][@"session"][@"uid"]
                                    };
         [LogIn loginWithData:logInDic];
+        [self requestShopCartList];
         [self goUserInfo];
     }];
 }
 
+- (void)requestShopCartList{
+    NetRequestManeger *manager = [NetRequestManeger shareManager];
+    [manager getShopCartWinesReponse:^(id reponseObjcet, NSError *error) {
+        NSArray *goodlist = [WinePurchaseModel getShopCartWineListWithData:reponseObjcet];
+        if(goodlist.count > 0){
+            NSInteger wineCount = 0;
+            for(WinePurchaseModel *wine in goodlist){
+                wineCount += [wine.goodsCount integerValue];
+            }
+            [[NSNotificationCenter defaultCenter]postNotificationName:kShopCartNumberChange
+                                                               object:nil
+                                                             userInfo:@{
+                                                            @"count" : [NSNumber numberWithInteger:wineCount]
+                                                                    }];
+        }
+    }];
+}
 
 - (void)goUserInfo{
     [self.navigationController popViewControllerAnimated:YES];

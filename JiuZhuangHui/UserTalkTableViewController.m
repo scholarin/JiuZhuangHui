@@ -81,7 +81,7 @@ static NSString *const kUserTalkDetailTableViewCell = @"userTalkTableViewCell";
 - (void)requesetUserTalkList{
     NSString *userTalkURL = [NSString stringWithFormat:@"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/articleList&cat_id=135&limit=7&page=%ld",self.page];
     NetRequestManeger *manager = [NetRequestManeger shareManager];
-    [manager geiRequestWithURL:userTalkURL reponse:^(id reponseObject, NSError *error) {
+    [manager getRequestWithURL:userTalkURL reponse:^(id reponseObject, NSError *error) {
         NSArray *array = [UserTalkModel getUserTalkDetailListWithData:reponseObject];
         if(array.count < 7){
             [self.tableView.mj_footer endRefreshingWithNoMoreData];

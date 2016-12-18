@@ -59,7 +59,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)requestLaws{
     NetRequestManeger *manager = [NetRequestManeger shareManager];
     NSString *urlWithString = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/articleList&cat_id=142&limit=7&page=1";
-    [manager geiRequestWithURL:urlWithString reponse:^(id reponseObject, NSError *error) {
+    [manager getRequestWithURL:urlWithString reponse:^(id reponseObject, NSError *error) {
         self.laws = [LawModel getlawsWithData:reponseObject];
         [self.collectionView reloadData];
     }];

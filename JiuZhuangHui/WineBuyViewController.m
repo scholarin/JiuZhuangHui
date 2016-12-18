@@ -24,19 +24,27 @@
 #import "WineDetailViewController.h"
 #import "LogIn.h"
 #import "WineTastingTableViewController.h"
+#import "ShopingBarButtonItme.h"
+#import "ShopingCartViewController.h"
+#import "WineCountView.h"
+#import "LoginTableViewController.h"
+#import "LogIn.h"
 
 static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
 
-@interface WineBuyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,WineTitleTableViewCellDelegate>
+@interface WineBuyViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,WineTitleTableViewCellDelegate,WineCountViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *buyTabBar;
 @property (strong, nonatomic) WineDetailModel *wineDetail;
+@property (strong, nonatomic) WineCountView *wineCountView;
 
 
 @end
 
-@implementation WineBuyViewController
+@implementation WineBuyViewController{
+    UIView *_shadeView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,8 +52,7 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     self.title = @"一酒一世界";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareWine)];
     [self updateTableView];
-    
-    // Do any additional setup after loading the view.
+    [self ShowbuyTabBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -62,6 +69,7 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
 - (void)shareWine{
     
 }
+
 - (void)updateTableView{
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
     self.tableView.delegate     = self;
@@ -72,10 +80,9 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     self.tableView.mj_footer = refresh;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateUI)];
     [self.tableView registerNib:[UINib nibWithNibName:kWineTitleTableViewCell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kWineTitleTableViewCell];
-    
     [self.view addSubview:self.tableView];
-    
 }
+
 
 - (void)updateUI{
     [self requestWineDetailForID:self.wineID];
@@ -89,8 +96,93 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         vc.view.frame = self.view.bounds;
     } completion:nil];
+    [self.view bringSubviewToFront:self.buyTabBar];
 }
 
+- (void)ShowbuyTabBar{
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.equalTo(@40);
+    }];
+    
+    __block NSInteger wineCount;
+    if([LogIn isLogIn]){
+         NetRequestManeger *manager = [NetRequestManeger shareManager];
+        [manager getShopCartWinesReponse:^(id reponseObjcet, NSError *error) {
+            NSArray *wineList = [WinePurchaseModel getShopCartWineListWithData:reponseObjcet];
+            if (wineList.count > 0) {
+                for(WinePurchaseModel *wine in wineList){
+                    wineCount += [wine.goodsCount integerValue];
+                }
+            }
+        }];
+    }
+    ShopingBarButtonItme *shopBarButtonItem = [[ShopingBarButtonItme alloc]initWithFrame:CGRectMake(10, 0, 40, 40) count:wineCount image:@"shopcart"];
+    [shopBarButtonItem addTarget:self action:@selector(goShopCart) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:shopBarButtonItem];
+    
+    UIButton *button = [[UIButton alloc]init];
+    [button setBackgroundColor:kOrangeColor];
+    NSAttributedString *buttonTitle = [[NSAttributedString alloc]initWithString:@"加入购物车"
+                                                                     attributes:@{
+                                                                                NSFontAttributeName : [UIFont systemFontOfSize:13],
+                                                                                NSForegroundColorAttributeName : [UIColor blackColor]                                                                                               }];
+    [button setAttributedTitle:buttonTitle forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(selectBuyCount) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@100);
+        make.top.right.bottom.equalTo(view);
+    }];
+    self.buyTabBar = view;
+}
+
+- (void)goShopCart{
+    ShopingCartViewController *shopCartVc = [[ShopingCartViewController alloc]init];
+    shopCartVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:shopCartVc animated:YES];
+}
+
+- (void)selectBuyCount{
+    UIView *view = [[UIView alloc]initWithFrame:self.view.bounds];
+    view.backgroundColor = [UIColor blackColor];
+    view.alpha = 0.5;
+    [view bk_whenTapped:^{
+        [view removeFromSuperview];
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.wineCountView.frame = CGRectMake(0, kScreen_Height, kScreen_Width, 225);
+        } completion:^(BOOL fished){
+            [self.wineCountView removeFromSuperview];
+        }];
+    }];
+    [self.view addSubview:view];
+    _shadeView = view;
+    
+    [self showWineCountView];
+
+}
+
+- (void)showWineCountView{
+    WineCountView *wineCountView = [WineCountView share];
+    wineCountView.frame =   CGRectMake(0, kScreen_Height, kScreen_Width, 225);
+    wineCountView.titleLabel.text = self.wineDetail.goodsName;
+    wineCountView.PriceLabel.text = self.wineDetail.goodsShopPrice;
+    [wineCountView.smallImageView sd_setImageWithURL:[NSURL URLWithString:self.wineDetail.goodsImage]];
+    [wineCountView  setHasBox:self.wineDetail.boxfulWines ? YES : NO];
+    wineCountView.delegate = self;
+
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        wineCountView.frame = CGRectMake(0, kScreen_Height - 225, kScreen_Width, 225);
+    } completion:nil];
+    [self.view addSubview:wineCountView];
+    self.wineCountView = wineCountView;
+}
+
+
+//网络相关
 - (void)requestWineDetailForID:(NSString *)wineID{
     NetRequestManeger *manager = [NetRequestManeger shareManager];
     [manager getWineDatailInfoWithID:wineID reponse:^(id reponseObject, NSError *error) {
@@ -104,7 +196,16 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     }];
 }
 
-
+- (void)postWineBuyInfoWithWineID:(NSString *)wineID WineCount:(NSInteger)count{
+    NetRequestManeger *manger = [NetRequestManeger shareManager];
+    [manger postWineBuyInfoWithWineID:wineID count:count reponse:^(id reponseObject, NSError *error) {
+        if(error){
+            NSLog(@"加入购物车失败,%@",error);
+        }else{
+            NSLog(@"已经加入购物车");
+        }
+    }];
+}
 
 #pragma mark - tableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -144,7 +245,11 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
         }
         cell.textLabel.font = kContentTextFont;
         if(indexPath.row == 0){
-            cell.textLabel.text = @"规格：单支，整箱（6支装，立省20元）";
+            if(self.wineDetail.boxfulWines){
+                cell.textLabel.text = @"规格：单支，整箱（6支装，立省20元）";
+            }else{
+                cell.textLabel.text = @"规格：单支";
+            }
         }else{
             cell.textLabel.text = @"运费：¥10（新用户首单免邮/满199包邮）";
         }
@@ -209,5 +314,31 @@ static NSString *kWineTitleTableViewCell = @"WineTitleTableViewCell";
     wineTastingVC.hidesBottomBarWhenPushed = YES;
     [wineTastingVC setWineTastingID:self.wineDetail.goodsTastingID name:self.wineDetail.goodsName];
     [self.navigationController pushViewController:wineTastingVC animated:YES];
+}
+
+#pragma mark - WineCountViewDelegate
+
+- (void)wineCountView:(WineCountView *)wineCountView addToCartType:(WineType)type count:(NSInteger)count{
+    if([LogIn isLogIn]) {
+        if(type == WineTypeSingle){
+            [self postWineBuyInfoWithWineID:self.wineDetail.goodsID WineCount:count];
+        }else{
+            [self postWineBuyInfoWithWineID:self.wineDetail.boxfulWines.boxfulID WineCount:count];
+        }
+        [_shadeView removeFromSuperview];
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.wineCountView.frame = CGRectMake(0, kScreen_Height, kScreen_Width, 225);
+        } completion:^(BOOL fished){
+            [self.wineCountView removeFromSuperview];
+        }];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kShopCartNumberChange
+                                                           object:nil
+                                                         userInfo:@{
+                                                        @"count" : [NSNumber numberWithInteger:count]
+                                                                    }];
+    }else{
+        LoginTableViewController *logInVC = [[LoginTableViewController alloc]init];
+        [self.navigationController pushViewController:logInVC animated:YES];
+    }
 }
 @end

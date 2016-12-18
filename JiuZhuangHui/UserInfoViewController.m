@@ -253,10 +253,11 @@ static NSString *const useInfoURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:@"如有更多问题，可关注微信服务号”“随时订货" attributes:@{
                                                                                                                 NSFontAttributeName : [UIFont systemFontOfSize:10]
                                                                                                                 }];
-        NSAttributedString *jiuzhuanghui = [[NSAttributedString alloc]initWithString:@"酒庄惠" attributes:@{
-                                                                                                        NSFontAttributeName : [UIFont systemFontOfSize:10],
-                                                                                                        NSForegroundColorAttributeName : [UIColor redColor]
-                                                                                                        }];
+        NSAttributedString *jiuzhuanghui = [[NSAttributedString alloc]initWithString:@"酒庄惠"
+                                                                          attributes:@{
+                                                                NSFontAttributeName : [UIFont systemFontOfSize:10],
+                                                     NSForegroundColorAttributeName : [UIColor redColor]
+                                                                                    }];
         [attString insertAttributedString:jiuzhuanghui atIndex:16];
         
         cell.textLabel.attributedText = attString;
@@ -289,7 +290,7 @@ static NSString *const useInfoURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=
             [self settingMyAccount];
         }
         
-    }else{
+    }else if(indexPath.section == 3 && indexPath.row == 0){
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt:0951-5155830"]];
     }
 }

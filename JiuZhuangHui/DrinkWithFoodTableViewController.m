@@ -39,7 +39,7 @@ static  NSString    *const kDrinkWithFoodCell = @"drinkWithFoodCell";
 
 - (void)requestData{
     NetRequestManeger *manager = [NetRequestManeger shareManager];
-    [manager geiRequestWithURL:KDrinkWithFoodURL reponse:^(id reponseObject, NSError *error) {
+    [manager getRequestWithURL:KDrinkWithFoodURL reponse:^(id reponseObject, NSError *error) {
         if(error){
             NSLog(@"请求配餐酒类失败，%@",error);
         }

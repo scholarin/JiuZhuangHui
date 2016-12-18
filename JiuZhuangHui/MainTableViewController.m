@@ -33,6 +33,7 @@
 #import "DrinkWithFoodTableViewController.h"
 #import "PrizeWineTableViewController.h"
 #import "WineTastingTableViewController.h"
+#import "GiftWineTableViewController.h"
 
 static  NSString  *kPanicBuyingPurchase = @"PanicBuyTableViewCell";
 static  NSString  *kHotWineTableViewCell = @"HotWineTableViewCell";
@@ -62,6 +63,7 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
     [self.tableView registerClass:[OriginatorTableViewCell class] forCellReuseIdentifier:kOriginatorTableViewCell];
     [self.tableView addSubview:self.refresh];
     [self requestPanicBuyingPurchase];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -241,20 +243,23 @@ static  NSString  *kOriginatorTableViewCell = @"OriginatorTableViewCell";
         PrizeWineTableViewController *prizeVc = [[PrizeWineTableViewController alloc]init];
         prizeVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:prizeVc animated:YES];
+    }else if(bottomButton.tag == 3){
+        GiftWineTableViewController *giftVC = [[GiftWineTableViewController alloc]init];
+        giftVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:giftVC animated:YES];
     }
     
 }
 
 - (void)mainHeaderView:(MainHeaderView *)mainHeaderView didSelectedScrollView:(NSUInteger)index{
-    if(index == 0){
-        
-        PlayerPictureModel *pictureModel = self.mainHeaderViewModel.playerPictiuresArray[0];
+    
+    PlayerPictureModel *pictureModel = self.mainHeaderViewModel.playerPictiuresArray[index];
+    if(pictureModel.picWineID && pictureModel.picWineID.length > 0){
+        [self showWineBuyTableViewWithWineID:pictureModel.picWineID];
+    }else if(pictureModel.picURL && pictureModel.picURL.length > 0){
         [self goWebViewWithURLString:pictureModel.picURL];
-        
     }else{
-        PlayerPictureModel *pictuerModel = self.mainHeaderViewModel.playerPictiuresArray[index];
-        [self showWineBuyTableViewWithWineID:pictuerModel.picWineID];
-        
+        return;
     }
 }
 

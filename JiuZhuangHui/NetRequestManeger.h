@@ -16,16 +16,18 @@
 - (void)getMainViewInfoReponse:(void (^)(id reponseObjext, NSError *error))reponse;
 
 //基本的数据请求带URL地址
-- (void)geiRequestWithURL:(NSString *)urlString reponse: (void(^)(id reponseObject, NSError *error))reponse;
+- (void)getRequestWithURL:(NSString *)urlString reponse: (void(^)(id reponseObject, NSError *error))reponse;
 
 
 - (void)getWineDatailInfoWithID:(NSString *)wineID reponse: (void(^)(id reponseObject, NSError *error))reponse;
-- (void)getWineDetailHTMLWithID:(NSString *)wineID reponse: (void(^)(id reponseObject, NSError *erroe))reponse;
+- (void)getWineDetailHTMLWithID:(NSString *)wineID reponse: (void(^)(id reponseObject, NSError *error))reponse;
 
 //酒庄主页面网络请求
 - (void)getWineryMainWithPage:(NSInteger)page Reponse:(void(^)(id reponseObject, NSError *error))reponse;
 //酒庄分类页面网络请求
-- (void)getFeatureWineryDataWithFeatureID:(NSString *)featureID name:(NSString *)featuerName page:(NSInteger)page reponse: (void(^)(id reponseObject, NSError *erroe))reponse;
+- (void)getFeatureWineryDataWithFeatureID:(NSString *)featureID name:(NSString *)featuerName page:(NSInteger)page reponse: (void(^)(id reponseObject, NSError *error))reponse;
+//酒庄详情页面请求
+- (void)getWineryDetailWihtWineryID:(NSString *)wineryID reponse: (void(^)(id reponseObject, NSError *error))reponse;
 
 //葡萄种类的使用者酒庄
 - (void)getwineriesOfGrapeTyepWithGrapeID:(NSString *)grapeID name:(NSString *)name page:(NSInteger)page reponse: (void(^)(id reponseObject, NSError *erroe))reponse;
@@ -61,4 +63,12 @@
 
 //上传用户评价
 - (void)postReplyWithURL:(NSString *)url content:(NSString *)content reponse:(void(^)(id reponseObject, NSError *error))reponse;
+
+//上传购买请求
+- (void)postWineBuyInfoWithWineID:(NSString *)wineID count:(NSInteger)count reponse:(void(^)(id reponseObject, NSError *error))reponse;
+//更新购物车
+- (void)updateWineBuyListWithWineID:(NSString *)wineID count:(NSInteger)count reponse:(void(^)(id reponseObject, NSError *error))reponse;
+//删除购物车中某商品
+- (void)deleteWineBuyListWithWineID:(NSString *)wineID reponse:(void(^)(id reponseObject, NSError *error))reponse;
+
 @end

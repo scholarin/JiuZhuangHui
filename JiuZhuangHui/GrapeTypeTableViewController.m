@@ -15,6 +15,7 @@
 #import "WineriesTableViewCell.h"
 #import "BasicTableHeaderView.h"
 #import "UILabel+Height.h"
+#import "WineryDetailTableViewController.h"
 
 
 static NSString *kGrapeTypeTableViewCell = @"GrapeTypeTableViewCell";
@@ -42,6 +43,7 @@ static NSString *kWineriesTableViewCell = @"WineiesTableViewCell";
     [self.tableView registerClass:[WineriesTableViewCell class] forCellReuseIdentifier:kWineriesTableViewCell];
     self.tableView.mj_footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateData)];
+    self.tableView.tableFooterView = [UIView new];
     
     [self requestWineriesWithGrapeID:self.grapeID name:self.grapeType page:self.page];
     // Uncomment the following line to preserve selection between presentations.
@@ -113,7 +115,6 @@ static NSString *kWineriesTableViewCell = @"WineiesTableViewCell";
     return number;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0){
         GrapeDetaliTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kGrapeTypeTableViewCell];
@@ -129,8 +130,6 @@ static NSString *kWineriesTableViewCell = @"WineiesTableViewCell";
     }
 
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height = 0;
@@ -150,48 +149,14 @@ static NSString *kWineriesTableViewCell = @"WineiesTableViewCell";
     BasicTableHeaderView *view = [[BasicTableHeaderView alloc]init];
     return view;
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 0) return;
+    WineryMoreModel *winery = self.wienries[indexPath.row];
+    WineryDetailTableViewController *wineryDetailVC = [[WineryDetailTableViewController alloc]init];
+    wineryDetailVC.wineryName = winery.wineryName;
+    wineryDetailVC.wineryID = winery.wineryID;
+    [self.navigationController pushViewController:wineryDetailVC  animated:YES];
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

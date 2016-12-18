@@ -21,33 +21,43 @@
             self.goodsShopPrice     = wineDetailDic[@"shop_price"];
             self.goodsMarketPrice   = wineDetailDic[@"market_price"];
             self.likeNumber         = wineDetailDic[@"like_num"];
+            self.goodsImage         = wineDetailDic[@"img"][@"small"];
             self.replyNumber        = [wineDetailDic[@"reply_num"] isKindOfClass:[NSString class]] ? wineDetailDic[@"reply_num"] : [wineDetailDic[@"reply_num"] stringValue];
             self.goodsInfoURL       = [wineDetailDic[@"googs_info_url"] isKindOfClass:[NSString class]] ? wineDetailDic[@"googs_info_url"] :[wineDetailDic[@"googs_info_url"] stringValue];
             self.goodsTastingID     = wineDetailDic[@"tasting_id"];
+            
             NSDictionary *boxfulDic = [wineDetailDic[@"linked_goods"] count] > 0 ?  wineDetailDic[@"linked_goods"][0] : nil;
-            self.boxfulWines        = [[BoxfulWinesModel alloc]initWithBoxfuDic:boxfulDic] ;
+            if(boxfulDic){
+                self.boxfulWines        = [[BoxfulWinesModel alloc]initWithBoxfuDic:boxfulDic] ;
+            }
             
             NSMutableArray *wineryArticles = [NSMutableArray new];
-            for(NSDictionary *articleDic in wineDetailDic[@"winery_article"]){
+            if([wineDetailDic[@"winery_article"] isKindOfClass:[NSArray class]]){
+                for(NSDictionary *articleDic in wineDetailDic[@"winery_article"]){
                 WineryArticle *article = [[WineryArticle alloc]initWithArticleDic:articleDic];
                 [wineryArticles addObject: article];
+                }
+                self.wineryArticles     = [wineryArticles copy];
             }
-            self.wineryArticles     = [wineryArticles copy];
-            
+                       
             
             NSMutableArray *pictures = [NSMutableArray new];
-            for(NSDictionary *pictureDic in wineDetailDic[@"pictures"]){
+            if([wineDetailDic[@"pictures"] isKindOfClass:[NSArray class]]){
+                for(NSDictionary *pictureDic in wineDetailDic[@"pictures"]){
                 NSString *pictureURL = pictureDic[@"small"];
                 [pictures addObject:pictureURL];
+                }
+                self.goodsPictures      = [pictures copy];
             }
-            self.goodsPictures      = [pictures copy];
             
-            NSMutableArray *replys = [NSMutableArray new];
-            for(NSDictionary *replyDic in wineDetailDic[@"reply_content"]){
-                ReplyContentModel *reply = [[ReplyContentModel alloc]initWithReplyDic:replyDic];
-                [replys addObject:reply];
+            if([wineDetailDic[@"reply_content"] isKindOfClass:[NSArray class]]){
+                 NSMutableArray *replys = [NSMutableArray new];
+                for(NSDictionary *replyDic in wineDetailDic[@"reply_content"]){
+                    ReplyContentModel *reply = [[ReplyContentModel alloc]initWithReplyDic:replyDic];
+                    [replys addObject:reply];
+                }
+                self.goodsReplys = [replys copy];
             }
-            self.goodsReplys = [replys copy];
         }
     }
     return self;

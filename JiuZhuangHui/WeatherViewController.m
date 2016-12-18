@@ -9,6 +9,7 @@
 
 
 #import "WeatherViewController.h"
+#import "JiuZhuangHui.h"
 
 static NSString *kWeatherWebURL  = @"http://3g.nx121.com/hp/appptcy.aspx";
 
@@ -24,12 +25,12 @@ static NSString *kWeatherWebURL  = @"http://3g.nx121.com/hp/appptcy.aspx";
     [super viewDidLoad];
     self.title = @"宁夏葡萄产业气象服务";
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.webWiew = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    self.webWiew = [[UIWebView alloc]init];
     [self.webWiew loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:kWeatherWebURL]]];
     [self.view addSubview:self.webWiew];
-    
-    self.tabBarController.tabBar.hidden = YES;
+    [self.webWiew mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.left.bottom.equalTo(self.view);
+    }];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareWebURL)];
     // Do any additional setup after loading the view.
 }
@@ -37,22 +38,5 @@ static NSString *kWeatherWebURL  = @"http://3g.nx121.com/hp/appptcy.aspx";
 - (void)shareWebURL{
     
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

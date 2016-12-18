@@ -151,17 +151,17 @@
 
 - (void)addWine{
     
-    self.wineCount++;
-    self.wineCountLabel.text = [NSString stringWithFormat:@"%ld",self.wineCount];
-    self.winePriceLabel.text = [NSString stringWithFormat:@"¥%.2f",self.winePrice * self.wineCount];
+    //self.wineCount++;
+    //self.wineCountLabel.text = [NSString stringWithFormat:@"%ld",self.wineCount];
+    //self.winePriceLabel.text = [NSString stringWithFormat:@"¥%.2f",self.winePrice * self.wineCount];
     [self.delegate addWineWithWineID:self.wineID];
 }
 
 - (void)reduceWine{
-    self.wineCount--;
+    //self.wineCount--;
     if(self.wineCount > 0){
-        self.wineCountLabel.text = [NSString stringWithFormat:@"%ld",self.wineCount];
-        self.winePriceLabel.text = [NSString stringWithFormat:@"¥%.2f",self.winePrice * self.wineCount];
+        //self.wineCountLabel.text = [NSString stringWithFormat:@"%ld",self.wineCount];
+        //self.winePriceLabel.text = [NSString stringWithFormat:@"¥%.2f",self.winePrice * self.wineCount];
         [self.delegate reduceWineWithWineID:self.wineID];
     }else{
         [self deleteWine];

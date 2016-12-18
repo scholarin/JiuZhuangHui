@@ -9,8 +9,6 @@
 #import "ShopingBarButtonItme.h"
 #import "JiuZhuangHui.h"
 
-
-static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
 @interface ShopingBarButtonItme ()
 
 @property(strong, nonatomic)UILabel *label;
@@ -22,19 +20,25 @@ static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
 
 
 - (instancetype)initWithShopCartCount:(NSInteger)count{
-    if(self = [super init]){
-        self.frame = CGRectMake(0, 0, 30, 30);
+    
+    return [self initWithFrame:CGRectMake(0, 0, 30, 30) count:count image:@"lighted_shoping"];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame count:(NSInteger)count image:(NSString *)imageName{
+    if(self = [super initWithFrame:frame]){
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(addShopCart:) name:kShopCartNumberChange object:nil];
         UIImageView *imageView = [[UIImageView alloc]init];
-        imageView.image = [UIImage imageNamed:@"lighted_shoping"];
-        
+        imageView.image = [UIImage imageNamed:imageName];
         [self addSubview:imageView];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.equalTo(self);
         }];
-        
         _label = [[UILabel alloc]init];
-        _label.text = [NSString stringWithFormat:@"%ld",count];
+        if(count == 0){
+            _label.text = @"";
+        }else{
+            _label.text = [NSString stringWithFormat:@"%ld",count];
+        }
         _label.font = [UIFont systemFontOfSize:8];
         _label.textColor = [UIColor whiteColor];
         _label.backgroundColor = [UIColor colorWithRed:185/255.0 green:0 blue:0 alpha:1];
@@ -42,13 +46,11 @@ static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
         _label.clipsToBounds = YES;
         _label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_label];
-        
-//        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.equalTo(self);
-//            make.top.equalTo(self).offset(5);
-//            make.height.equalTo(@12);
-//            
-//        }];
+        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self);
+            make.top.equalTo(self).offset(2);
+            make.height.width.equalTo(@12);
+        }];
         
         _button = [[UIButton alloc]init];
         [self addSubview:_button];
@@ -58,7 +60,6 @@ static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
     }
     return self;
 }
-
 
 - (void)addShopCart:(NSNotification *)not{
     NSInteger count = [not.userInfo[@"count"] integerValue];
@@ -70,6 +71,7 @@ static NSString *const kShopCartNumberChange = @"shopCartNumberChange";
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)UIControlEvents{
     [self.button addTarget:target action:action forControlEvents:UIControlEvents];
 }
+
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }

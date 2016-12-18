@@ -50,7 +50,7 @@ static  NSString *const kPriceCell = @"priceCell";
 
 - (void)requestPrizeData{
     NetRequestManeger *manager = [NetRequestManeger shareManager];
-    [manager geiRequestWithURL:kPrizeWinesURL reponse:^(id reponseObject, NSError *error) {
+    [manager getRequestWithURL:kPrizeWinesURL reponse:^(id reponseObject, NSError *error) {
         if(error){
             NSLog(@"获奖数据请求失败，%@",error);
             return ;

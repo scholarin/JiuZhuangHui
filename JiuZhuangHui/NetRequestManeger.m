@@ -19,7 +19,7 @@
     return [[[self class]alloc]init];
 }
 
-- (void)geiRequestWithURL:(NSString *)urlString reponse: (void(^)(id reponseObject, NSError *error))reponse{
+- (void)getRequestWithURL:(NSString *)urlString reponse: (void(^)(id reponseObject, NSError *error))reponse{
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         reponse(responseObject, nil);
@@ -204,8 +204,8 @@ static NSString *baseURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/user/upd
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         reponse(nil,error);
     }];
-
 }
+
 //用户上传其他信息
 - (void)postUserInfoWithCateory:(NSString *)cateOry info:(NSString *)info reponse:(void(^)(id reponseObject, NSError *error))reponse{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -219,6 +219,7 @@ static NSString *baseURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/user/upd
     }];
 }
 
+//用户评论
 - (void)postReplyWithURL:(NSString *)url content:(NSString *)content reponse:(void(^)(id reponseObject, NSError *error))reponse{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary *postDic = nil;
@@ -229,4 +230,59 @@ static NSString *baseURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/user/upd
         reponse(nil,error);
     }];
 }
+
+//上传商品加入购物车请求
+- (void)postWineBuyInfoWithWineID:(NSString *)wineID count:(NSInteger)count reponse:(void(^)(id reponseObject, NSError *error))reponse{
+    NSString *kCreateWineOrderURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/cart/create";
+    NSString *content = [NSString stringWithFormat:@"\"number\":%ld,\"goods_id\":%@,%@,\"spec\":[]",count,wineID,[LogIn JSONWithCurrentUser]];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *postDic = @{ @"json" : [NSString stringWithFormat:@"{%@}",content]};
+    [manager POST:kCreateWineOrderURL parameters:postDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+}
+
+//更新购物车
+- (void)updateWineBuyListWithWineID:(NSString *)wineID count:(NSInteger)count reponse:(void(^)(id reponseObject, NSError *error))reponse{
+    
+    NSString *kCreateWineOrderURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/cart/update";
+    NSString *content = [NSString stringWithFormat:@"\"new_number\":%ld,\"rec_id\":%@,%@,\"spec\":[]",count,wineID,[LogIn JSONWithCurrentUser]];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *postDic = @{ @"json" : [NSString stringWithFormat:@"{%@}",content]};
+    [manager POST:kCreateWineOrderURL parameters:postDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+
+}
+//删除购物车中某商品
+- (void)deleteWineBuyListWithWineID:(NSString *)wineID reponse:(void(^)(id reponseObject, NSError *error))reponse{
+    NSString *kCreateWineOrderURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/cart/delete";
+    NSString *content = [NSString stringWithFormat:@"\"rec_id\":%@,%@,\"spec\":[]",wineID,[LogIn JSONWithCurrentUser]];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *postDic = @{ @"json" : [NSString stringWithFormat:@"{%@}",content]};
+    [manager POST:kCreateWineOrderURL parameters:postDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+
+}
+
+//酒庄详情页面请求
+- (void)getWineryDetailWihtWineryID:(NSString *)wineryID reponse: (void(^)(id reponseObject, NSError *erroe))reponse{
+    NSString *wineryDetailURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/winery";
+    NSString *posting = [NSString stringWithFormat:@"{\"winery_id\":\"%@\"}",wineryID];
+    NSDictionary *paremeter = @{@"json" : posting};
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:wineryDetailURL parameters:paremeter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        reponse(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        reponse(nil,error);
+    }];
+}
+
 @end

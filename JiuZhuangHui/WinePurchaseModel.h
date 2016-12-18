@@ -21,12 +21,16 @@
 @property (nonatomic, copy) NSString *replyNumber;
 @property (nonatomic, copy) NSString *goodsShortName;
 @property (nonatomic, copy) NSString *goodsTastingID;
+@property (nonatomic, copy) NSString *goodsRecID;
 
 - (instancetype)initWithPanicBuyData:(id)data;
 - (instancetype)initWineModelForDic: (NSDictionary *)wineDic;
 - (instancetype)initWineryGoodListForDic:(NSDictionary *)wineDic;
 - (instancetype)initWithDrinkWithFoodDic:(NSDictionary *)wineDic;
+- (instancetype)initWithGiftWithDic:(NSDictionary *)wineDic;
 
+
+//
 + (NSArray *)getHotWineWithData:(id)data;
 + (NSArray *)getRecommendWineWithData:(id)data;
 

@@ -40,7 +40,7 @@
 - (void)requestOwerStoryData{
     NSString *owerSroryURL = @"http://www.jiuzhuanghui.com/ecmobile/?url=/2_1_0/articleList&cat_id=138&limit=7&page=1";
     NetRequestManeger *manager = [NetRequestManeger shareManager];
-    [manager geiRequestWithURL:owerSroryURL reponse:^(id reponseObject, NSError *error) {
+    [manager getRequestWithURL:owerSroryURL reponse:^(id reponseObject, NSError *error) {
         self.articles = [WineryArticle getArticlesWithData:reponseObject];
         self.topImageURL = reponseObject[@"data"][@"focus_img"];
         [self.tableView reloadData];

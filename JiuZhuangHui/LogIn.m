@@ -87,4 +87,5 @@ static  NSString    *const  kLikeWines = @"likeWines";
     [[NSUserDefaults standardUserDefaults] setObject:[mutableWines copy] forKey:kLikeWines];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
 @end

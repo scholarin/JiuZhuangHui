@@ -42,7 +42,7 @@
     self.wineNameLabel.text = wineDetailModel.goodsName;
     self.wineEnglishLabel.text = wineDetailModel.goodsEnglishName;
     self.shopPriceLabel.text = wineDetailModel.goodsShopPrice;
-    if([wineDetailModel.goodsID isEqualToString:@"333"]){
+    if([wineDetailModel.replyNumber integerValue] == 0){
         //将热卖推荐酒的评价和点赞隐藏
         self.likeButton.hidden = YES;
         self.replyButton.hidden = YES;
